@@ -12,5 +12,5 @@ export default async function CheckInboxPage({ params }: PageProps<"/[locale]/je
   const locale = toLocale((await params).locale);
   setRequestLocale(locale);
   const t = await getTranslations("jellyListPage");
-  return <StatusScreen variant="mail" title={t("checkTitle")} body={t("checkBody")} hint={t("checkHint")} />;
+  return <StatusScreen variant="mail" art="tech-bench-inbox" title={t("checkTitle")} body={t("checkBody")} hint={t("checkHint")} />;
 }

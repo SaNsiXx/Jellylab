@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import { UsersThree, StackSimple, Crosshair } from "@phosphor-icons/react/dist/ssr";
 import { Section, Eyebrow } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { BrandIcon, CampaignArt, type IconName } from "@/components/ui/BrandArt";
 import { TalentCard } from "@/components/talent/TalentCard";
 import { getTalentAdapter } from "@/lib/adapters/talent";
 import { crewHref, developerJoinHref, routes } from "@/lib/site";
@@ -44,7 +44,7 @@ export async function SolutionsPreview() {
   const t = await getTranslations();
   const cards = t.raw("solutions.cards") as Item[];
   const tech = t.raw("solutions.techLine") as string[];
-  const icons = [UsersThree, StackSimple, Crosshair];
+  const icons: IconName[] = ["staff-augmentation", "dedicated-teams", "specialists"];
   return (
     <Section labelledBy="solutions-title">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -58,13 +58,12 @@ export async function SolutionsPreview() {
       </div>
       <ul className="mt-14 grid gap-5 md:grid-cols-3">
         {cards.map((c, i) => {
-          const Icon = icons[i] ?? UsersThree;
           return (
             <li key={c.title}>
               <Reveal delay={i * 80} className="h-full">
                 <article className="card flex h-full flex-col p-7 sm:p-8">
-                  <span className="flex size-12 items-center justify-center rounded-2xl border border-line bg-white/[0.03] text-cyan">
-                    <Icon size={24} weight="light" aria-hidden="true" />
+                  <span className="flex size-14 items-center justify-center rounded-2xl border border-line bg-white/[0.03]">
+                    <BrandIcon name={icons[i] ?? "specialists"} size={40} />
                   </span>
                   <h3 className="h3 mt-10">{c.title}</h3>
                   <p className="mt-3 text-muted">{c.body}</p>
@@ -183,20 +182,9 @@ export async function JellyDropBlock() {
             </div>
             <p className="mt-5 max-w-lg text-sm text-muted">{t("drop.microcopy")}</p>
           </div>
-          {/* Campaign visual slot — 01_Get_The_Jelly_Drop_1200.png (missing from brand pack). Fixed ratio prevents CLS on swap. */}
+          {/* Campaign card (SVG from scripts/build-brand-svgs.mjs); PNG export: public/campaign/01_Get_The_Jelly_Drop_1200.png */}
           <div className="relative lg:col-span-5">
-            <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-[var(--radius-card)] border border-line bg-bg">
-              <div aria-hidden="true" className="absolute inset-0">
-                <div className="absolute top-[18%] left-[14%] h-[38%] w-[58%] -rotate-12 rounded-[48%_52%_44%_56%/55%_48%_52%_45%] bg-[image:var(--gradient-heat-jelly)] opacity-80 blur-[1px]" />
-                <div className="absolute top-[44%] left-[38%] h-[30%] w-[46%] rotate-12 rounded-[52%_48%_56%_44%/48%_55%_45%_52%] bg-[image:var(--gradient-heat-jelly)] opacity-55 mix-blend-screen" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.35),transparent_22%)]" />
-              </div>
-              {showDevPlaceholders && (
-                <p className="absolute inset-x-4 bottom-4 rounded-xl border border-dashed border-orange/60 bg-bg/85 px-3 py-2 font-mono text-[0.6875rem] text-orange">
-                  {t("drop.imagePending")}
-                </p>
-              )}
-            </div>
+            <CampaignArt name="jelly-drop" className="mx-auto max-w-md border border-line" />
           </div>
         </div>
       </div>

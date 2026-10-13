@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 1200" width="1200" height="1200"><title>Your tech bench. In your inbox.</title>
+  <defs>
+    <pattern id="ci-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern>
+    <pattern id="ci-fine" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M15 0H0V15" fill="none" stroke="#fff" stroke-opacity=".02"/></pattern>
+    <radialGradient id="ci-g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="700"><stop offset="0" stop-color="#306BFF" stop-opacity=".22"/><stop offset="1" stop-color="#306BFF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="ci-g2" gradientUnits="userSpaceOnUse" cx="1200" cy="1200" r="760"><stop offset="0" stop-color="#6B38FF" stop-opacity=".2"/><stop offset="1" stop-color="#6B38FF" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="1200" rx="56" fill="#07080D"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#ci-fine)"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#ci-grid)"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#ci-g1)"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#ci-g2)"/>
+  <g stroke="#fff" stroke-opacity=".3" stroke-width="2"><path d="M78 90H102M90 78V102"/><path d="M1098 90H1122M1110 78V102"/><path d="M78 1110H102M90 1098V1122"/><path d="M1098 1110H1122M1110 1098V1122"/></g>
+  <rect x="1" y="1" width="1198" height="1198" rx="55" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="2"/>
+  <defs>
+    <linearGradient id="ci-edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13C8FF"/><stop offset=".35" stop-color="#6B38FF"/><stop offset=".65" stop-color="#8DFF45"/><stop offset="1" stop-color="#FF9A31"/></linearGradient>
+    <linearGradient id="ci-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+    <filter id="ci-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <path d="M60 1060 H360 L390 1030 L420 1090 L450 1000 L480 1110 L510 1060 H1140" fill="none" stroke="#13C8FF" stroke-opacity=".4" stroke-width="3"/>
+  <g transform="translate(500 470) rotate(0) scale(0.44) translate(-256 -256)">
+  <defs>
+    <g id="ci1-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="ci1-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#13C8FF"/><stop offset=".5" stop-color="#306BFF"/><stop offset="1" stop-color="#6B38FF"/>
+    </linearGradient>
+    <radialGradient id="ci1-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ci1-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#13C8FF" stop-opacity=".55"/><stop offset="1" stop-color="#13C8FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ci1-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#13C8FF" stop-opacity=".55"/><stop offset="1" stop-color="#6B38FF" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="ci1-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="ci1-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="ci1-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="ci1-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#ci1-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#ci1-geo" fill="#306BFF"  filter="url(#ci1-blur)" opacity="0.5"/>
+  <use href="#ci1-geo" fill="url(#ci1-body)"  opacity=".92"/>
+  <g mask="url(#ci1-mask)">
+    <rect width="512" height="512" fill="url(#ci1-core)"/>
+    <rect width="512" height="512" fill="url(#ci1-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#ci1-spec)" opacity=".8" filter="url(#ci1-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#ci1-geo" fill="none" stroke="url(#ci1-rim)" stroke-width="4"/></g>
+  <g transform="translate(690 330) rotate(-12) scale(0.5) translate(-256 -256)">
+  <defs>
+    <g id="ci2-geo"><path d="M86 248 C78 150 180 112 270 122 C 372 134 428 196 420 266 C 412 336 352 372 282 360 C 238 352 214 334 168 350 C 112 370 90 318 86 248 Z"/></g>
+    <linearGradient id="ci2-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#D7FF54"/><stop offset=".5" stop-color="#8DFF45"/><stop offset="1" stop-color="#00D47E"/>
+    </linearGradient>
+    <radialGradient id="ci2-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ci2-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#D7FF54" stop-opacity=".55"/><stop offset="1" stop-color="#D7FF54" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ci2-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#D7FF54" stop-opacity=".55"/><stop offset="1" stop-color="#00D47E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="ci2-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="ci2-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="ci2-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="ci2-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#ci2-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#ci2-geo" fill="#8DFF45"  filter="url(#ci2-blur)" opacity="0.5"/>
+  <use href="#ci2-geo" fill="url(#ci2-body)"  opacity=".92"/>
+  <g mask="url(#ci2-mask)">
+    <rect width="512" height="512" fill="url(#ci2-core)"/>
+    <rect width="512" height="512" fill="url(#ci2-caustic)"/>
+    
+    <ellipse cx="200" cy="170" rx="70" ry="22" transform="rotate(-12 200 170)" fill="url(#ci2-spec)" opacity=".8" filter="url(#ci2-soft)"/><ellipse cx="168.5" cy="172.2" rx="11.200000000000001" ry="7.04" transform="rotate(-12 200 170)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#ci2-geo" fill="none" stroke="url(#ci2-rim)" stroke-width="4"/></g>
+  <g transform="translate(800 540) rotate(8) scale(0.34) translate(-256 -256)">
+  <defs>
+    <g id="ci3-geo"><rect x="76" y="186" width="360" height="140" rx="70" transform="rotate(-22 256 256)"/></g>
+    <linearGradient id="ci3-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="ci3-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ci3-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ci3-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="ci3-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="ci3-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="ci3-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="ci3-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#ci3-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#ci3-geo" fill="#FF9A31"  filter="url(#ci3-blur)" opacity="0.5"/>
+  <use href="#ci3-geo" fill="url(#ci3-body)"  opacity=".92"/>
+  <g mask="url(#ci3-mask)">
+    <rect width="512" height="512" fill="url(#ci3-core)"/>
+    <rect width="512" height="512" fill="url(#ci3-caustic)"/>
+    
+    <ellipse cx="190" cy="232" rx="70" ry="18" transform="rotate(-22 190 232)" fill="url(#ci3-spec)" opacity=".8" filter="url(#ci3-soft)"/><ellipse cx="158.5" cy="233.8" rx="11.200000000000001" ry="5.76" transform="rotate(-22 190 232)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#ci3-geo" fill="none" stroke="url(#ci3-rim)" stroke-width="4"/></g>
+  <g transform="translate(330 620)">
+    <rect width="540" height="360" rx="34" fill="none" stroke="url(#ci-edge)" stroke-width="10" filter="url(#ci-glow)" opacity=".7"/>
+    <rect width="540" height="360" rx="34" fill="url(#ci-glass)" stroke="url(#ci-edge)" stroke-width="3"/>
+    <path d="M14 22 L270 210 L526 22" fill="none" stroke="url(#ci-edge)" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M14 342 L200 168 M526 342 L340 168" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+    <rect x="40" y="26" width="200" height="8" rx="4" fill="#fff" opacity=".35"/>
+  </g></svg>

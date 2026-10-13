@@ -24,7 +24,6 @@ export function LocaleSwitch({ size = "sm", onSwitch }: { size?: "sm" | "lg"; on
                 hrefLang={locale}
                 lang={locale}
                 aria-current={active ? "true" : undefined}
-                aria-label={active ? undefined : t("switchTo")}
                 onClick={() => {
                   if (!active) track("language_change", { from: current, to: locale });
                   onSwitch?.();
@@ -34,6 +33,7 @@ export function LocaleSwitch({ size = "sm", onSwitch }: { size?: "sm" | "lg"; on
                 }`}
               >
                 {locale}
+                {!active && <span className="sr-only"> — {t("switchTo")}</span>}
               </Link>
             </li>
           );

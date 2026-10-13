@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" width="64" height="64"><title>ecommerce</title><defs>
+    <linearGradient id="i-g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#13C8FF"/><stop offset=".55" stop-color="#306BFF"/><stop offset="1" stop-color="#6B38FF"/></linearGradient>
+    <linearGradient id="i-a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D7FF54"/><stop offset="1" stop-color="#00D47E"/></linearGradient>
+    <filter id="i-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <style>.l{fill:none;stroke:url(#i-g);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.l .a{stroke:url(#i-a)}.l .f{fill:url(#i-g);stroke:none}</style>
+  </defs>
+  <g class="l" filter="url(#i-glow)" opacity=".55"><path d="M16 22h32l-3 30H19z"/><path d="M24 22v-4a8 8 0 0 1 16 0v4"/><circle cx="32" cy="37" r="4" class="a"/><circle cx="32" cy="37" r="1.5" class="f"/></g>
+  <g class="l"><path d="M16 22h32l-3 30H19z"/><path d="M24 22v-4a8 8 0 0 1 16 0v4"/><circle cx="32" cy="37" r="4" class="a"/><circle cx="32" cy="37" r="1.5" class="f"/></g></svg>

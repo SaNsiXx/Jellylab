@@ -1,0 +1,264 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 1200" width="1200" height="1200"><title>Get the Jelly Drop</title>
+  <defs>
+    <pattern id="cd-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern>
+    <pattern id="cd-fine" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M15 0H0V15" fill="none" stroke="#fff" stroke-opacity=".02"/></pattern>
+    <radialGradient id="cd-g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="700"><stop offset="0" stop-color="#306BFF" stop-opacity=".22"/><stop offset="1" stop-color="#306BFF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cd-g2" gradientUnits="userSpaceOnUse" cx="1200" cy="1200" r="760"><stop offset="0" stop-color="#FF4D5E" stop-opacity=".2"/><stop offset="1" stop-color="#FF4D5E" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="1200" rx="56" fill="#07080D"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#cd-fine)"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#cd-grid)"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#cd-g1)"/>
+  <rect width="1200" height="1200" rx="56" fill="url(#cd-g2)"/>
+  <g stroke="#fff" stroke-opacity=".3" stroke-width="2"><path d="M78 90H102M90 78V102"/><path d="M1098 90H1122M1110 78V102"/><path d="M78 1110H102M90 1098V1122"/><path d="M1098 1110H1122M1110 1098V1122"/></g>
+  <rect x="1" y="1" width="1198" height="1198" rx="55" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="2"/>
+  <defs>
+    <linearGradient id="cd-ripple" x1="0" x2="1"><stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/></linearGradient>
+    <radialGradient id="cd-pool" cx="700" cy="890" r="420" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 890) scale(1 .25) translate(-700 -890)"><stop offset="0" stop-color="#FF9A31" stop-opacity=".55"/><stop offset=".6" stop-color="#FF4D5E" stop-opacity=".12"/><stop offset="1" stop-color="#FF4D5E" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path d="M0 940 H300 C350 940 360 900 410 900 H560" fill="none" stroke="#13C8FF" stroke-width="3" stroke-opacity=".75"/><circle cx="560" cy="900" r="9" fill="#13C8FF"/><circle cx="560" cy="900" r="20" fill="#13C8FF" opacity=".18"/>
+  <path d="M0 1010 H420 C470 1010 490 960 540 950" fill="none" stroke="#8DFF45" stroke-width="3" stroke-opacity=".75"/><circle cx="540" cy="950" r="9" fill="#8DFF45"/><circle cx="540" cy="950" r="20" fill="#8DFF45" opacity=".18"/>
+  <ellipse cx="700" cy="890" rx="440" ry="110" fill="url(#cd-pool)"/>
+  <ellipse cx="700" cy="890" rx="120" ry="26" fill="none" stroke="url(#cd-ripple)" stroke-width="4" opacity="0.9"/><ellipse cx="700" cy="890" rx="190" ry="41" fill="none" stroke="url(#cd-ripple)" stroke-width="3.4" opacity="0.73"/><ellipse cx="700" cy="890" rx="260" ry="56" fill="none" stroke="url(#cd-ripple)" stroke-width="2.8" opacity="0.56"/><ellipse cx="700" cy="890" rx="330" ry="71" fill="none" stroke="url(#cd-ripple)" stroke-width="2.2" opacity="0.39"/><ellipse cx="700" cy="890" rx="400" ry="86" fill="none" stroke="url(#cd-ripple)" stroke-width="1.6" opacity="0.21999999999999997"/>
+  <g transform="translate(700 470) rotate(4) scale(0.92) translate(-256 -256)">
+  <defs>
+    <g id="cdm-geo"><path d="M256 70 C 312 70 356 168 356 292 C 356 392 312 444 256 444 C 200 444 156 392 156 292 C 156 168 200 70 256 70 Z"/></g>
+    <linearGradient id="cdm-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdm-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdm-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdm-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdm-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdm-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdm-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdm-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdm-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdm-geo" fill="#FF9A31"  filter="url(#cdm-blur)" opacity="0.7"/>
+  <use href="#cdm-geo" fill="url(#cdm-body)"  opacity=".92"/>
+  <g mask="url(#cdm-mask)">
+    <rect width="512" height="512" fill="url(#cdm-core)"/>
+    <rect width="512" height="512" fill="url(#cdm-caustic)"/>
+    
+    <ellipse cx="214" cy="170" rx="24" ry="62" transform="rotate(4 214 170)" fill="url(#cdm-spec)" opacity=".8" filter="url(#cdm-soft)"/><ellipse cx="203.2" cy="176.2" rx="5" ry="19.84" transform="rotate(4 214 170)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdm-geo" fill="none" stroke="url(#cdm-rim)" stroke-width="4"/></g>
+  <g transform="translate(600 780) rotate(0) scale(0.12) translate(-256 -256)">
+  <defs>
+    <g id="cdd0-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd0-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd0-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd0-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd0-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd0-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd0-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd0-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd0-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd0-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd0-geo" fill="#FF9A31"  filter="url(#cdd0-blur)" opacity="0.6"/>
+  <use href="#cdd0-geo" fill="url(#cdd0-body)"  opacity=".92"/>
+  <g mask="url(#cdd0-mask)">
+    <rect width="512" height="512" fill="url(#cdd0-core)"/>
+    <rect width="512" height="512" fill="url(#cdd0-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd0-spec)" opacity=".8" filter="url(#cdd0-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd0-geo" fill="none" stroke="url(#cdd0-rim)" stroke-width="4"/></g><g transform="translate(790 760) rotate(0) scale(0.1) translate(-256 -256)">
+  <defs>
+    <g id="cdd1-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd1-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd1-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd1-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd1-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd1-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd1-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd1-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd1-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd1-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd1-geo" fill="#FF9A31"  filter="url(#cdd1-blur)" opacity="0.6"/>
+  <use href="#cdd1-geo" fill="url(#cdd1-body)"  opacity=".92"/>
+  <g mask="url(#cdd1-mask)">
+    <rect width="512" height="512" fill="url(#cdd1-core)"/>
+    <rect width="512" height="512" fill="url(#cdd1-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd1-spec)" opacity=".8" filter="url(#cdd1-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd1-geo" fill="none" stroke="url(#cdd1-rim)" stroke-width="4"/></g><g transform="translate(520 840) rotate(0) scale(0.07) translate(-256 -256)">
+  <defs>
+    <g id="cdd2-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd2-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd2-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd2-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd2-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd2-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd2-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd2-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd2-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd2-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd2-geo" fill="#FF9A31"  filter="url(#cdd2-blur)" opacity="0.6"/>
+  <use href="#cdd2-geo" fill="url(#cdd2-body)"  opacity=".92"/>
+  <g mask="url(#cdd2-mask)">
+    <rect width="512" height="512" fill="url(#cdd2-core)"/>
+    <rect width="512" height="512" fill="url(#cdd2-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd2-spec)" opacity=".8" filter="url(#cdd2-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd2-geo" fill="none" stroke="url(#cdd2-rim)" stroke-width="4"/></g><g transform="translate(880 830) rotate(0) scale(0.08) translate(-256 -256)">
+  <defs>
+    <g id="cdd3-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd3-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd3-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd3-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd3-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd3-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd3-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd3-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd3-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd3-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd3-geo" fill="#FF9A31"  filter="url(#cdd3-blur)" opacity="0.6"/>
+  <use href="#cdd3-geo" fill="url(#cdd3-body)"  opacity=".92"/>
+  <g mask="url(#cdd3-mask)">
+    <rect width="512" height="512" fill="url(#cdd3-core)"/>
+    <rect width="512" height="512" fill="url(#cdd3-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd3-spec)" opacity=".8" filter="url(#cdd3-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd3-geo" fill="none" stroke="url(#cdd3-rim)" stroke-width="4"/></g><g transform="translate(700 720) rotate(0) scale(0.06) translate(-256 -256)">
+  <defs>
+    <g id="cdd4-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd4-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd4-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd4-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd4-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd4-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd4-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd4-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd4-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd4-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd4-geo" fill="#FF9A31"  filter="url(#cdd4-blur)" opacity="0.6"/>
+  <use href="#cdd4-geo" fill="url(#cdd4-body)"  opacity=".92"/>
+  <g mask="url(#cdd4-mask)">
+    <rect width="512" height="512" fill="url(#cdd4-core)"/>
+    <rect width="512" height="512" fill="url(#cdd4-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd4-spec)" opacity=".8" filter="url(#cdd4-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd4-geo" fill="none" stroke="url(#cdd4-rim)" stroke-width="4"/></g><g transform="translate(650 690) rotate(0) scale(0.045) translate(-256 -256)">
+  <defs>
+    <g id="cdd5-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd5-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd5-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd5-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd5-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd5-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd5-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd5-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd5-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd5-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd5-geo" fill="#FF9A31"  filter="url(#cdd5-blur)" opacity="0.6"/>
+  <use href="#cdd5-geo" fill="url(#cdd5-body)"  opacity=".92"/>
+  <g mask="url(#cdd5-mask)">
+    <rect width="512" height="512" fill="url(#cdd5-core)"/>
+    <rect width="512" height="512" fill="url(#cdd5-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd5-spec)" opacity=".8" filter="url(#cdd5-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd5-geo" fill="none" stroke="url(#cdd5-rim)" stroke-width="4"/></g><g transform="translate(760 690) rotate(0) scale(0.04) translate(-256 -256)">
+  <defs>
+    <g id="cdd6-geo"><circle cx="256" cy="256" r="150"/></g>
+    <linearGradient id="cdd6-body" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/>
+    </linearGradient>
+    <radialGradient id="cdd6-core" gradientUnits="userSpaceOnUse" cx="270" cy="276" r="190">
+      <stop offset="0" stop-color="#07080D" stop-opacity=".55"/><stop offset=".65" stop-color="#07080D" stop-opacity=".12"/><stop offset="1" stop-color="#07080D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cdd6-caustic" gradientUnits="userSpaceOnUse" cx="330" cy="340" r="150">
+      <stop offset="0" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cdd6-rim" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#FFD25A" stop-opacity=".55"/><stop offset="1" stop-color="#FF4D5E" stop-opacity=".95"/>
+    </linearGradient>
+    <radialGradient id="cdd6-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="cdd6-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="cdd6-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="cdd6-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <use href="#cdd6-geo" fill="#fff"/>
+    </mask>
+  </defs>
+  <use href="#cdd6-geo" fill="#FF9A31"  filter="url(#cdd6-blur)" opacity="0.6"/>
+  <use href="#cdd6-geo" fill="url(#cdd6-body)"  opacity=".92"/>
+  <g mask="url(#cdd6-mask)">
+    <rect width="512" height="512" fill="url(#cdd6-core)"/>
+    <rect width="512" height="512" fill="url(#cdd6-caustic)"/>
+    
+    <ellipse cx="200" cy="186" rx="62" ry="30" transform="rotate(-30 200 186)" fill="url(#cdd6-spec)" opacity=".8" filter="url(#cdd6-soft)"/><ellipse cx="172.1" cy="189" rx="9.92" ry="9.6" transform="rotate(-30 200 186)" fill="#fff" opacity=".9"/>
+  </g>
+  <use href="#cdd6-geo" fill="none" stroke="url(#cdd6-rim)" stroke-width="4"/></g></svg>

@@ -2,11 +2,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { toLocale } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
-import { showDevPlaceholders } from "@/lib/legal/entity";
 import { Link } from "@/i18n/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { JellyListForm } from "@/components/forms/JellyListForm";
 import { FormBoundary } from "@/components/forms/ui";
+import { CampaignArt } from "@/components/ui/BrandArt";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/jelly-list">) {
   return pageMetadata(toLocale((await params).locale), "jellyList", routes.jellyList);
@@ -45,6 +45,7 @@ export default async function JellyListPage({ params }: PageProps<"/[locale]/jel
             <p className="mt-6 text-sm text-muted">{t("drop.microcopy")}</p>
           </div>
           <div className="card p-7">
+            <CampaignArt name="jelly-box" className="mb-6 border border-line" />
             <p className="font-display font-semibold">{t("jellyListPage.boxTitle")}</p>
             <ul className="mt-4 grid gap-2 text-sm text-muted">
               {box.map((li) => (
@@ -55,12 +56,7 @@ export default async function JellyListPage({ params }: PageProps<"/[locale]/jel
               {t("jellyListPage.boxTerms")}
             </Link>
           </div>
-          {/* Campaign visual slot — 01_Get_The_Jelly_Drop_1200.png (see docs/IMAGE_PROMPTS.md). */}
-          {showDevPlaceholders && (
-            <div className="flex aspect-square items-end rounded-[var(--radius-card)] border border-dashed border-orange/50 p-4">
-              <p className="font-mono text-xs text-orange">{t("drop.imagePending")}</p>
-            </div>
-          )}
+          <CampaignArt name="tech-bench-inbox" className="border border-line" />
         </aside>
       </section>
     </>

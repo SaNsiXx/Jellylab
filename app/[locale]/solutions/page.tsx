@@ -1,5 +1,4 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { UsersThree, StackSimple, Compass } from "@phosphor-icons/react/dist/ssr";
 import { toLocale } from "@/i18n/locale";
 import { pageMetadata, absoluteUrl, localizedPath } from "@/lib/seo";
 import { crewHref, routes } from "@/lib/site";
@@ -7,8 +6,12 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { BrandIcon, type IconName } from "@/components/ui/BrandArt";
 import { FinalCTA } from "@/components/home/Sections";
 import { JsonLd } from "@/components/seo/JsonLd";
+
+// Same order as solutionsPage.capabilities: Frontend, Backend, Cloud & DevOps, AI & Data, Quality, eCommerce.
+const CAP_ICONS: IconName[] = ["frontend", "backend", "cloud-devops", "ai-data", "quality", "ecommerce"];
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/solutions">) {
   return pageMetadata(toLocale((await params).locale), "solutions", routes.solutions);
@@ -22,9 +25,9 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
   const caps = t.raw("capabilities") as { area: string; stack: string }[];
 
   const services = [
-    { key: "staffAug", Icon: UsersThree, list: t.raw("staffAug.list") as string[], cta: tc("requestSpecialists") },
-    { key: "teams", Icon: StackSimple, list: t.raw("teams.list") as string[], cta: tc("designTeam") },
-    { key: "leadership", Icon: Compass, list: [] as string[], cta: tc("talkProblem") },
+    { key: "staffAug", icon: "staff-augmentation" as IconName, list: t.raw("staffAug.list") as string[], cta: tc("requestSpecialists") },
+    { key: "teams", icon: "dedicated-teams" as IconName, list: t.raw("teams.list") as string[], cta: tc("designTeam") },
+    { key: "leadership", icon: "leadership" as IconName, list: [] as string[], cta: tc("talkProblem") },
   ] as const;
 
   return (
@@ -32,12 +35,12 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
       <PageHero title={t("title")} intro={t("intro")} accent="blue" />
       <Section className="pt-0 lg:pt-0">
         <div className="grid gap-5">
-          {services.map(({ key, Icon, list, cta }, i) => (
+          {services.map(({ key, icon, list, cta }, i) => (
             <Reveal key={key} delay={i * 60}>
               <article id={key} className="card grid gap-8 p-7 sm:p-10 lg:grid-cols-12 lg:gap-12">
                 <div className="lg:col-span-6">
-                  <span className="flex size-12 items-center justify-center rounded-2xl border border-line bg-white/[0.03] text-cyan">
-                    <Icon size={24} weight="light" aria-hidden="true" />
+                  <span className="flex size-14 items-center justify-center rounded-2xl border border-line bg-white/[0.03]">
+                    <BrandIcon name={icon} size={40} />
                   </span>
                   <h2 className="h2 mt-8 text-[clamp(1.75rem,3vw,2.5rem)]">{t(`${key}.title`)}</h2>
                   <p className="mt-4 text-lg text-muted">{t(`${key}.body`)}</p>
@@ -69,8 +72,9 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
       <Section labelledBy="caps-title" className="border-t border-line">
         <h2 id="caps-title" className="h2">{t("capabilitiesTitle")}</h2>
         <dl className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-          {caps.map((c) => (
+          {caps.map((c, i) => (
             <div key={c.area} className="bg-bg p-7">
+              <BrandIcon name={CAP_ICONS[i] ?? "specialists"} size={36} className="mb-5" />
               <dt className="font-display text-xl font-semibold tracking-tight">{c.area}</dt>
               <dd className="mt-2 font-mono text-sm text-muted">{c.stack}</dd>
             </div>

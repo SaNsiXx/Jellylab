@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" width="64" height="64"><title>dedicated-teams</title><defs>
+    <linearGradient id="i-g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#13C8FF"/><stop offset=".55" stop-color="#306BFF"/><stop offset="1" stop-color="#6B38FF"/></linearGradient>
+    <linearGradient id="i-a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D7FF54"/><stop offset="1" stop-color="#00D47E"/></linearGradient>
+    <filter id="i-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <style>.l{fill:none;stroke:url(#i-g);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.l .a{stroke:url(#i-a)}.l .f{fill:url(#i-g);stroke:none}</style>
+  </defs>
+  <g class="l" filter="url(#i-glow)" opacity=".55"><circle cx="32" cy="32" r="7"/><circle cx="16" cy="18" r="4"/><circle cx="48" cy="18" r="4"/><circle cx="16" cy="46" r="4"/><circle cx="48" cy="46" r="4"/><path d="M19 21l8 6M45 21l-8 6M19 43l8-6M45 43l-8-6M20 18h24M20 46h24"/></g>
+  <g class="l"><circle cx="32" cy="32" r="7"/><circle cx="16" cy="18" r="4"/><circle cx="48" cy="18" r="4"/><circle cx="16" cy="46" r="4"/><circle cx="48" cy="46" r="4"/><path d="M19 21l8 6M45 21l-8 6M19 43l8-6M45 43l-8-6M20 18h24M20 46h24"/></g></svg>

@@ -15,7 +15,7 @@ export default async function ConfirmedPage({ params }: PageProps<"/[locale]/jel
   setRequestLocale(toLocale((await params).locale));
   const t = await getTranslations();
   return (
-    <StatusScreen title={t("jellyListPage.confirmedTitle")} body={t("jellyListPage.confirmedBody")}>
+    <StatusScreen art="jelly-box" title={t("jellyListPage.confirmedTitle")} body={t("jellyListPage.confirmedBody")}>
       <ConfirmedTracker />
       <ButtonLink href={routes.talent} variant="secondary" arrow>
         {t("cta.seeTalent")}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" width="64" height="64"><title>frontend</title><defs>
+    <linearGradient id="i-g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#13C8FF"/><stop offset=".55" stop-color="#306BFF"/><stop offset="1" stop-color="#6B38FF"/></linearGradient>
+    <linearGradient id="i-a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D7FF54"/><stop offset="1" stop-color="#00D47E"/></linearGradient>
+    <filter id="i-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <style>.l{fill:none;stroke:url(#i-g);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.l .a{stroke:url(#i-a)}.l .f{fill:url(#i-g);stroke:none}</style>
+  </defs>
+  <g class="l" filter="url(#i-glow)" opacity=".55"><rect x="10" y="14" width="44" height="34" rx="6"/><path d="M10 22h44"/><circle cx="15" cy="18" r="1" class="f"/><circle cx="19" cy="18" r="1" class="f"/><path d="M27 30l-5 5 5 5M37 30l5 5-5 5M34 28l-4 14" class="a"/></g>
+  <g class="l"><rect x="10" y="14" width="44" height="34" rx="6"/><path d="M10 22h44"/><circle cx="15" cy="18" r="1" class="f"/><circle cx="19" cy="18" r="1" class="f"/><path d="M27 30l-5 5 5 5M37 30l5 5-5 5M34 28l-4 14" class="a"/></g></svg>

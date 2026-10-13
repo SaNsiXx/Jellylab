@@ -151,12 +151,13 @@
   .tech-line { animation: none; stroke-dashoffset: 0; }
 }
 
-/* ---------- Reveal (gated on .js so no-JS users always see content) ---------- */
-.js [data-reveal]:not([data-shown]) { opacity: 0; transform: translate3d(0, 24px, 0); }
-[data-reveal] { transition: opacity var(--duration-section) var(--ease-jelly), transform var(--duration-section) var(--ease-jelly); }
-@media (prefers-reduced-motion: reduce) {
-  .js [data-reveal]:not([data-shown]) { opacity: 1; transform: none; }
-  [data-reveal] { transition: none; }
+/* ---------- Reveal ----------
+   Hidden start state only when scripting is enabled AND motion is welcome, so no-JS users,
+   reduced-motion users and older browsers (no `scripting` media feature) always see content.
+   Pure CSS on purpose: an inline <script> in the layout triggers React's client-render warning. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal]:not([data-shown]) { opacity: 0; transform: translate3d(0, 24px, 0); }
+  [data-reveal] { transition: opacity var(--duration-section) var(--ease-jelly), transform var(--duration-section) var(--ease-jelly); }
 }
 
 /* =====================================================================
@@ -353,3 +354,11 @@ a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
   a:hover > .wordmark .wordmark-jelly-wrap { animation: none; }
   .tech-pulse { display: none; }
 }
+
+/* Floating jelly accents (public/jelly/*.svg) */
+@keyframes jl-accent-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -14px, 0) rotate(4deg); }
+}
+.jelly-accent { animation: jl-accent-float 9s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgb(0 0 0 / 0.45)); }
+@media (prefers-reduced-motion: reduce) { .jelly-accent { animation: none; } }

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -23,6 +22,8 @@ const body = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
   display: "swap",
+  // Body text is never the LCP element (the Space Grotesk H1 is), so don't compete for early bandwidth.
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -53,11 +54,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const t = await getTranslations("a11y");
 
   return (
-    <html lang={locale} className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
-      <head>
-        {/* Enables progressive reveal styles only when JS runs. */}
-        <Script id="js-class" strategy="beforeInteractive">{`document.documentElement.classList.add('js')`}</Script>
-      </head>
+    <html lang={locale} className={`${display.variable} ${body.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
         <div aria-hidden="true" className="lab-bg" />
         <NextIntlClientProvider>
