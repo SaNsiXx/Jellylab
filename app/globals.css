@@ -183,34 +183,94 @@
 @keyframes jl-neon-spin { to { --neon-a: 360deg; } }
 @keyframes jl-neon-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 
-/* ---------- Lab backdrop: graph paper + neon corner light ---------- */
+/* ---------- Living backdrop: drifting jelly auras + passing signals ----------
+   Replaces the old graph-paper grid. Only `transform`/`opacity` animate (compositor-only, no repaint).
+   Aura alphas stay low so muted text keeps ≥ 4.5:1 contrast on top. Static under reduced motion. */
 .lab-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
-  background:
-    radial-gradient(60rem 42rem at -10% -10%, rgb(48 107 255 / 0.16), transparent 60%),
-    radial-gradient(48rem 36rem at 110% 0%, rgb(141 255 69 / 0.07), transparent 60%),
-    radial-gradient(54rem 40rem at 110% 110%, rgb(255 77 94 / 0.11), transparent 60%);
+  contain: strict;
 }
-.lab-bg::before,
-.lab-bg::after {
+.aura {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  will-change: transform;
+}
+.aura-electric {
+  top: -32vmax;
+  left: -26vmax;
+  background: radial-gradient(circle at 50% 50%, rgb(48 107 255 / 0.24), rgb(107 56 255 / 0.1) 38%, transparent 66%);
+  animation: jl-aura-electric 46s ease-in-out infinite alternate;
+}
+.aura-acid {
+  top: 18vh;
+  right: -38vmax;
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle at 50% 50%, rgb(141 255 69 / 0.13), rgb(0 212 126 / 0.06) 40%, transparent 66%);
+  animation: jl-aura-acid 58s ease-in-out infinite alternate;
+}
+.aura-heat {
+  bottom: -36vmax;
+  left: 22vw;
+  background: radial-gradient(circle at 50% 50%, rgb(255 77 94 / 0.17), rgb(255 154 49 / 0.07) 40%, transparent 66%);
+  animation: jl-aura-heat 52s ease-in-out infinite alternate;
+}
+@keyframes jl-aura-electric {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(28vw, 14vh, 0) scale(1.12); }
+  100% { transform: translate3d(12vw, 30vh, 0) scale(0.95); }
+}
+@keyframes jl-aura-acid {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-22vw, 26vh, 0) scale(1.15); }
+  100% { transform: translate3d(-34vw, -6vh, 0) scale(1); }
+}
+@keyframes jl-aura-heat {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-18vw, -22vh, 0) scale(1.08); }
+  100% { transform: translate3d(20vw, -34vh, 0) scale(1.14); }
+}
+
+/* Signals: a thin pulse of light occasionally crossing the screen (The Jelly Signal / circuit traces). */
+.signal {
+  position: absolute;
+  left: 0;
+  width: 34vw;
+  height: 1px;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: jl-signal 15s linear infinite;
+}
+.signal::after {
   content: "";
   position: absolute;
-  inset: 0;
-  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 30%, transparent 100%);
+  right: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 10px 2px currentColor;
 }
-.lab-bg::before {
-  background:
-    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px) 0 0 / 72px 72px,
-    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px) 0 0 / 72px 72px;
+.signal-cyan { top: 23%; color: var(--color-cyan); background: linear-gradient(90deg, transparent, rgb(19 200 255 / 0.55)); }
+.signal-green { top: 61%; color: var(--color-green); background: linear-gradient(90deg, transparent, rgb(141 255 69 / 0.45)); animation-duration: 19s; animation-delay: 6s; }
+.signal-red { top: 84%; color: var(--color-red); background: linear-gradient(90deg, transparent, rgb(255 77 94 / 0.45)); animation-duration: 23s; animation-delay: 12s; }
+@keyframes jl-signal {
+  0% { transform: translate3d(-40vw, 0, 0); opacity: 0; }
+  4% { opacity: 1; }
+  30% { transform: translate3d(110vw, 0, 0); opacity: 1; }
+  31%, 100% { transform: translate3d(110vw, 0, 0); opacity: 0; }
 }
-/* finer sub-grid, like lab graph paper */
-.lab-bg::after {
-  background:
-    linear-gradient(rgb(255 255 255 / 0.018) 1px, transparent 1px) 0 0 / 18px 18px,
-    linear-gradient(90deg, rgb(255 255 255 / 0.018) 1px, transparent 1px) 0 0 / 18px 18px;
+
+@media (prefers-reduced-motion: reduce) {
+  .aura { animation: none; }
+  .signal { display: none; }
 }
 
 /* ---------- Animated wordmark ---------- */

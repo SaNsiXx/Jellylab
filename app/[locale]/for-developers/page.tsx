@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { CandidateForm } from "@/components/forms/CandidateForm";
 import { FormBoundary } from "@/components/forms/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/for-developers">) {
   return pageMetadata(toLocale((await params).locale), "forDevelopers", routes.forDevelopers);
@@ -63,7 +64,7 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
 
       <Section id="join" labelledBy="join-title" className="border-t border-line">
         <div className="mx-auto max-w-3xl">
-          <h2 id="join-title" className="h2">{t("formTitle")}</h2>
+          <h2 id="join-title" className="h2"><NeonHeadline text={t("formTitle")} /></h2>
           <div className="mt-10">
             <FormBoundary fallback={<p role="alert">{te("server")}</p>}>
               <CandidateForm />
@@ -74,7 +75,7 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
 
       <Section labelledBy="dev-faq-title" className="border-t border-line">
         <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="dev-faq-title" className="h2 lg:col-span-4">{t("faqTitle")}</h2>
+          <h2 id="dev-faq-title" className="h2 lg:col-span-4"><NeonHeadline text={t("faqTitle")} /></h2>
           <div className="divide-y divide-line border-y border-line lg:col-span-8">
             {faq.map((i) => (
               <details key={i.q} className="group">

@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { BrandIcon, type IconName } from "@/components/ui/BrandArt";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 import { FinalCTA } from "@/components/home/Sections";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -42,7 +43,7 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
                   <span className="flex size-14 items-center justify-center rounded-2xl border border-line bg-white/[0.03]">
                     <BrandIcon name={icon} size={40} />
                   </span>
-                  <h2 className="h2 mt-8 text-[clamp(1.75rem,3vw,2.5rem)]">{t(`${key}.title`)}</h2>
+                  <h2 className="h2 mt-8 text-[clamp(1.75rem,3vw,2.5rem)]"><NeonHeadline text={t(`${key}.title`)} /></h2>
                   <p className="mt-4 text-lg text-muted">{t(`${key}.body`)}</p>
                   <div className="mt-8">
                     <ButtonLink href={crewHref()} variant="secondary" arrow>
@@ -70,7 +71,7 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
       </Section>
 
       <Section labelledBy="caps-title" className="border-t border-line">
-        <h2 id="caps-title" className="h2">{t("capabilitiesTitle")}</h2>
+        <h2 id="caps-title" className="h2"><NeonHeadline text={t("capabilitiesTitle")} /></h2>
         <dl className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {caps.map((c, i) => (
             <div key={c.area} className="bg-bg p-7">

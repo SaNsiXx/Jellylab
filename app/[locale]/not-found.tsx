@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/Button";
 import { routes } from "@/lib/site";
 import { JellyAccent } from "@/components/ui/BrandArt";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 export default async function NotFound() {
   const t = await getTranslations();
@@ -11,7 +12,7 @@ export default async function NotFound() {
       {/* The escaped Jelly. */}
       <JellyAccent priority energy="heat" shape="drop" className="absolute top-32 right-[4%] -z-10 w-40 rotate-[18deg] opacity-80 sm:w-56 lg:right-[12%] lg:w-72" />
       <p className="eyebrow">404 · WHO THE F*CK IS JELLY?</p>
-      <h1 className="h1 mt-6 max-w-4xl">{t("notFound.title")}</h1>
+      <h1 className="h1 mt-6 max-w-4xl"><NeonHeadline text={t("notFound.title")} /></h1>
       <p className="lead mt-6">{t("notFound.body")}</p>
       <div className="mt-10">
         <ButtonLink href={routes.home} arrow>{t("cta.backHome")}</ButtonLink>

@@ -7,6 +7,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about">) {
   return pageMetadata(toLocale((await params).locale), "about", routes.about);
@@ -54,7 +55,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 h-80 w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--gradient-blue-jelly)] opacity-15 blur-3xl" />
         <div className="container-jl max-w-4xl text-center">
           <h2 id="manifesto-title" className="eyebrow justify-center">{t("manifestoTitle")}</h2>
-          <p className="h2 mt-8">{manifesto[0]}</p>
+          <p className="h2 mt-8"><NeonHeadline text={manifesto[0] ?? ""} /></p>
           <p className="lead mx-auto mt-8">{manifesto[1]}</p>
           <p className="neon-text mt-10 inline-block font-display text-3xl font-semibold tracking-tight sm:text-4xl">{t("manifestoEnd")}</p>
         </div>

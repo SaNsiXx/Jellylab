@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "./Section";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 import { JellyAccent, type JellyEnergy, type JellyShape } from "./BrandArt";
 
 type Accent = "blue" | "green" | "heat";
@@ -32,7 +33,7 @@ export function PageHero({ eyebrow, title, intro, accent = "blue", children }: {
       </svg>
       <div className="container-jl">
         {eyebrow && <Eyebrow accent={accent} className="mb-6">{eyebrow}</Eyebrow>}
-        <h1 className="h2 max-w-5xl lg:text-[clamp(3rem,5.6vw,5rem)]">{title}</h1>
+        <h1 className="h2 max-w-5xl lg:text-[clamp(3rem,5.6vw,5rem)]"><NeonHeadline text={title} /></h1>
         {intro && <p className="lead mt-6">{intro}</p>}
         {children}
       </div>

@@ -56,7 +56,15 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   return (
     <html lang={locale} className={`${display.variable} ${body.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
-        <div aria-hidden="true" className="lab-bg" />
+        {/* Living backdrop: drifting jelly auras + passing signals (see .lab-bg in globals.css). */}
+        <div aria-hidden="true" className="lab-bg">
+          <span className="aura aura-electric" />
+          <span className="aura aura-acid" />
+          <span className="aura aura-heat" />
+          <span className="signal signal-cyan" />
+          <span className="signal signal-green" />
+          <span className="signal signal-red" />
+        </div>
         <NextIntlClientProvider>
           <a
             href="#main"

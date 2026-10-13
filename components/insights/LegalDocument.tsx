@@ -4,6 +4,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { getTranslations } from "next-intl/server";
 import { renderMdx } from "./Mdx";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 export type LegalDoc = "privacy" | "cookies" | "jelly-box-terms";
 
@@ -26,7 +27,7 @@ export async function LegalDocument({ locale, doc, children }: { locale: "en" | 
             {t("draftBanner")}
           </p>
         )}
-        <h1 className="h2">{d.title}</h1>
+        <h1 className="h2"><NeonHeadline text={d.title} /></h1>
         <p className="mt-4 text-sm text-muted">
           {t("lastUpdated")}: {d.updatedAt}
         </p>

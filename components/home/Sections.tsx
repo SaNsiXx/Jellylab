@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Section, Eyebrow } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 import { BrandIcon, CampaignArt, type IconName } from "@/components/ui/BrandArt";
 import { TalentCard } from "@/components/talent/TalentCard";
 import { getTalentAdapter } from "@/lib/adapters/talent";
@@ -18,7 +19,7 @@ export async function ProblemSection() {
     <Section labelledBy="problem-title">
       <div className="grid gap-10 lg:grid-cols-12">
         <Reveal className="lg:col-span-8">
-          <h2 id="problem-title" className="h2">{t("title")}</h2>
+          <h2 id="problem-title" className="h2"><NeonHeadline text={t("title")} /></h2>
         </Reveal>
         <Reveal className="lg:col-span-4 lg:self-end" delay={120}>
           <p className="lead">{t("body")}</p>
@@ -50,7 +51,7 @@ export async function SolutionsPreview() {
       <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <Reveal>
           <Eyebrow accent="blue">{t("solutions.eyebrow")}</Eyebrow>
-          <h2 id="solutions-title" className="h2 mt-5 max-w-3xl">{t("solutions.title")}</h2>
+          <h2 id="solutions-title" className="h2 mt-5 max-w-3xl"><NeonHeadline text={t("solutions.title")} /></h2>
         </Reveal>
         <ButtonLink href={routes.solutions} variant="secondary" arrow className="self-start lg:self-auto">
           {t("cta.exploreSolutions")}
@@ -93,7 +94,7 @@ export async function TalentPreview() {
       <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
         <Reveal className="lg:col-span-7">
           <Eyebrow accent="green">{t("talent.eyebrow")}</Eyebrow>
-          <h2 id="talent-title" className="h2 mt-5">{t("talent.title")}</h2>
+          <h2 id="talent-title" className="h2 mt-5"><NeonHeadline text={t("talent.title")} /></h2>
         </Reveal>
         <Reveal className="lg:col-span-5" delay={120}>
           <p className="lead">{t("talent.body")}</p>
@@ -126,7 +127,7 @@ export async function ProcessSteps() {
     <Section labelledBy="process-title" className="border-t border-line">
       <Reveal>
         <Eyebrow accent="blue">{t("process.eyebrow")}</Eyebrow>
-        <h2 id="process-title" className="h2 mt-5 max-w-3xl">{t("process.title")}</h2>
+        <h2 id="process-title" className="h2 mt-5 max-w-3xl"><NeonHeadline text={t("process.title")} /></h2>
       </Reveal>
       <ol className="relative mt-16 grid gap-10 md:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-8">
         {/* connecting technical line */}
@@ -164,7 +165,7 @@ export async function JellyDropBlock() {
         <div className="relative grid gap-12 p-7 sm:p-12 lg:grid-cols-12 lg:gap-16 lg:p-16">
           <div className="lg:col-span-7">
             <Eyebrow accent="heat">{t("drop.eyebrow")}</Eyebrow>
-            <h2 id="drop-title" className="h2 mt-5">{t("drop.title")}</h2>
+            <h2 id="drop-title" className="h2 mt-5"><NeonHeadline text={t("drop.title")} /></h2>
             <p className="lead mt-6">{t("drop.body")}</p>
             <p className="mt-8 font-display font-semibold">{t("drop.listTitle")}</p>
             <ul className="mt-4 grid gap-3">
@@ -200,7 +201,7 @@ export async function JellyCrewBlock() {
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-6">
           <Eyebrow accent="green">{t("crew.eyebrow")}</Eyebrow>
-          <h2 id="crew-title" className="h2 mt-5">{t("crew.title")}</h2>
+          <h2 id="crew-title" className="h2 mt-5"><NeonHeadline text={t("crew.title")} /></h2>
         </Reveal>
         <Reveal className="lg:col-span-5 lg:col-start-8 lg:pt-14" delay={120}>
           <p className="lead">{t("crew.body")}</p>
@@ -223,7 +224,7 @@ export async function ValuesGrid() {
   return (
     <Section labelledBy="values-title" className="border-t border-line">
       <Reveal>
-        <h2 id="values-title" className="h2 max-w-3xl">{t("title")}</h2>
+        <h2 id="values-title" className="h2 max-w-3xl"><NeonHeadline text={t("title")} /></h2>
       </Reveal>
       <ul className="mt-14 grid gap-5 sm:grid-cols-2">
         {items.map((v, i) => (
@@ -250,7 +251,7 @@ export async function ManifestPreview() {
       <div aria-hidden="true" className="pointer-events-none absolute top-1/2 -left-40 size-[30rem] -translate-y-1/2 rounded-full bg-[image:var(--gradient-blue-jelly)] opacity-[0.12] blur-3xl" />
       <div className="relative grid gap-10 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
-          <h2 id="about-title" className="h2">{t("about.title")}</h2>
+          <h2 id="about-title" className="h2"><NeonHeadline text={t("about.title")} /></h2>
         </Reveal>
         <Reveal className="lg:col-span-6 lg:col-start-7" delay={120}>
           {paras.map((p) => (
@@ -277,7 +278,7 @@ export async function ProofSection() {
       <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <Eyebrow>{t("eyebrow")}</Eyebrow>
-          <h2 id="proof-title" className="h2 mt-5">{t("title")}</h2>
+          <h2 id="proof-title" className="h2 mt-5"><NeonHeadline text={t("title")} /></h2>
         </div>
         <ul className="flex flex-wrap gap-2 lg:max-w-xl lg:justify-end">
           {markets.map((m) => (
@@ -317,7 +318,7 @@ export async function FAQSection() {
   return (
     <Section labelledBy="faq-title" className="border-t border-line">
       <div className="grid gap-10 lg:grid-cols-12">
-        <h2 id="faq-title" className="h2 lg:col-span-4">{t("title")}</h2>
+        <h2 id="faq-title" className="h2 lg:col-span-4"><NeonHeadline text={t("title")} /></h2>
         <div className="divide-y divide-line border-y border-line lg:col-span-8">
           {items.map((i) => (
             <details key={i.q} className="group">
@@ -349,7 +350,7 @@ export async function FinalCTA() {
       </div>
       <div className="container-jl text-center">
         <Reveal>
-          <h2 id="final-title" className="h2 mx-auto max-w-4xl">{t("final.title")}</h2>
+          <h2 id="final-title" className="h2 mx-auto max-w-4xl"><NeonHeadline text={t("final.title")} /></h2>
           <p className="lead mx-auto mt-6">{t("final.body")}</p>
           <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ButtonLink href={routes.jellyList} arrow>

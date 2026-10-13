@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { crewHref, developerJoinHref, routes } from "@/lib/site";
 import { TrackedLink } from "@/components/ui/TrackedLink";
 import { JellyStage } from "./JellyStage";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 /** Technical line motif from the brand reference — circuit traces ending in signal dots. */
 function TechLines() {
@@ -35,17 +36,12 @@ function TechLines() {
           <path key={`${x}-${y}`} d={`M${x! - 7} ${y} H${x! + 7} M${x} ${y! - 7} V${y! + 7}`} />
         ))}
       </g>
-      {/* faint grid */}
-      <g stroke="white" strokeOpacity="0.07">
-        <path d="M0 180 H1440 M0 760 H1440 M96 0 V900 M1344 0 V900" />
-      </g>
     </svg>
   );
 }
 
 export async function Hero() {
   const t = await getTranslations();
-  const [line1, ...rest] = t("hero.title").split(/(?<=\.)\s/);
 
   return (
     <section aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-28 pb-14 lg:justify-center lg:pb-24">
@@ -65,8 +61,7 @@ export async function Hero() {
           </p>
           {/* Brief: H1 desktop 72–104px. Long localised titles step down so they stay on two lines. */}
           <h1 id="hero-title" className={`h1 mt-6 ${t("hero.title").length > 30 ? "md:text-[clamp(4.5rem,6.4vw,5.75rem)]" : "md:text-[clamp(4.5rem,7.4vw,6.5rem)]"}`}>
-            <span className="block">{line1}</span>
-            {rest.length > 0 && <span className="neon-text block">{rest.join(" ")}</span>}
+            <NeonHeadline text={t("hero.title")} stacked />
           </h1>
           <p className="lead mt-6 max-w-[36rem] text-fg/85">{t("hero.body")}</p>
 

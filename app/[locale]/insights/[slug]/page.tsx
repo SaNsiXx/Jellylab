@@ -9,6 +9,7 @@ import { getInsights } from "@/lib/adapters/insights";
 import { renderMdx } from "@/components/insights/Mdx";
 import { NewsletterCTA } from "@/components/ui/NewsletterCTA";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 export async function generateStaticParams() {
   const all = await Promise.all(routing.locales.map(async (locale) => (await getInsights().list(locale)).map((a) => ({ locale, slug: a.slug }))));
@@ -60,7 +61,7 @@ export default async function ArticlePage({ params }: PageProps<"/[locale]/insig
             <span className="rounded-full border border-cyan/40 px-3 py-1 font-mono text-[0.6875rem] tracking-wider text-cyan uppercase">{t(`categories.${a.category}`)}</span>
             {a.sample && <span className="rounded-full border border-dashed border-orange/60 px-2.5 py-0.5 font-mono text-[0.6875rem] text-orange">{t("sampleBadge")}</span>}
           </div>
-          <h1 className="h2 mt-6">{a.title}</h1>
+          <h1 className="h2 mt-6"><NeonHeadline text={a.title} /></h1>
           <p className="lead mt-6">{a.excerpt}</p>
           <p className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-line py-4 text-sm text-muted">
             <span>{t("by", { author: a.author.name })}</span>
