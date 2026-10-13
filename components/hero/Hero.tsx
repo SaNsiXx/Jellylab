@@ -12,19 +12,31 @@ function TechLines() {
     { d: "M0 630 H760 C800 630 820 676 860 700 H1110", c: "var(--color-red)" },
   ];
   return (
-    <svg aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMinYMid slice" className="pointer-events-none absolute inset-0 -z-10 hidden h-full w-full opacity-60 lg:block">
+    <svg aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMinYMid slice" className="pointer-events-none absolute inset-0 -z-10 hidden h-full w-full opacity-80 lg:block">
       <g fill="none" strokeWidth="1.25">
         {lines.map((l) => (
           <path key={l.d} d={l.d} stroke={l.c} pathLength={1} className="tech-line" opacity="0.7" />
         ))}
       </g>
-      <g>
+      <g className="tech-pulse">
         <circle cx="1060" cy="420" r="5" fill="var(--color-cyan)" />
         <circle cx="1150" cy="668" r="5" fill="var(--color-green)" />
         <circle cx="1110" cy="700" r="5" fill="var(--color-red)" />
       </g>
+      {/* Signal pulses travelling along the traces (hidden under reduced motion). */}
+      {lines.map((l, i) => (
+        <circle key={`pulse-${i}`} r="3" fill={l.c} className="tech-pulse" style={{ color: l.c }}>
+          <animateMotion dur={`${5 + i * 1.3}s`} begin={`${2.4 + i * 0.8}s`} repeatCount="indefinite" path={l.d} keyPoints="0;1" keyTimes="0;1" calcMode="linear" />
+        </circle>
+      ))}
+      {/* Lab crosshair markers */}
+      <g stroke="white" strokeOpacity="0.28" strokeWidth="1">
+        {[[96, 180], [1344, 180], [96, 760], [1344, 760]].map(([x, y]) => (
+          <path key={`${x}-${y}`} d={`M${x! - 7} ${y} H${x! + 7} M${x} ${y! - 7} V${y! + 7}`} />
+        ))}
+      </g>
       {/* faint grid */}
-      <g stroke="white" strokeOpacity="0.05">
+      <g stroke="white" strokeOpacity="0.07">
         <path d="M0 180 H1440 M0 760 H1440 M96 0 V900 M1344 0 V900" />
       </g>
     </svg>
@@ -42,19 +54,19 @@ export async function Hero() {
       {/* Readability scrim: guarantees contrast for the copy regardless of where the Jellies drift. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-[5] bg-[linear-gradient(to_top,var(--color-bg)_30%,transparent_75%)] lg:bg-[linear-gradient(90deg,var(--color-bg)_28%,color-mix(in_oklab,var(--color-bg)_55%,transparent)_52%,transparent_72%)]"
+        className="pointer-events-none absolute inset-0 -z-[5] bg-[linear-gradient(to_top,var(--color-bg)_30%,transparent_75%)] lg:bg-[linear-gradient(90deg,color-mix(in_oklab,var(--color-bg)_88%,transparent)_26%,color-mix(in_oklab,var(--color-bg)_45%,transparent)_50%,transparent_70%)]"
       />
 
       <div className="container-jl relative">
         <div className="max-w-[46rem] lg:max-w-[62rem]">
           <p className="eyebrow flex items-center gap-3 text-fg/80">
-            <span aria-hidden="true" className="h-px w-10 bg-[image:var(--gradient-heat-jelly)]" />
+            <span aria-hidden="true" className="header-neon-line h-px w-10" />
             {t("hero.eyebrow")}
           </p>
           {/* Brief: H1 desktop 72–104px. Long localised titles step down so they stay on two lines. */}
           <h1 id="hero-title" className={`h1 mt-6 ${t("hero.title").length > 30 ? "md:text-[clamp(4.5rem,6.4vw,5.75rem)]" : "md:text-[clamp(4.5rem,7.4vw,6.5rem)]"}`}>
             <span className="block">{line1}</span>
-            {rest.length > 0 && <span className="block">{rest.join(" ")}</span>}
+            {rest.length > 0 && <span className="neon-text block">{rest.join(" ")}</span>}
           </h1>
           <p className="lead mt-6 max-w-[36rem] text-fg/85">{t("hero.body")}</p>
 

@@ -4,9 +4,9 @@ import { crewHref } from "@/lib/site";
 import { TrackedLink } from "@/components/ui/TrackedLink";
 
 const availabilityTone: Record<TalentProfile["availability"], string> = {
-  immediate: "bg-green shadow-[0_0_10px_var(--color-green)]",
-  "2_weeks": "bg-emerald",
-  "1_month": "bg-cyan",
+  immediate: "live-dot bg-green shadow-[0_0_10px_var(--color-green)]",
+  "2_weeks": "bg-emerald shadow-[0_0_8px_var(--color-emerald)]",
+  "1_month": "bg-cyan shadow-[0_0_8px_var(--color-cyan)]",
   future: "bg-muted",
 };
 

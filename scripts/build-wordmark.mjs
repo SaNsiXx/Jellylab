@@ -59,3 +59,30 @@ const img = sharp(out, { raw: { width, height, channels: 4 } }).extract(crop);
 await img.clone().resize({ width: 640 }).webp({ quality: 92, alphaQuality: 100 }).toFile(`${outBase}.webp`);
 await img.clone().resize({ width: 640 }).png({ compressionLevel: 9 }).toFile(`${outBase}.png`);
 console.log(`wordmark ${crop.width}×${crop.height} (ratio ${(crop.width / crop.height).toFixed(4)}) bg=${bg}`);
+
+// Split layers for the animated wordmark: "Jelly" becomes an alpha mask that a moving neon
+// gradient shows through; "Labs" stays as the original white letterforms.
+{
+  const full = await sharp(`${outBase}.png`).raw().toBuffer({ resolveWithObject: true });
+  const { width: w, height: h, channels: ch } = full.info;
+  // Widest empty column run in the middle third = gap between "Jelly" and "Labs".
+  let best = [0, 0], start = -1;
+  for (let x = Math.floor(w / 3); x < Math.floor((2 * w) / 3); x++) {
+    let a = 0;
+    for (let y = 0; y < h; y++) a = Math.max(a, full.data[(y * w + x) * ch + 3]);
+    if (a < 10) { if (start < 0) start = x; }
+    else if (start >= 0) { if (x - start > best[1] - best[0]) best = [start, x]; start = -1; }
+  }
+  const split = Math.round((best[0] + best[1]) / 2);
+  const jelly = Buffer.alloc(w * h * 4);
+  const labs = Buffer.alloc(w * h * 4);
+  for (let i = 0; i < w * h; i++) {
+    const x = i % w;
+    const a = full.data[i * ch + 3];
+    if (x < split) { jelly[i * 4] = jelly[i * 4 + 1] = jelly[i * 4 + 2] = 255; jelly[i * 4 + 3] = a; }
+    else for (let c = 0; c < 4; c++) labs[i * 4 + c] = full.data[i * ch + c];
+  }
+  await sharp(jelly, { raw: { width: w, height: h, channels: 4 } }).png({ compressionLevel: 9 }).toFile(`${outBase}-jelly-mask.png`);
+  await sharp(labs, { raw: { width: w, height: h, channels: 4 } }).webp({ quality: 92, alphaQuality: 100 }).toFile(`${outBase}-labs.webp`);
+  console.log(`split at x=${split}/${w}`);
+}

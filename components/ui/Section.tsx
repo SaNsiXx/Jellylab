@@ -12,7 +12,7 @@ const dot: Record<Accent, string> = {
 export function Eyebrow({ children, accent = "none", className = "" }: { children: ReactNode; accent?: Accent; className?: string }) {
   return (
     <p className={`eyebrow flex items-center gap-3 ${className}`}>
-      <span aria-hidden="true" className={`size-1.5 rounded-full ${dot[accent]}`} />
+      <span aria-hidden="true" className={`live-dot size-1.5 rounded-full ${dot[accent]}`} />
       {children}
     </p>
   );

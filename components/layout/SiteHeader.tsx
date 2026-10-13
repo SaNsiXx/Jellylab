@@ -39,9 +39,13 @@ export function SiteHeader() {
         scrolled ? "border-line bg-bg/72 backdrop-blur-xl backdrop-saturate-150" : "border-transparent bg-transparent"
       }`}
     >
+      <span
+        aria-hidden="true"
+        className={`header-neon-line absolute inset-x-0 -bottom-px h-px transition-opacity duration-[var(--duration-standard)] ${scrolled ? "opacity-70" : "opacity-0"}`}
+      />
       <div className="container-jl flex h-18 items-center gap-6 lg:h-20">
         <Link href={routes.home} aria-label={t("a11y.home")} className="-m-2 shrink-0 p-2">
-          <Wordmark priority className="h-6 w-auto sm:h-7" />
+          <Wordmark className="h-6 w-auto sm:h-7" />
         </Link>
 
         <nav aria-label={t("a11y.mainNav")} className="ml-auto hidden xl:block">
@@ -59,7 +63,7 @@ export function SiteHeader() {
                   >
                     {t(`nav.${key}`)}
                     {active && (
-                      <span aria-hidden="true" className="absolute inset-x-3.5 -bottom-0.5 h-px bg-[image:var(--gradient-blue-jelly)]" />
+                      <span aria-hidden="true" className="header-neon-line absolute inset-x-3.5 -bottom-0.5 h-px" />
                     )}
                   </Link>
                 </li>

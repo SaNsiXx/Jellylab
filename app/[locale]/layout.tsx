@@ -56,6 +56,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body className="min-h-dvh overflow-x-clip">
+        <div aria-hidden="true" className="lab-bg" />
         <NextIntlClientProvider>
           <a
             href="#main"

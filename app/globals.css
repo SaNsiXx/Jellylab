@@ -158,3 +158,198 @@
   .js [data-reveal]:not([data-shown]) { opacity: 1; transform: none; }
   [data-reveal] { transition: none; }
 }
+
+/* =====================================================================
+   NEON LAB LAYER
+   Colour moves; text stays white-on-dark for contrast. Everything that
+   animates stops under prefers-reduced-motion.
+   ===================================================================== */
+
+@property --neon-a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+:root {
+  /* One spectrum, in brand order: Electric → Acid → Heat. */
+  --neon-spectrum: #13c8ff, #306bff, #6b38ff, #8dff45, #00d47e, #ffd25a, #ff9a31, #ff4d5e, #13c8ff;
+  --neon-conic: conic-gradient(from var(--neon-a), var(--neon-spectrum));
+  /* Repeated twice across 200% width → seamless loop when shifted by one period. */
+  --neon-linear: linear-gradient(90deg, #13c8ff, #306bff, #6b38ff, #8dff45, #00d47e, #ffd25a, #ff9a31, #ff4d5e, #13c8ff, #306bff, #6b38ff, #8dff45, #00d47e, #ffd25a, #ff9a31, #ff4d5e, #13c8ff);
+}
+
+@keyframes jl-neon-spin { to { --neon-a: 360deg; } }
+@keyframes jl-neon-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+/* ---------- Lab backdrop: graph paper + neon corner light ---------- */
+.lab-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 42rem at -10% -10%, rgb(48 107 255 / 0.16), transparent 60%),
+    radial-gradient(48rem 36rem at 110% 0%, rgb(141 255 69 / 0.07), transparent 60%),
+    radial-gradient(54rem 40rem at 110% 110%, rgb(255 77 94 / 0.11), transparent 60%);
+}
+.lab-bg::before,
+.lab-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 30%, transparent 100%);
+}
+.lab-bg::before {
+  background:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px) 0 0 / 72px 72px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px) 0 0 / 72px 72px;
+}
+/* finer sub-grid, like lab graph paper */
+.lab-bg::after {
+  background:
+    linear-gradient(rgb(255 255 255 / 0.018) 1px, transparent 1px) 0 0 / 18px 18px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.018) 1px, transparent 1px) 0 0 / 18px 18px;
+}
+
+/* ---------- Animated wordmark ---------- */
+.wordmark {
+  position: relative;
+  display: inline-block;
+  aspect-ratio: 640 / 151;
+}
+.wordmark > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wordmark-jelly-wrap {
+  filter: drop-shadow(0 0 6px rgb(19 200 255 / 0.55)) drop-shadow(0 0 14px rgb(107 56 255 / 0.35));
+  transform-origin: 25% 80%;
+}
+.wordmark-jelly {
+  background: var(--neon-linear);
+  background-size: 200% 100%;
+  -webkit-mask: url("/brand/jellylabs-wordmark-jelly-mask.png") center / 100% 100% no-repeat;
+  mask: url("/brand/jellylabs-wordmark-jelly-mask.png") center / 100% 100% no-repeat;
+  animation: jl-neon-flow 7s linear infinite;
+}
+@keyframes jl-jelly-squish {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(1.06, 0.92); }
+  50% { transform: scale(0.96, 1.05); }
+  75% { transform: scale(1.02, 0.98); }
+}
+a:hover > .wordmark .wordmark-jelly-wrap,
+a:focus-visible > .wordmark .wordmark-jelly-wrap { animation: jl-jelly-squish 0.7s var(--ease-jelly); }
+a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
+
+/* ---------- Neon buttons ---------- */
+.btn-neon,
+.btn-neon-ghost {
+  isolation: isolate;
+  border: 1.5px solid transparent;
+  color: var(--color-fg);
+  text-shadow: 0 0 12px rgb(255 255 255 / 0.25);
+  animation: jl-neon-spin 4.5s linear infinite;
+}
+.btn-neon::before,
+.btn-neon-ghost::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--neon-conic);
+  filter: blur(14px);
+  animation: jl-neon-spin 4.5s linear infinite;
+  transition: opacity var(--duration-standard) var(--ease-jelly);
+  pointer-events: none;
+}
+/* Primary: tinted glass fill + full-spectrum rotating border + glow. */
+.btn-neon {
+  background:
+    linear-gradient(rgb(7 8 13 / 0.84), rgb(7 8 13 / 0.84)) padding-box,
+    var(--neon-conic) padding-box,
+    var(--neon-conic) border-box;
+}
+.btn-neon::before { opacity: 0.55; }
+.btn-neon:hover {
+  background:
+    linear-gradient(rgb(7 8 13 / 0.7), rgb(7 8 13 / 0.7)) padding-box,
+    var(--neon-conic) padding-box,
+    var(--neon-conic) border-box;
+  transform: translateY(-1px);
+}
+.btn-neon:hover::before { opacity: 0.95; }
+/* Secondary: dim, slow border; lights up on hover/focus. */
+.btn-neon-ghost {
+  animation-duration: 9s;
+  background:
+    linear-gradient(rgb(7 8 13 / 0.92), rgb(7 8 13 / 0.92)) padding-box,
+    conic-gradient(from var(--neon-a), rgb(19 200 255 / 0.55), rgb(107 56 255 / 0.25), rgb(141 255 69 / 0.5), rgb(255 154 49 / 0.25), rgb(19 200 255 / 0.55)) border-box;
+}
+.btn-neon-ghost::before { opacity: 0; }
+.btn-neon-ghost:hover,
+.btn-neon-ghost:focus-visible {
+  animation-duration: 3s;
+  background:
+    linear-gradient(rgb(7 8 13 / 0.86), rgb(7 8 13 / 0.86)) padding-box,
+    var(--neon-conic) border-box;
+}
+.btn-neon-ghost:hover::before,
+.btn-neon-ghost:focus-visible::before { opacity: 0.5; }
+.btn-neon .btn-arrow { filter: drop-shadow(0 0 6px currentColor); }
+
+/* ---------- Neon text ---------- */
+.neon-text {
+  background: var(--neon-linear);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgb(48 107 255 / 0.35));
+  animation: jl-neon-flow 12s linear infinite;
+  /* keep descenders inside the clip box */
+  padding-bottom: 0.08em;
+}
+.neon-glow-text { text-shadow: 0 0 18px rgb(19 200 255 / 0.45); }
+
+/* ---------- Lab cards: corner brackets + neon edge on hover ---------- */
+.card {
+  transition: border-color var(--duration-standard) var(--ease-jelly), box-shadow var(--duration-standard) var(--ease-jelly);
+}
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  border-color: rgb(19 200 255 / 0.55);
+  border-style: solid;
+  transition: border-color var(--duration-standard), filter var(--duration-standard);
+}
+.card::before { top: 10px; left: 10px; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 6px; }
+.card::after { right: 10px; bottom: 10px; border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 6px; }
+.card:hover {
+  border-color: rgb(19 200 255 / 0.35);
+  box-shadow: 0 0 0 1px rgb(19 200 255 / 0.08), 0 0 40px -10px rgb(19 200 255 / 0.45), inset 0 0 40px -24px rgb(107 56 255 / 0.6);
+}
+.card:hover::before,
+.card:hover::after { border-color: var(--color-green); filter: drop-shadow(0 0 6px var(--color-green)); }
+
+/* ---------- Lab readouts ---------- */
+.eyebrow { text-shadow: 0 0 14px rgb(19 200 255 / 0.25); }
+@keyframes jl-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.live-dot { animation: jl-blink 1.6s ease-in-out infinite; }
+.header-neon-line {
+  background: var(--neon-linear);
+  background-size: 200% 100%;
+  animation: jl-neon-flow 10s linear infinite;
+  box-shadow: 0 0 12px rgb(19 200 255 / 0.6);
+}
+.tech-pulse { filter: drop-shadow(0 0 6px currentColor); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark-jelly, .btn-neon, .btn-neon-ghost, .btn-neon::before, .btn-neon-ghost::before,
+  .neon-text, .live-dot, .header-neon-line { animation: none !important; }
+  a:hover > .wordmark .wordmark-jelly-wrap { animation: none; }
+  .tech-pulse { display: none; }
+}
