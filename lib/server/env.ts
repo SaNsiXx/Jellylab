@@ -10,6 +10,8 @@ const read = (k: string) => {
 
 export const env = {
   isProd: process.env.NODE_ENV === "production",
+  /** The live site (jellylabs.com). Vercel previews run NODE_ENV=production but are NOT live. */
+  isLive: process.env.DEPLOY_ENV === "production",
   siteUrl: read("NEXT_PUBLIC_SITE_URL"),
   doiSecret: read("DOI_SECRET"),
 

@@ -44,11 +44,12 @@ content/              insights/*.mdx, legal/*.mdx
 scripts/              build/QA tooling
 ```
 
-## Deployment (Vercel or any Node host)
+## Deployment (Vercel → jellylabs.com)
 
-1. Set env vars from `.env.example` (Production): `NEXT_PUBLIC_SITE_URL`, `DOI_SECRET`, `CRM_PROVIDER=pipedrive`, `MAIL_PROVIDER=brevo`, `RATE_LIMIT_PROVIDER=upstash`, analytics IDs, and `DEPLOY_ENV=production` **only** on the live deployment.
-2. Previews/staging: leave `DEPLOY_ENV` unset → robots blocks indexing, placeholders only warn.
-3. The production build fails until everything in `docs/LAUNCH_CHECKLIST.md` is resolved.
+EN at `https://jellylabs.com`, PL at `https://jellylabs.com/pl`. Step-by-step: `docs/DEPLOYMENT.md`.
+
+- Preview: import the GitHub repo in Vercel, no env vars needed; `*.vercel.app` is never indexed and the placeholder check only warns.
+- Launch: add the domain, set `NEXT_PUBLIC_SITE_URL=https://jellylabs.com`, `DEPLOY_ENV=production` and the integration variables. The build fails until `docs/LAUNCH_CHECKLIST.md` is resolved.
 
 ## Quality results (Phase 4, production build)
 
@@ -59,6 +60,7 @@ scripts/              build/QA tooling
 
 ## Documentation
 
+- `docs/DEPLOYMENT.md` — Vercel preview and launch on jellylabs.com
 - `docs/LAUNCH_CHECKLIST.md` — legal placeholders, configuration, copy to review, QA checklist
 - `docs/INTEGRATIONS.md` — CRM, email/double opt-in, rate limiting, CV storage, talent CMS, analytics, consent manager
 - `docs/CONTENT_EDITING.md` — copy, Insights, legal pages, consent versions, tokens, images

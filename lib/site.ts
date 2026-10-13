@@ -1,6 +1,9 @@
 // Route and navigation config. Slugs are identical in EN and PL (brief §13.5).
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+// Production: NEXT_PUBLIC_SITE_URL=https://jellylabs.com. Vercel previews fall back to their own deployment URL
+// (server-side only: canonical, sitemap, structured data), local dev to localhost.
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 export const routes = {
   home: "/",

@@ -1,12 +1,14 @@
 // Pre-build guard (runs in `npm run build` via prebuild).
-// Production deploys (DEPLOY_ENV=production or VERCEL_ENV=production) FAIL while placeholders remain.
+// Production deploys (DEPLOY_ENV=production) FAIL while placeholders remain.
 // Every other build prints a loud warning listing what is still missing.
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const isProdDeploy = process.env.DEPLOY_ENV === "production" || process.env.VERCEL_ENV === "production";
+// Explicit opt-in only: Vercel marks every main-branch deploy as VERCEL_ENV=production, including the
+// pre-launch preview on *.vercel.app — that must still build. Set DEPLOY_ENV=production on launch day.
+const isProdDeploy = process.env.DEPLOY_ENV === "production";
 const issues = [];
 
 const scan = async (rel, re, label) => {

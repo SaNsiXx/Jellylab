@@ -14,7 +14,9 @@ const DEV_SECRET = "dev-only-doi-secret-change-me";
 
 function secret() {
   if (env.doiSecret) return env.doiSecret;
-  if (env.isProd) throw new Error("DOI_SECRET is not set");
+  // Required on the live site (also enforced by scripts/check-placeholders.mjs). Previews use console
+  // adapters only, so a fixed dev secret is acceptable there.
+  if (env.isLive) throw new Error("DOI_SECRET is not set");
   return DEV_SECRET;
 }
 
