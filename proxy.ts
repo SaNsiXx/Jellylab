@@ -5,5 +5,6 @@ export default createMiddleware(routing);
 
 export const config = {
   // Skip API routes, Next internals and anything with a file extension.
-  matcher: "/((?!api|_next|_vercel|.*\..*).*)",
+  // NB: "\\." must be double-escaped inside a JS string to reach the regex as a literal dot.
+  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
 };

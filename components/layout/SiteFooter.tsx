@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/site";
 import { legalEntity, isPlaceholder } from "@/lib/legal/entity";
 import { Wordmark } from "./Wordmark";
+import { CookieSettingsButton } from "@/components/consent/ConsentBanner";
 
 function Placeholder({ children }: { children: string }) {
   return <span className="rounded-md border border-dashed border-orange/50 px-1.5 py-0.5 font-mono text-xs text-orange">{children}</span>;
@@ -88,6 +89,9 @@ export async function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <CookieSettingsButton className="inline-flex min-h-10 items-center hover:text-fg" />
+              </li>
             </ul>
           </nav>
         </div>

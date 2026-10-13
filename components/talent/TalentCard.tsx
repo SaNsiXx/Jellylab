@@ -1,4 +1,4 @@
-import { getFormatter, getLocale, getTranslations } from "next-intl/server";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import type { TalentProfile } from "@/lib/adapters/talent/types";
 import { crewHref } from "@/lib/site";
 import { TrackedLink } from "@/components/ui/TrackedLink";
@@ -10,11 +10,12 @@ const availabilityTone: Record<TalentProfile["availability"], string> = {
   future: "bg-muted",
 };
 
-export async function TalentCard({ profile, headingLevel = "h3" }: { profile: TalentProfile; headingLevel?: "h2" | "h3" }) {
-  const t = await getTranslations("talent");
-  const tc = await getTranslations("cta");
-  const locale = (await getLocale()) as "en" | "pl";
-  const format = await getFormatter();
+// Hook-based (not async) so it renders in both Server Components (homepage) and the client-side talent explorer.
+export function TalentCard({ profile, headingLevel = "h3" }: { profile: TalentProfile; headingLevel?: "h2" | "h3" }) {
+  const t = useTranslations("talent");
+  const tc = useTranslations("cta");
+  const locale = useLocale() as "en" | "pl";
+  const format = useFormatter();
   const H = headingLevel;
   const verified = new Date(profile.availabilityVerifiedAt);
 

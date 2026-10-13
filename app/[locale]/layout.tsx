@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -6,6 +7,8 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
+import { AnalyticsScripts } from "@/components/consent/AnalyticsScripts";
 import "../globals.css";
 import { toLocale } from "@/i18n/locale";
 
@@ -53,7 +56,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     <html lang={locale} className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
         {/* Enables progressive reveal styles only when JS runs. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <Script id="js-class" strategy="beforeInteractive">{`document.documentElement.classList.add('js')`}</Script>
       </head>
       <body className="min-h-dvh overflow-x-clip">
         <div aria-hidden="true" className="lab-bg" />
@@ -69,6 +72,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             {children}
           </main>
           <SiteFooter />
+          <ConsentBanner />
+          <AnalyticsScripts />
         </NextIntlClientProvider>
       </body>
     </html>

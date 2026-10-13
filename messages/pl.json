@@ -2,7 +2,53 @@
   "meta": {
     "siteName": "Jelly Labs",
     "homeTitle": "Jelly Labs — Trudne problemy. Elastyczne zespoły.",
-    "homeDescription": "Zweryfikowani specjaliści IT i elastyczne zespoły dla firm, które muszą działać teraz. Z Polski. Gotowi na Europę."
+    "homeDescription": "Zweryfikowani specjaliści IT i elastyczne zespoły dla firm, które muszą działać teraz. Z Polski. Gotowi na Europę.",
+    "pages": {
+      "solutions": {
+        "title": "Rozwiązania — staff augmentation i dedykowane zespoły",
+        "description": "Od jednego trudno dostępnego specjalisty po dedykowany zespół — Jelly Labs pomaga dodawać kompetencje bez tworzenia kolejnej warstwy chaosu."
+      },
+      "talent": {
+        "title": "Dostępni specjaliści — aktualny Jelly Bench",
+        "description": "Zweryfikowani specjaliści i potwierdzona dostępność. Poproś o profil, żeby otrzymać bieżące szczegóły."
+      },
+      "howItWorks": {
+        "title": "Jak działamy",
+        "description": "Mniej szumu między potrzebą a delivery: najpierw kontekst, krótka selekcja, rozmowy bez teatru, jasny onboarding i partnerstwo w trakcie delivery."
+      },
+      "forDevelopers": {
+        "title": "Dla developerów — dołącz do Jelly Crew",
+        "description": "Dołącz do sieci zbudowanej wokół uczciwej komunikacji, trafnych projektów i szacunku dla Twojego czasu."
+      },
+      "about": {
+        "title": "O Jelly Labs",
+        "description": "Elastyczni z założenia. Odpowiedzialni z wyboru. Jelly Labs łączy mocnych specjalistów technologicznych z firmami, które chcą działać szybciej bez obniżania standardów."
+      },
+      "insights": {
+        "title": "The Jelly Signal — wiedza",
+        "description": "Czyste sygnały z rynku talentów technologicznych: dostępność, stawki, kompetencje, delivery i ludzie stojący za pracą."
+      },
+      "jellyList": {
+        "title": "Pobierz Jelly Drop",
+        "description": "Twój tech bench. W Twojej skrzynce. Odbieraj aktualny Jelly Drop: zweryfikowanych specjalistów, potwierdzoną dostępność i stacki otwierające się w tym tygodniu."
+      },
+      "contact": {
+        "title": "Kontakt — powiedz nam, co jest zablokowane",
+        "description": "Potrzebujesz jednego specjalisty, całego zespołu czy realistycznego obrazu rynku? Daj nam kontekst. Odpowie człowiek."
+      },
+      "privacy": {
+        "title": "Polityka prywatności",
+        "description": "Jak Jelly Labs przetwarza dane osobowe."
+      },
+      "cookies": {
+        "title": "Polityka cookies",
+        "description": "Jak Jelly Labs korzysta z plików cookies i podobnych technologii."
+      },
+      "jellyBoxTerms": {
+        "title": "Regulamin Jelly Box",
+        "description": "Zasady akcji Jelly Box dla zweryfikowanych kontaktów B2B."
+      }
+    }
   },
   "a11y": {
     "skipToContent": "Przejdź do treści",
@@ -25,7 +71,8 @@
     "forDevelopers": "Dla developerów",
     "about": "O nas",
     "insights": "Wiedza",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "cookieSettings": "Ustawienia cookies"
   },
   "cta": {
     "getDrop": "POBIERZ JELLY DROP",
@@ -38,7 +85,15 @@
     "tellUs": "POWIEDZ, KOGO POTRZEBUJESZ",
     "meetJelly": "POZNAJ JELLY",
     "talkHuman": "POROZMAWIAJ Z CZŁOWIEKIEM",
-    "backHome": "WRÓĆ DO JELLY LABS"
+    "backHome": "WRÓĆ DO JELLY LABS",
+    "requestSpecialists": "POPROŚ O SPECJALISTÓW",
+    "designTeam": "ZAPROJEKTUJ ZESPÓŁ",
+    "talkProblem": "POROZMAWIAJ O PROBLEMIE",
+    "createRequest": "DODAJ ZAPOTRZEBOWANIE",
+    "startConversation": "ZACZNIJ OD ROZMOWY",
+    "workWithJelly": "PRACUJ Z JELLY",
+    "sendSignal": "WYŚLIJ SYGNAŁ",
+    "getSignal": "ODBIERZ SYGNAŁ"
   },
   "hero": {
     "eyebrow": "WHO THE F*CK IS JELLY?",
@@ -48,26 +103,64 @@
     "microcopy": "Z Polski. Gotowi na Europę. Stworzeni do pracy rozproszonej."
   },
   "signal": {
-    "items": ["STAFF AUGMENTATION", "DEDYKOWANE ZESPOŁY", "AI & DATA", "CLOUD & DEVOPS", "QA", "ECOMMERCE", "POLSKA → EUROPA → ŚWIAT"]
+    "items": [
+      "STAFF AUGMENTATION",
+      "DEDYKOWANE ZESPOŁY",
+      "AI & DATA",
+      "CLOUD & DEVOPS",
+      "QA",
+      "ECOMMERCE",
+      "POLSKA → EUROPA → ŚWIAT"
+    ]
   },
   "problem": {
     "title": "Nie potrzebujesz więcej CV. Potrzebujesz właściwych ludzi, gotowych teraz.",
     "body": "Tradycyjny staffing generuje szum: stare profile, niepewna dostępność i zbyt wielu pośredników. Jelly Labs zostawia czysty sygnał.",
     "points": [
-      { "title": "Potwierdzona dostępność", "body": "Pokazujemy osoby, które naprawdę mogą rozpocząć współpracę." },
-      { "title": "Zweryfikowane kompetencje", "body": "Przed prezentacją sprawdzamy doświadczenie, komunikację, oczekiwania i dopasowanie." },
-      { "title": "Ludzie, którzy rozmawiają", "body": "Bez znikania i teatru profili. Jasna informacja od pierwszej rozmowy po delivery." }
+      {
+        "title": "Potwierdzona dostępność",
+        "body": "Pokazujemy osoby, które naprawdę mogą rozpocząć współpracę."
+      },
+      {
+        "title": "Zweryfikowane kompetencje",
+        "body": "Przed prezentacją sprawdzamy doświadczenie, komunikację, oczekiwania i dopasowanie."
+      },
+      {
+        "title": "Ludzie, którzy rozmawiają",
+        "body": "Bez znikania i teatru profili. Jasna informacja od pierwszej rozmowy po delivery."
+      }
     ]
   },
   "solutions": {
     "eyebrow": "CO ROBIMY",
     "title": "Dodaj kompetencje, nie chaos.",
     "cards": [
-      { "title": "Staff Augmentation", "body": "Rozbuduj obecny zespół o specjalistów dopasowanych do technologii, modelu delivery i harmonogramu." },
-      { "title": "Dedykowane zespoły", "body": "Zbuduj skoncentrowany zespół z jasną odpowiedzialnością i możliwością skalowania." },
-      { "title": "Trudno dostępni specjaliści", "body": "Pozyskaj Tech Leadów, Cloud i DevOps, AI/Data, QA oraz ekspertów eCommerce." }
+      {
+        "title": "Staff Augmentation",
+        "body": "Rozbuduj obecny zespół o specjalistów dopasowanych do technologii, modelu delivery i harmonogramu."
+      },
+      {
+        "title": "Dedykowane zespoły",
+        "body": "Zbuduj skoncentrowany zespół z jasną odpowiedzialnością i możliwością skalowania."
+      },
+      {
+        "title": "Trudno dostępni specjaliści",
+        "body": "Pozyskaj Tech Leadów, Cloud i DevOps, AI/Data, QA oraz ekspertów eCommerce."
+      }
     ],
-    "techLine": ["React", ".NET", "Java", "Python", "DevOps", "AWS", "Azure", "AI/LLM", "Data", "QA", "Magento"]
+    "techLine": [
+      "React",
+      ".NET",
+      "Java",
+      "Python",
+      "DevOps",
+      "AWS",
+      "Azure",
+      "AI/LLM",
+      "Data",
+      "QA",
+      "Magento"
+    ]
   },
   "talent": {
     "eyebrow": "LIVE SIGNAL",
@@ -84,19 +177,45 @@
       "location": "Lokalizacja / model pracy",
       "lastVerified": "Ostatnia weryfikacja"
     },
-    "seniority": { "mid": "Mid", "senior": "Senior", "lead": "Lead", "architect": "Architect" },
-    "availability": { "immediate": "Od zaraz", "2_weeks": "Za 2 tygodnie", "1_month": "Za miesiąc", "future": "W przyszłości" },
-    "workModel": { "remote": "Zdalnie", "hybrid": "Hybrydowo", "onsite": "Stacjonarnie" },
+    "seniority": {
+      "mid": "Mid",
+      "senior": "Senior",
+      "lead": "Lead",
+      "architect": "Architect"
+    },
+    "availability": {
+      "immediate": "Od zaraz",
+      "2_weeks": "Za 2 tygodnie",
+      "1_month": "Za miesiąc",
+      "future": "W przyszłości"
+    },
+    "workModel": {
+      "remote": "Zdalnie",
+      "hybrid": "Hybrydowo",
+      "onsite": "Stacjonarnie"
+    },
     "requestProfileFor": "Poproś o profil {id}"
   },
   "process": {
     "eyebrow": "BEZ TEATRU. CZTERY KROKI.",
     "title": "Od blokady do budowania.",
     "steps": [
-      { "title": "Powiedz, co blokuje delivery.", "body": "Opisz rezultat, stack, kontekst zespołu, termin i ramy komercyjne." },
-      { "title": "Poznaj zweryfikowanych ludzi.", "body": "Dostajesz krótką, trafną selekcję zamiast stosu przypadkowych CV." },
-      { "title": "Zacznij mało. Skaluj, gdy działa.", "body": "Przeprowadź rozmowę, wybierz osobę i zwiększaj zespół wraz z potrzebami." },
-      { "title": "Nadal odpowiadamy za relację.", "body": "Jesteśmy obecni po starcie i reagujemy, zanim feedback zamieni się w tarcie." }
+      {
+        "title": "Powiedz, co blokuje delivery.",
+        "body": "Opisz rezultat, stack, kontekst zespołu, termin i ramy komercyjne."
+      },
+      {
+        "title": "Poznaj zweryfikowanych ludzi.",
+        "body": "Dostajesz krótką, trafną selekcję zamiast stosu przypadkowych CV."
+      },
+      {
+        "title": "Zacznij mało. Skaluj, gdy działa.",
+        "body": "Przeprowadź rozmowę, wybierz osobę i zwiększaj zespół wraz z potrzebami."
+      },
+      {
+        "title": "Nadal odpowiadamy za relację.",
+        "body": "Jesteśmy obecni po starcie i reagujemy, zanim feedback zamieni się w tarcie."
+      }
     ]
   },
   "drop": {
@@ -104,7 +223,12 @@
     "title": "Twój tech bench. W Twojej skrzynce.",
     "body": "Odbieraj aktualny Jelly Drop: krótką informację o zweryfikowanych specjalistach, potwierdzonej dostępności i stackach otwierających się w tym tygodniu.",
     "listTitle": "Dostaniesz:",
-    "list": ["aktualną dostępność,", "wcześniejszy dostęp do wybranych profili,", "praktyczne sygnały z rynku staff augmentation,", "zaproszenia i okazjonalne Jelly surprises."],
+    "list": [
+      "aktualną dostępność,",
+      "wcześniejszy dostęp do wybranych profili,",
+      "praktyczne sygnały z rynku staff augmentation,",
+      "zaproszenia i okazjonalne Jelly surprises."
+    ],
     "microcopy": "Zero spamu. Rezygnacja jednym kliknięciem. Zweryfikowane kontakty B2B mogą otrzymać Jelly Box zgodnie z regulaminem akcji.",
     "imagePending": "Grafika kampanii w przygotowaniu: 01_Get_The_Jelly_Drop_1200.png"
   },
@@ -117,10 +241,22 @@
   "values": {
     "title": "Celowo działamy inaczej.",
     "items": [
-      { "title": "Prawda ponad teatrem", "body": "Jeśli nie mamy właściwej osoby, mówimy o tym." },
-      { "title": "Ludzie ponad profilami", "body": "Stack nie jest osobowością. CV nie gwarantuje dopasowania do zespołu." },
-      { "title": "Szybkość ze standardami", "body": "Szybko nie musi znaczyć przypadkowo." },
-      { "title": "Partnerstwo po rozpoczęciu współpracy", "body": "Nasza praca zaczyna się po podpisaniu umowy, a nie wtedy się kończy." }
+      {
+        "title": "Prawda ponad teatrem",
+        "body": "Jeśli nie mamy właściwej osoby, mówimy o tym."
+      },
+      {
+        "title": "Ludzie ponad profilami",
+        "body": "Stack nie jest osobowością. CV nie gwarantuje dopasowania do zespołu."
+      },
+      {
+        "title": "Szybkość ze standardami",
+        "body": "Szybko nie musi znaczyć przypadkowo."
+      },
+      {
+        "title": "Partnerstwo po rozpoczęciu współpracy",
+        "body": "Nasza praca zaczyna się po podpisaniu umowy, a nie wtedy się kończy."
+      }
     ]
   },
   "about": {
@@ -134,7 +270,13 @@
   "proof": {
     "eyebrow": "PROOF",
     "title": "Rynki, z którymi pracujemy.",
-    "markets": ["Polska", "DACH", "Wielka Brytania", "Europa", "Rynki międzynarodowe"],
+    "markets": [
+      "Polska",
+      "DACH",
+      "Wielka Brytania",
+      "Europa",
+      "Rynki międzynarodowe"
+    ],
     "placeholderTitle": "Case study — treść wymagana przed publikacją",
     "placeholderBody": "Publikować wyłącznie za zgodą klienta i z potwierdzonymi wynikami (caseStudy.permissionConfirmed, results[].evidenceConfirmed).",
     "placeholderNote": "Placeholder: widoczny tylko w wersji deweloperskiej i podglądowej."
@@ -142,13 +284,34 @@
   "faq": {
     "title": "FAQ",
     "items": [
-      { "q": "Czym jest staff augmentation?", "a": "To elastyczny sposób uzupełnienia zespołu o zewnętrznych specjalistów przy zachowaniu odpowiedzialności za produkt i delivery po stronie klienta." },
-      { "q": "Jak szybko specjalista może rozpocząć?", "a": "Zależy to od roli i procesu rozmów. Jelly Drop pokazuje osoby z aktualnie potwierdzoną dostępnością." },
-      { "q": "Jak weryfikujecie specjalistów?", "a": "Przedstawiamy doświadczenie, dopasowanie techniczne, komunikację, oczekiwania i dostępność. Proces techniczny możemy dostosować do roli." },
-      { "q": "Czy możecie zbudować cały zespół?", "a": "Tak. Budujemy zespoły obejmujące engineering, QA, Cloud/DevOps, Data/AI i eCommerce." },
-      { "q": "Skąd są Wasi specjaliści?", "a": "Rdzeń sieci znajduje się w Polsce i Europie Środkowej. Pracujemy zdalnie z klientami w Europie i poza nią." },
-      { "q": "Co, jeśli współpraca nie zadziała?", "a": "Przed startem ustalamy przejrzysty proces feedbacku i ewentualnego zastępstwa." },
-      { "q": "Czy współpracujecie z software house’ami?", "a": "Tak. Pomagamy w obsłudze nadmiaru projektów, niszowych kompetencji, pilnych luk i długoterminowego skalowania zespołów." }
+      {
+        "q": "Czym jest staff augmentation?",
+        "a": "To elastyczny sposób uzupełnienia zespołu o zewnętrznych specjalistów przy zachowaniu odpowiedzialności za produkt i delivery po stronie klienta."
+      },
+      {
+        "q": "Jak szybko specjalista może rozpocząć?",
+        "a": "Zależy to od roli i procesu rozmów. Jelly Drop pokazuje osoby z aktualnie potwierdzoną dostępnością."
+      },
+      {
+        "q": "Jak weryfikujecie specjalistów?",
+        "a": "Przedstawiamy doświadczenie, dopasowanie techniczne, komunikację, oczekiwania i dostępność. Proces techniczny możemy dostosować do roli."
+      },
+      {
+        "q": "Czy możecie zbudować cały zespół?",
+        "a": "Tak. Budujemy zespoły obejmujące engineering, QA, Cloud/DevOps, Data/AI i eCommerce."
+      },
+      {
+        "q": "Skąd są Wasi specjaliści?",
+        "a": "Rdzeń sieci znajduje się w Polsce i Europie Środkowej. Pracujemy zdalnie z klientami w Europie i poza nią."
+      },
+      {
+        "q": "Co, jeśli współpraca nie zadziała?",
+        "a": "Przed startem ustalamy przejrzysty proces feedbacku i ewentualnego zastępstwa."
+      },
+      {
+        "q": "Czy współpracujecie z software house’ami?",
+        "a": "Tak. Pomagamy w obsłudze nadmiaru projektów, niszowych kompetencji, pilnych luk i długoterminowego skalowania zespołów."
+      }
     ]
   },
   "final": {
@@ -157,7 +320,11 @@
   },
   "footer": {
     "tagline": "Zweryfikowani specjaliści IT i elastyczne zespoły.",
-    "legal": { "privacy": "Polityka prywatności", "cookies": "Cookies", "jellyBox": "Regulamin Jelly Box" },
+    "legal": {
+      "privacy": "Polityka prywatności",
+      "cookies": "Cookies",
+      "jellyBox": "Regulamin Jelly Box"
+    },
     "companyLabel": "Spółka",
     "location": "Gliwice, Polska / zdalnie w całej Europie",
     "claim": "People. Solutions. Impact.",
@@ -167,20 +334,429 @@
     "title": "Ten Jelly uciekł.",
     "body": "Strony nie ma. Zespół nadal jest."
   },
-  "pending": {
-    "note": "Ta podstrona powstaje w kolejnym etapie prac.",
-    "titles": {
-      "solutions": "Ludzie, których potrzebuje delivery. Elastyczność, której potrzebuje biznes.",
-      "talent": "Aktualny Jelly Bench.",
-      "how-it-works": "Mniej szumu między potrzebą a delivery.",
-      "for-developers": "Jesteś kimś więcej niż stackiem.",
-      "about": "Elastyczni z założenia. Odpowiedzialni z wyboru.",
-      "insights": "The Jelly Signal.",
-      "jelly-list": "Twój tech bench. W Twojej skrzynce.",
-      "contact": "Powiedz nam, co jest zablokowane.",
-      "privacy": "Polityka prywatności",
-      "cookies": "Polityka cookies",
-      "jelly-box-terms": "Regulamin Jelly Box"
+  "solutionsPage": {
+    "title": "Ludzie, których potrzebuje delivery. Elastyczność, której potrzebuje biznes.",
+    "intro": "Od jednego trudno dostępnego specjalisty po dedykowany zespół — Jelly Labs pomaga dodawać kompetencje bez tworzenia kolejnej warstwy chaosu.",
+    "staffAug": {
+      "title": "Staff Augmentation",
+      "body": "Rozbuduj istniejący zespół o specjalistów dobranych do technologii, sposobu pracy i kontekstu projektu.",
+      "listTitle": "Najlepsze zastosowania:",
+      "list": [
+        "pilne braki kompetencyjne,",
+        "czasowe wzrosty zapotrzebowania,",
+        "niszowe technologie,",
+        "usuwanie wąskich gardeł,",
+        "długoterminowy team extension."
+      ]
+    },
+    "teams": {
+      "title": "Dedykowane zespoły",
+      "body": "Zbuduj stabilny, wielofunkcyjny zespół wokół produktu, workstreamu lub konkretnego rezultatu biznesowego.",
+      "listTitle": "Role:",
+      "list": [
+        "Tech Lead,",
+        "frontend,",
+        "backend,",
+        "QA,",
+        "DevOps/Cloud,",
+        "Data/AI i wsparcie delivery."
+      ]
+    },
+    "leadership": {
+      "title": "Tech Leadership & Consulting",
+      "body": "Włącz seniorów, gdy potrzebujesz wsparcia architektury, technical leadership, discovery albo odzyskania kontroli nad delivery."
+    },
+    "capabilitiesTitle": "Obszary kompetencji",
+    "capabilities": [
+      {
+        "area": "Frontend",
+        "stack": "React, Angular, Vue"
+      },
+      {
+        "area": "Backend",
+        "stack": ".NET, Java, Python, Node.js"
+      },
+      {
+        "area": "Cloud & DevOps",
+        "stack": "AWS, Azure, GCP, Kubernetes, CI/CD"
+      },
+      {
+        "area": "AI & Data",
+        "stack": "LLM, ML, Data Engineering, Analytics"
+      },
+      {
+        "area": "Jakość",
+        "stack": "Testy manualne, automatyzacja, wydajność"
+      },
+      {
+        "area": "eCommerce",
+        "stack": "Magento, composable commerce, integracje"
+      }
+    ]
+  },
+  "talentPage": {
+    "title": "Aktualny Jelly Bench.",
+    "intro": "Zweryfikowani specjaliści i potwierdzona dostępność. Poproś o profil, żeby otrzymać bieżące szczegóły.",
+    "filtersTitle": "Filtruj bench",
+    "filters": {
+      "role": "Rola",
+      "stack": "Stack",
+      "seniority": "Seniority",
+      "availability": "Dostępność",
+      "language": "Poziom angielskiego"
+    },
+    "any": "Dowolny",
+    "reset": "Wyczyść filtry",
+    "results": "{count, plural, =0 {Brak pasujących profili} one {# profil} few {# profile} many {# profili} other {# profilu}}",
+    "emptyTitle": "Dzisiaj nic nie pasuje? Bench się porusza.",
+    "emptyBody": "Powiedz nam, czego szukasz, a sprawdzimy szerszą sieć Jelly.",
+    "newsletterTitle": "Nie poluj na bench. Niech bench przyjdzie do Ciebie.",
+    "newsletterBody": "Dołącz do Jelly List i otrzymuj regularne informacje o dostępności."
+  },
+  "howPage": {
+    "title": "Mniej szumu między potrzebą a delivery.",
+    "steps": [
+      {
+        "title": "Najpierw kontekst",
+        "body": "Poznajemy problem, zespół, produkt, termin i budżet."
+      },
+      {
+        "title": "Krótka selekcja",
+        "body": "Przedstawiamy tylko osoby dopasowane i dostępne."
+      },
+      {
+        "title": "Rozmowy bez teatru",
+        "body": "Koordynujemy proces i szybki feedback."
+      },
+      {
+        "title": "Jasny onboarding",
+        "body": "Umowa, dostępy, data startu i oczekiwania przed pierwszym dniem."
+      },
+      {
+        "title": "Partnerstwo w trakcie delivery",
+        "body": "Reagujemy na feedback i pomagamy rozwijać model."
+      }
+    ]
+  },
+  "devPage": {
+    "eyebrow": "JELLY CREW",
+    "title": "Jesteś kimś więcej niż stackiem.",
+    "intro": "Dołącz do sieci zbudowanej wokół uczciwej komunikacji, trafnych projektów i szacunku dla Twojego czasu.",
+    "expectTitle": "Możesz oczekiwać",
+    "expect": [
+      "kontekstu projektu przed rozmową,",
+      "jasnej stawki i modelu,",
+      "niewysyłania profilu bez zgody,",
+      "konkretnego feedbacku,",
+      "jednego ludzkiego kontaktu,",
+      "ofert dopasowanych do realnego doświadczenia."
+    ],
+    "processTitle": "Proces",
+    "process": [
+      "Powiedz nam, kim jesteś.",
+      "Odbądź jedną prawdziwą rozmowę.",
+      "Wybieraj, do których projektów możemy wysłać profil.",
+      "Poznaj klienta.",
+      "Dołącz do projektu i pozostań z nami w kontakcie."
+    ],
+    "formTitle": "Dołącz do Jelly Crew",
+    "faqTitle": "FAQ",
+    "faq": [
+      {
+        "q": "Czy wyślecie moje CV bez pytania?",
+        "a": "Nie. Twój profil udostępniamy wyłącznie przy uzgodnionej ofercie."
+      },
+      {
+        "q": "Czy pracujecie tylko na kontraktach B2B?",
+        "a": "Naszym głównym modelem jest B2B, ale dostępna forma zależy od projektu i kraju."
+      },
+      {
+        "q": "Czy muszę być dostępny od zaraz?",
+        "a": "Nie. Podaj realną dostępność, a my będziemy dbać o aktualność tej informacji."
+      }
+    ]
+  },
+  "aboutPage": {
+    "title": "Elastyczni z założenia. Odpowiedzialni z wyboru.",
+    "paragraphs": [
+      "Jelly Labs łączy mocnych specjalistów technologicznych z firmami, które chcą działać szybciej bez obniżania standardów.",
+      "Znamy rynek staff augmentation od środka: sprzedaż, rekrutację, delivery i trudne rozmowy, od których zależy prawdziwe partnerstwo.",
+      "Rynek nie potrzebuje kolejnej maszyny do przesyłania CV. Potrzebuje kontekstu, aktualnych informacji i ludzi, którzy pozostają odpowiedzialni po przedstawieniu kandydata."
+    ],
+    "principlesTitle": "Nasze zasady",
+    "principles": [
+      "mów prawdę wcześnie,",
+      "szanuj czas obu stron,",
+      "utrzymuj krótką shortlistę,",
+      "nie myl pilności z chaosem,",
+      "zostań po starcie."
+    ],
+    "manifestoTitle": "Manifest",
+    "manifesto": [
+      "Sztywne struktury pękają. Dobre zespoły się dostosowują.",
+      "Nie oznacza to rezygnacji ze standardów. Oznacza, że właściwi ludzie, informacje i decyzje poruszają się bez zbędnego tarcia."
+    ],
+    "manifestoEnd": "To jest Jelly.",
+    "location": "Polska / Europa / zdalnie",
+    "teamTitle": "Założyciele i zespół",
+    "teamPlaceholder": "Profile zespołu — treść wymagana przed publikacją (rekordy teamMember ze zdjęciem, rolą i bio; publikacja wyłącznie za zgodą)."
+  },
+  "insightsPage": {
+    "title": "The Jelly Signal.",
+    "intro": "Czyste sygnały z rynku talentów technologicznych: dostępność, stawki, kompetencje, delivery i ludzie stojący za pracą.",
+    "all": "Wszystkie",
+    "categories": {
+      "jelly_drop": "Jelly Drop",
+      "market_signals": "Market Signals",
+      "delivery": "Delivery",
+      "people": "People",
+      "ai_technology": "AI & Technology"
+    },
+    "emptyTitle": "Pierwszy sygnał jest w drodze.",
+    "emptyBody": "Dołącz do The Jelly Signal i otrzymaj go od razu po publikacji.",
+    "newsletterTitle": "Odbierz sygnał, zanim stanie się szumem.",
+    "newsletterBody": "Dołącz do The Jelly Signal i otrzymuj najnowszy Jelly Drop.",
+    "readTime": "{minutes} min czytania",
+    "by": "Autor: {author}",
+    "published": "Opublikowano",
+    "updated": "Zaktualizowano",
+    "back": "Wszystkie artykuły",
+    "sampleBadge": "Przykładowy artykuł — placeholder",
+    "filterLabel": "Filtruj według kategorii"
+  },
+  "jellyListPage": {
+    "formTitle": "Dołącz do Jelly List",
+    "boxTitle": "Jelly Box",
+    "boxList": [
+      "dla zweryfikowanych kontaktów B2B,",
+      "jedna paczka na firmę,",
+      "limitowana pula,",
+      "wysyłka na adres firmowy w Polsce,",
+      "brak ekwiwalentu pieniężnego,",
+      "zgłoszenia prywatne, duplikaty i niepełne dane mogą zostać odrzucone."
+    ],
+    "boxTerms": "Pełny regulamin Jelly Box",
+    "checkTitle": "Jeszcze jeden krok.",
+    "checkBody": "Wysłaliśmy link potwierdzający na Twoją skrzynkę. Kliknij go, aby potwierdzić adres e-mail, a wyślemy Ci aktualny Jelly Drop.",
+    "checkHint": "Nic nie przyszło? Sprawdź folder spam lub oferty. Link jest ważny 7 dni.",
+    "confirmTitle": "Potwierdź swój e-mail.",
+    "confirmBody": "Jedno kliknięcie i jesteś na Jelly List.",
+    "confirmButton": "POTWIERDZAM E-MAIL",
+    "confirmedTitle": "Jesteś na Jelly List.",
+    "confirmedBody": "Twój e-mail został potwierdzony. Aktualny Jelly Drop jest w drodze do Twojej skrzynki.",
+    "invalidTitle": "Ten link wygasł lub jest nieprawidłowy.",
+    "invalidBody": "Linki potwierdzające są ważne 7 dni. Zapisz się ponownie, a wyślemy nowy."
+  },
+  "contactPage": {
+    "title": "Powiedz nam, co jest zablokowane.",
+    "intro": "Potrzebujesz jednego specjalisty, całego zespołu czy realistycznego obrazu rynku? Daj nam kontekst. Odpowie człowiek.",
+    "tabs": {
+      "label": "Czego potrzebujesz?",
+      "crew": "Zbuduj zespół",
+      "contact": "Inne pytanie"
+    },
+    "altTitle": "Wolisz inny kanał?",
+    "email": "E-mail",
+    "linkedin": "LinkedIn",
+    "location": "Lokalizacja",
+    "locationValue": "Gliwice / Polska / zdalnie w Europie"
+  },
+  "forms": {
+    "required": "wymagane",
+    "optional": "opcjonalnie",
+    "submitting": "Wysyłanie…",
+    "errorSummary": "Popraw {count, plural, one {# pole} few {# pola} many {# pól} other {# pola}} przed wysłaniem:",
+    "honeypot": "Zostaw to pole puste",
+    "fields": {
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "fullName": "Imię i nazwisko",
+      "company": "Firma",
+      "role": "Stanowisko",
+      "businessEmail": "Służbowy e-mail",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "needs": "Czego potrzebujesz?",
+      "timeline": "Termin",
+      "interest": "Interesuje mnie",
+      "preferredContact": "Preferowany kontakt",
+      "roles": "Rola/role",
+      "headcount": "Liczba osób",
+      "stack": "Stack",
+      "seniority": "Seniority",
+      "startDate": "Data startu",
+      "duration": "Długość współpracy",
+      "workModel": "Model pracy",
+      "budget": "Budżet lub stawka",
+      "description": "Opis problemu",
+      "profileId": "Wybrany profil",
+      "message": "Wiadomość",
+      "location": "Lokalizacja",
+      "linkedin": "Adres profilu LinkedIn",
+      "cv": "CV",
+      "mainRole": "Główna rola",
+      "technologies": "Technologie",
+      "english": "Angielski",
+      "availability": "Dostępność",
+      "rate": "Preferowana stawka",
+      "contractType": "Model współpracy"
+    },
+    "hints": {
+      "businessEmail": "Wyślemy na niego Jelly Drop i zweryfikujemy kwalifikację B2B.",
+      "phone": "Podaj numer z kierunkowym, np. +48.",
+      "roles": "np. 2× Senior React, 1× DevOps",
+      "stack": "Najważniejsze technologie i wersje.",
+      "description": "Rezultat, kontekst zespołu, co jest zablokowane i ramy komercyjne.",
+      "budget": "Opcjonalnie. Wystarczy przedział.",
+      "linkedinOrCv": "Podaj adres LinkedIn albo załącz CV (co najmniej jedno).",
+      "cv": "PDF lub DOCX, do 5 MB.",
+      "technologies": "Oddzielone przecinkami, najmocniejsze najpierw.",
+      "rate": "Opcjonalnie. np. B2B netto za godzinę lub miesiąc, z walutą."
+    },
+    "options": {
+      "needs": {
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "devops_cloud": "DevOps & Cloud",
+        "data_ai": "Data & AI",
+        "qa": "QA",
+        "ecommerce": "eCommerce",
+        "dedicated_team": "Dedykowany zespół",
+        "not_sure": "Jeszcze nie wiem"
+      },
+      "timeline": {
+        "immediately": "Od zaraz",
+        "2_4_weeks": "2–4 tygodnie",
+        "1_3_months": "1–3 miesiące",
+        "exploring": "Tylko sprawdzam"
+      },
+      "interest": {
+        "jelly_drop": "Jelly Drop",
+        "jelly_signal": "The Jelly Signal",
+        "both": "Oba"
+      },
+      "preferredContact": {
+        "email": "E-mail",
+        "phone": "Telefon"
+      },
+      "seniority": {
+        "mid": "Mid",
+        "senior": "Senior",
+        "lead": "Lead",
+        "architect": "Architect",
+        "mixed": "Mieszane"
+      },
+      "startDate": {
+        "asap": "Jak najszybciej",
+        "2_4_weeks": "Za 2–4 tygodnie",
+        "1_3_months": "Za 1–3 miesiące",
+        "flexible": "Elastycznie"
+      },
+      "duration": {
+        "lt_3": "Poniżej 3 miesięcy",
+        "3_6": "3–6 miesięcy",
+        "6_12": "6–12 miesięcy",
+        "gt_12": "Ponad 12 miesięcy",
+        "unknown": "Jeszcze nie wiem"
+      },
+      "workModel": {
+        "remote": "Zdalnie",
+        "hybrid": "Hybrydowo",
+        "onsite": "Stacjonarnie"
+      },
+      "mainRole": {
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "fullstack": "Full-stack",
+        "mobile": "Mobile",
+        "devops_cloud": "DevOps & Cloud",
+        "data_ai": "Data & AI",
+        "qa": "QA / Automatyzacja",
+        "ecommerce": "eCommerce",
+        "tech_lead": "Tech Lead / Architekt",
+        "other": "Inna"
+      },
+      "english": {
+        "b1": "B1",
+        "b2": "B2",
+        "c1": "C1",
+        "c2": "C2 / native"
+      },
+      "availability": {
+        "immediate": "Od zaraz",
+        "2_weeks": "Za 2 tygodnie",
+        "1_month": "Za miesiąc",
+        "later": "Później — miejcie mnie na uwadze"
+      },
+      "contractType": {
+        "b2b": "B2B",
+        "employment": "Umowa o pracę",
+        "open": "Oba warianty"
+      }
+    },
+    "select": "Wybierz…",
+    "errors": {
+      "required": "To pole jest wymagane.",
+      "email": "Podaj poprawny adres e-mail, np. imie@firma.pl.",
+      "phone": "Podaj poprawny numer telefonu z kierunkowym, np. +48 600 000 000.",
+      "phoneRequired": "Dodaj numer telefonu albo wybierz e-mail jako preferowany kontakt.",
+      "url": "Podaj pełny adres zaczynający się od https://.",
+      "linkedin": "Podaj adres profilu LinkedIn, np. https://www.linkedin.com/in/twoje-imie.",
+      "linkedinOrCv": "Dodaj adres LinkedIn albo załącz CV.",
+      "minItems": "Wybierz co najmniej jedną opcję.",
+      "tooShort": "Dodaj trochę więcej szczegółów.",
+      "tooLong": "Skróć ten tekst.",
+      "headcount": "Podaj liczbę od 1 do 50.",
+      "consentRequired": "Potrzebujemy tej zgody, aby obsłużyć Twoje zgłoszenie.",
+      "fileType": "Załącz plik PDF lub DOCX.",
+      "fileSize": "Plik jest większy niż 5 MB.",
+      "cvUnavailable": "Wysyłka CV jest chwilowo niedostępna. Podaj adres LinkedIn.",
+      "rateLimited": "Zbyt wiele prób. Odczekaj kilka minut i spróbuj ponownie.",
+      "server": "Coś poszło nie tak po naszej stronie. Dane nie zostały utracone — spróbuj ponownie lub napisz do nas.",
+      "network": "Nie udało się połączyć z serwerem. Sprawdź połączenie i spróbuj ponownie."
+    },
+    "consents": {
+      "groupLabel": "Zgody",
+      "notice": "Administratorem danych jest {controller}. Informacje o celach, podstawach, okresach przetwarzania i przysługujących prawach znajdują się w Polityce prywatności.",
+      "privacyLink": "Polityka prywatności",
+      "marketingOptionalNote": "Zgody marketingowe są dobrowolne i nie wpływają na obsługę zapytania."
+    },
+    "success": {
+      "crewTitle": "Sygnał odebrany.",
+      "crewBody": "Człowiek z Jelly Labs odpowie w ciągu jednego dnia roboczego z pytaniami albo pierwszym obrazem tego, kto może pomóc.",
+      "contactTitle": "Wiadomość odebrana.",
+      "contactBody": "Dziękujemy. Człowiek odezwie się wkrótce.",
+      "candidateTitle": "Witaj w procesie Jelly Crew.",
+      "candidateBody": "Przejrzymy Twój profil i odezwiemy się na jedną prawdziwą rozmowę. Nigdy nie udostępnimy profilu bez Twojej zgody.",
+      "doiNote": "Zgłosiłeś też chęć otrzymywania e-maili marketingowych — potwierdź to w swojej skrzynce.",
+      "again": "Wyślij kolejne"
     }
+  },
+  "consentBanner": {
+    "title": "Cookies, uczciwie.",
+    "body": "Używamy niezbędnych plików cookies, aby strona działała. Za Twoją zgodą chcielibyśmy też używać cookies analitycznych i marketingowych (Google Analytics, LinkedIn), żeby rozumieć, co działa. Wybór możesz zmienić w każdej chwili.",
+    "acceptAll": "Akceptuję wszystkie",
+    "rejectAll": "Odrzuć opcjonalne",
+    "settings": "Ustawienia",
+    "save": "Zapisz wybór",
+    "essential": "Niezbędne",
+    "essentialBody": "Wymagane do działania strony i formularzy. Zawsze włączone.",
+    "analytics": "Analityczne",
+    "analyticsBody": "Statystyki korzystania ze strony (Google Analytics 4).",
+    "marketing": "Marketingowe",
+    "marketingBody": "Mierzenie wyników kampanii (LinkedIn Insight Tag).",
+    "policy": "Polityka cookies"
+  },
+  "emails": {
+    "doiSubject": "Potwierdź swój e-mail — Jelly Labs",
+    "doiHeading": "Jeszcze jeden krok.",
+    "doiBody": "Potwierdź adres e-mail, aby dołączyć do Jelly List i otrzymać aktualny Jelly Drop.",
+    "doiButton": "Potwierdzam e-mail",
+    "doiIgnore": "Jeśli to nie Ty — zignoruj tę wiadomość, nic się nie stanie.",
+    "doiFooter": "Jelly Labs · People. Solutions. Impact."
+  },
+  "legal": {
+    "draftBanner": "WERSJA ROBOCZA — wyłącznie struktura, nie stanowi porady prawnej. Musi zostać uzupełniona i zatwierdzona przez prawnika / IOD przed publikacją.",
+    "lastUpdated": "Ostatnia aktualizacja"
   }
 }
