@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme inline {
+  --font-display: var(--font-space-grotesk), "Space Grotesk", "Sora", ui-sans-serif, sans-serif;
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, monospace;
+}
+
+/* z-index scale: base 0 · raised 10 · header 40 · overlay 50 · toast 60 */
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem; /* keep anchored/focused content clear of the sticky header */
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  @media (min-width: 1024px) {
+    body { font-size: var(--text-body); }
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: color-mix(in oklab, var(--color-cyan) 40%, transparent); color: var(--color-fg); }
+
+  /* Visible, high-contrast focus everywhere (WCAG 2.4.7 / 2.4.11). */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  a, button, summary, [role="button"] { cursor: pointer; touch-action: manipulation; }
+}
+
+@layer components {
+  .container-jl {
+    width: var(--container);
+    margin-inline: auto;
+  }
+  .section-y {
+    padding-block: var(--spacing-section-mobile);
+  }
+  @media (min-width: 1024px) {
+    .section-y { padding-block: var(--spacing-section); }
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .h1 { font-size: var(--text-h1-mobile); font-weight: 600; }
+  @media (min-width: 768px) {
+    .h1 { font-size: var(--text-h1-desktop); }
+  }
+  .h2 {
+    font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+    font-weight: 600;
+  }
+  .h3 {
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .lead { font-size: var(--text-body); color: var(--color-muted); max-width: 40rem; }
+  @media (min-width: 1024px) {
+    .lead { font-size: var(--text-body-lg); }
+  }
+  .card {
+    position: relative;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-line);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--color-surface) 92%, white 2%), var(--color-surface));
+  }
+  .hairline { border-color: var(--color-line); }
+  /* Single-colour accent text — used once per section at most. */
+  .text-accent-blue { color: var(--color-cyan); }
+  .text-accent-green { color: var(--color-green); }
+  .text-accent-heat { color: var(--color-orange); }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+/* ---------- Signal bar marquee ---------- */
+@keyframes jl-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: jl-marquee 48s linear infinite;
+}
+.marquee[data-paused="true"] .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ---------- Hero fallback jellies (CSS/SVG) ---------- */
+@keyframes jl-enter-right { from { transform: translate3d(60vw, 4vh, 0) scale(0.8); opacity: 0; } }
+@keyframes jl-enter-bottom { from { transform: translate3d(10vw, 60vh, 0) scale(0.8); opacity: 0; } }
+@keyframes jl-enter-top { from { transform: translate3d(20vw, -60vh, 0) scale(0.8); opacity: 0; } }
+
+@keyframes jl-orbit-blue {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50% { transform: translate3d(-5%, 3%, 0) rotate(3deg); }
+}
+@keyframes jl-bounce-green {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1, 1); }
+  40% { transform: translate3d(0, -6%, 0) rotate(5deg) scale(0.97, 1.03); }
+  60% { transform: translate3d(0, -5%, 0) rotate(6deg) scale(1.02, 0.98); }
+}
+@keyframes jl-pulse-heat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-3%, 4%, 0) scale(1.04); }
+}
+
+.jelly-svg { will-change: transform; transform-box: fill-box; transform-origin: center; }
+.jelly-in-blue { animation: jl-enter-right 2.2s var(--ease-jelly) both; }
+.jelly-in-green { animation: jl-enter-top 2.4s var(--ease-jelly) 0.15s both; }
+.jelly-in-heat { animation: jl-enter-bottom 2.6s var(--ease-jelly) 0.3s both; }
+.jelly-float-blue { animation: jl-orbit-blue 11s ease-in-out 2.2s infinite; }
+.jelly-float-green { animation: jl-bounce-green 8s cubic-bezier(0.34, 1.4, 0.64, 1) 2.5s infinite; }
+.jelly-float-heat { animation: jl-pulse-heat 9.5s ease-in-out 2.9s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .jelly-in-blue, .jelly-in-green, .jelly-in-heat,
+  .jelly-float-blue, .jelly-float-green, .jelly-float-heat { animation: none; }
+}
+
+/* Technical line motif (from brand reference) — draws in once. */
+@keyframes jl-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.tech-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: jl-draw 2.4s var(--ease-jelly) 0.6s forwards; }
+@media (prefers-reduced-motion: reduce) {
+  .tech-line { animation: none; stroke-dashoffset: 0; }
+}
+
+/* ---------- Reveal (gated on .js so no-JS users always see content) ---------- */
+.js [data-reveal]:not([data-shown]) { opacity: 0; transform: translate3d(0, 24px, 0); }
+[data-reveal] { transition: opacity var(--duration-section) var(--ease-jelly), transform var(--duration-section) var(--ease-jelly); }
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal]:not([data-shown]) { opacity: 1; transform: none; }
+  [data-reveal] { transition: none; }
+}

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "siteName": "Jelly Labs",
+    "homeTitle": "Jelly Labs — Hard problems. Fluid teams.",
+    "homeDescription": "Verified software engineers and flexible delivery teams for companies that need to move now. Poland-based. Europe-ready."
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "mainNav": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "home": "Jelly Labs — home",
+    "languageSwitch": "Language",
+    "switchTo": "Przełącz na polski",
+    "pauseTicker": "Pause moving text",
+    "playTicker": "Play moving text",
+    "footerNav": "Footer navigation",
+    "legalNav": "Legal",
+    "external": "(opens in a new tab)"
+  },
+  "nav": {
+    "solutions": "Solutions",
+    "talent": "Talent",
+    "howItWorks": "How it works",
+    "forDevelopers": "For Developers",
+    "about": "About",
+    "insights": "Insights",
+    "contact": "Contact"
+  },
+  "cta": {
+    "getDrop": "GET THE JELLY DROP",
+    "buildCrew": "BUILD YOUR CREW",
+    "joinCrew": "JOIN JELLY CREW",
+    "joinList": "JOIN THE JELLY LIST",
+    "exploreSolutions": "EXPLORE SOLUTIONS",
+    "seeTalent": "SEE AVAILABLE TALENT",
+    "requestProfile": "REQUEST PROFILE",
+    "tellUs": "TELL US WHAT YOU NEED",
+    "meetJelly": "MEET JELLY",
+    "talkHuman": "TALK TO A HUMAN",
+    "backHome": "BACK TO JELLY LABS"
+  },
+  "hero": {
+    "eyebrow": "WHO THE F*CK IS JELLY?",
+    "title": "Hard problems. Fluid teams.",
+    "body": "Verified software engineers and flexible delivery teams for companies that need to move now.",
+    "devLink": "Are you a developer? Join Jelly Crew",
+    "microcopy": "Poland-based. Europe-ready. Built for distributed delivery."
+  },
+  "signal": {
+    "items": ["STAFF AUGMENTATION", "DEDICATED TEAMS", "AI & DATA", "CLOUD & DEVOPS", "QA", "ECOMMERCE", "POLAND → EUROPE → WORLD"]
+  },
+  "problem": {
+    "title": "You do not need more CVs. You need the right people, ready now.",
+    "body": "Traditional staffing creates noise: old profiles, uncertain availability and too many handovers. Jelly Labs keeps the signal clean.",
+    "points": [
+      { "title": "Availability confirmed", "body": "We tell you who can actually start — not who appeared in a database six months ago." },
+      { "title": "Skills verified", "body": "Technical fit, communication and expectations are checked before the introduction." },
+      { "title": "Humans who communicate", "body": "No disappearing acts. No profile theatre. Clear feedback from first call to delivery." }
+    ]
+  },
+  "solutions": {
+    "eyebrow": "WHAT WE DO",
+    "title": "Add capability without adding chaos.",
+    "cards": [
+      { "title": "Staff Augmentation", "body": "Extend your team with specialists matched to your stack, delivery model and timeline." },
+      { "title": "Dedicated Delivery Teams", "body": "Build a focused cross-functional team with clear ownership and room to scale." },
+      { "title": "Hard-to-find Specialists", "body": "Reach experienced Tech Leads, Cloud and DevOps engineers, AI/Data specialists, QA experts and eCommerce talent." }
+    ],
+    "techLine": ["React", ".NET", "Java", "Python", "DevOps", "AWS", "Azure", "AI/LLM", "Data", "QA", "Magento"]
+  },
+  "talent": {
+    "eyebrow": "LIVE SIGNAL",
+    "title": "Meet the people behind the profiles.",
+    "body": "Every profile shown here represents a real conversation, a verified skill set and recently confirmed availability.",
+    "disclaimer": "Availability changes quickly. Request the current Jelly Drop for the latest status.",
+    "sampleBadge": "Sample profile — placeholder",
+    "labels": {
+      "role": "Role",
+      "seniority": "Seniority",
+      "coreStack": "Core stack",
+      "availability": "Availability",
+      "english": "English",
+      "location": "Location / remote model",
+      "lastVerified": "Last verified"
+    },
+    "seniority": { "mid": "Mid", "senior": "Senior", "lead": "Lead", "architect": "Architect" },
+    "availability": { "immediate": "Immediate", "2_weeks": "In 2 weeks", "1_month": "In 1 month", "future": "Future" },
+    "workModel": { "remote": "Remote", "hybrid": "Hybrid", "onsite": "Onsite" },
+    "requestProfileFor": "Request profile {id}"
+  },
+  "process": {
+    "eyebrow": "NO THEATRE. FOUR STEPS.",
+    "title": "From blocked to building.",
+    "steps": [
+      { "title": "Tell us what is blocked.", "body": "Share the outcome, stack, team context, timeline and commercial constraints." },
+      { "title": "Meet verified people.", "body": "Receive a short, relevant selection instead of a pile of random CVs." },
+      { "title": "Start small. Scale when it works.", "body": "Interview, choose and onboard. Extend the team as delivery needs change." },
+      { "title": "We stay accountable.", "body": "We remain present after placement and deal with feedback before it becomes friction." }
+    ]
+  },
+  "drop": {
+    "eyebrow": "THE JELLY SIGNAL",
+    "title": "Your tech bench. In your inbox.",
+    "body": "Get the latest Jelly Drop: a concise update on verified specialists, confirmed availability and the stacks opening this week.",
+    "listTitle": "You will receive:",
+    "list": ["current availability,", "early access to selected profiles,", "practical staff augmentation market signals,", "invitations and occasional Jelly surprises."],
+    "microcopy": "No spam. Unsubscribe in one click. Qualified B2B contacts may receive a Jelly Box, subject to campaign terms.",
+    "imagePending": "Campaign visual pending: 01_Get_The_Jelly_Drop_1200.png"
+  },
+  "crew": {
+    "eyebrow": "JELLY CREW",
+    "title": "Great people deserve projects that make sense.",
+    "body": "We are building a network for specialists who value honest rates, clear expectations, useful feedback and work that fits their experience.",
+    "kicker": "You bring the craft. We bring the signal, context and real conversation."
+  },
+  "values": {
+    "title": "Built differently on purpose.",
+    "items": [
+      { "title": "Truth over theatre", "body": "If we do not have the right person, we say it." },
+      { "title": "People over profiles", "body": "A stack is not a personality. A CV is not a team fit." },
+      { "title": "Speed with standards", "body": "Fast does not have to mean random." },
+      { "title": "Partnership after placement", "body": "The work starts when the contract is signed, not when it ends." }
+    ]
+  },
+  "about": {
+    "title": "Who the f*ck is Jelly?",
+    "paragraphs": [
+      "Jelly Labs was created by people who have spent years inside software delivery, recruitment and staff augmentation. We have seen what happens when sales overpromise, recruitment works without context and great engineers become rows in a spreadsheet.",
+      "So we built a simpler model: fewer layers, stronger relationships and a live view of who is genuinely ready to help."
+    ],
+    "signoff": "We are flexible by design. Accountable by choice."
+  },
+  "proof": {
+    "eyebrow": "PROOF",
+    "title": "Markets we work with.",
+    "markets": ["Poland", "DACH", "United Kingdom", "Europe", "International"],
+    "placeholderTitle": "Case study — content required before launch",
+    "placeholderBody": "Publish only with client permission and confirmed evidence (caseStudy.permissionConfirmed, results[].evidenceConfirmed).",
+    "placeholderNote": "Placeholder: visible in development and preview builds only."
+  },
+  "faq": {
+    "title": "FAQ",
+    "items": [
+      { "q": "What is staff augmentation?", "a": "It is a flexible way to add external specialists to your existing team while keeping product and delivery ownership on your side." },
+      { "q": "How quickly can someone start?", "a": "It depends on the role and interview process. Jelly Drop highlights people whose availability has been recently confirmed." },
+      { "q": "How do you verify specialists?", "a": "We review experience, technical fit, communication, expectations and availability before presenting a profile. The exact technical process can be adjusted to your role." },
+      { "q": "Can you build a full team?", "a": "Yes. We can assemble dedicated or mixed teams across engineering, QA, Cloud/DevOps, Data/AI and eCommerce." },
+      { "q": "Where are your specialists based?", "a": "Our core network is based in Poland and Central Europe and works remotely with clients across Europe and beyond." },
+      { "q": "What happens if the match does not work?", "a": "We agree on a transparent feedback and replacement process before the engagement begins." },
+      { "q": "Do you work with software houses?", "a": "Yes. Software houses are one of our primary partner groups. We can support overflow, niche skills, urgent delivery gaps and longer-term team extension." }
+    ]
+  },
+  "final": {
+    "title": "Ready to make your team less rigid?",
+    "body": "Get the current Jelly Drop or tell us what is blocking delivery."
+  },
+  "footer": {
+    "tagline": "Verified tech talent and flexible delivery teams.",
+    "legal": { "privacy": "Privacy Policy", "cookies": "Cookie Policy", "jellyBox": "Jelly Box Terms" },
+    "companyLabel": "Company",
+    "location": "Gliwice, Poland / remote across Europe",
+    "claim": "People. Solutions. Impact.",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "This Jelly escaped.",
+    "body": "The page is gone, the team is not."
+  },
+  "pending": {
+    "note": "This page is part of the next build phase.",
+    "titles": {
+      "solutions": "The people your delivery needs. The flexibility your business needs.",
+      "talent": "The live Jelly bench.",
+      "how-it-works": "Less noise between need and delivery.",
+      "for-developers": "You are more than a stack.",
+      "about": "Flexible by design. Accountable by choice.",
+      "insights": "The Jelly Signal.",
+      "jelly-list": "Your tech bench. In your inbox.",
+      "contact": "Tell us what is blocked.",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy",
+      "jelly-box-terms": "Jelly Box Terms"
+    }
+  }
+}

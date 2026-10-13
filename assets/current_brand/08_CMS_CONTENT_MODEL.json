@@ -1,0 +1,90 @@
+{
+  "talentProfile": {
+    "id": "string",
+    "publicSlug": "string",
+    "publicTitle": "string",
+    "role": "string",
+    "seniority": "mid | senior | lead | architect",
+    "coreStack": ["string"],
+    "secondaryStack": ["string"],
+    "availability": "immediate | 2_weeks | 1_month | future",
+    "availabilityVerifiedAt": "datetime",
+    "englishLevel": "B2 | C1 | C2",
+    "location": "string",
+    "workModel": ["remote", "hybrid", "onsite"],
+    "engagementModel": ["B2B"],
+    "summaryEn": "string",
+    "summaryPl": "string",
+    "featured": "boolean",
+    "published": "boolean",
+    "consentToPublish": "boolean",
+    "privateCrmId": "string_not_exposed_to_client"
+  },
+  "insightArticle": {
+    "slug": "string",
+    "titleEn": "string",
+    "titlePl": "string",
+    "excerptEn": "string",
+    "excerptPl": "string",
+    "category": "jelly_drop | market_signals | delivery | people | ai_technology",
+    "author": "reference:teamMember",
+    "publishedAt": "datetime",
+    "updatedAt": "datetime",
+    "coverImage": "image",
+    "bodyEn": "rich_text_or_mdx",
+    "bodyPl": "rich_text_or_mdx",
+    "seo": {
+      "titleEn": "string",
+      "titlePl": "string",
+      "descriptionEn": "string",
+      "descriptionPl": "string",
+      "ogImage": "image"
+    }
+  },
+  "caseStudy": {
+    "slug": "string",
+    "clientName": "string_or_anonymized",
+    "logo": "image_optional",
+    "permissionConfirmed": "boolean",
+    "challengeEn": "string",
+    "challengePl": "string",
+    "solutionEn": "string",
+    "solutionPl": "string",
+    "results": [
+      {
+        "labelEn": "string",
+        "labelPl": "string",
+        "value": "verified_string",
+        "evidenceConfirmed": "boolean"
+      }
+    ],
+    "services": ["string"],
+    "technologies": ["string"],
+    "published": "boolean"
+  },
+  "teamMember": {
+    "slug": "string",
+    "name": "string",
+    "roleEn": "string",
+    "rolePl": "string",
+    "bioEn": "string",
+    "bioPl": "string",
+    "photo": "image",
+    "linkedinUrl": "url",
+    "published": "boolean"
+  },
+  "globalSettings": {
+    "companyLegalName": "string_required_before_production",
+    "registeredAddress": "string_required_before_production",
+    "taxId": "string_required_before_production",
+    "companyRegisterId": "string_required_before_production",
+    "contactEmail": "email_required_before_production",
+    "linkedinUrl": "url",
+    "privacyPolicyVersion": "string",
+    "emailConsentVersion": "string",
+    "phoneConsentVersion": "string",
+    "jellyBoxCampaignActive": "boolean",
+    "jellyBoxLimit": "number",
+    "jellyBoxRemaining": "number"
+  }
+}

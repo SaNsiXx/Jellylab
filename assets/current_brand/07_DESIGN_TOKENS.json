@@ -1,0 +1,61 @@
+{
+  "brand": {
+    "name": "Jelly Labs",
+    "positioning": "Bold outside. Reliable inside.",
+    "headline": "Hard problems. Fluid teams.",
+    "campaignLine": "Who the f*ck is Jelly?"
+  },
+  "colors": {
+    "background": "#07080D",
+    "surface": "#10131C",
+    "surfaceElevated": "#171B27",
+    "border": "rgba(255,255,255,0.12)",
+    "textPrimary": "#F7F8FC",
+    "textSecondary": "#A9AFBF",
+    "blue": "#306BFF",
+    "cyan": "#13C8FF",
+    "violet": "#6B38FF",
+    "green": "#8DFF45",
+    "emerald": "#00D47E",
+    "orange": "#FF9A31",
+    "red": "#FF4D5E",
+    "focus": "#13C8FF"
+  },
+  "gradients": {
+    "blueJelly": "linear-gradient(135deg, #13C8FF 0%, #306BFF 48%, #6B38FF 100%)",
+    "greenJelly": "linear-gradient(135deg, #D7FF54 0%, #8DFF45 42%, #00D47E 100%)",
+    "heatJelly": "linear-gradient(135deg, #FFD25A 0%, #FF9A31 42%, #FF4D5E 100%)"
+  },
+  "typography": {
+    "display": "Space Grotesk, Sora, sans-serif",
+    "body": "Inter, sans-serif",
+    "h1Desktop": "clamp(4.5rem, 8vw, 7rem)",
+    "h1Mobile": "clamp(2.8rem, 14vw, 3.65rem)",
+    "bodyLarge": "1.25rem",
+    "body": "1.125rem",
+    "small": "0.875rem"
+  },
+  "radii": {
+    "button": "999px",
+    "card": "24px",
+    "modal": "28px"
+  },
+  "spacing": {
+    "sectionDesktop": "clamp(7rem, 12vw, 11rem)",
+    "sectionMobile": "5rem",
+    "container": "min(1280px, calc(100vw - 48px))"
+  },
+  "motion": {
+    "micro": "160ms",
+    "standard": "420ms",
+    "section": "720ms",
+    "easing": [0.22, 1, 0.36, 1],
+    "respectReducedMotion": true
+  },
+  "breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px"
+  }
+}
