@@ -20,7 +20,7 @@ export function alternatesFor(locale: string, path: string) {
   };
 }
 
-export type PageKey = "solutions" | "talent" | "howItWorks" | "forDevelopers" | "about" | "insights" | "jellyList" | "contact" | "privacy" | "cookies" | "jellyBoxTerms";
+export type PageKey = "solutions" | "talent" | "howItWorks" | "forDevelopers" | "about" | "insights" | "jellyList" | "contact" | "privacy" | "cookies" | "jellyBoxTerms" | "jellyBox";
 
 /** Generated 1200×630 preview image (app/api/og). Explicit per page so child metadata never drops it. */
 export const ogImage = (title: string, eyebrow?: string) => {

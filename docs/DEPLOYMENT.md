@@ -16,7 +16,9 @@ What the preview does:
 - `robots.txt` disallows everything → not indexed.
 - Forms work end-to-end with **console adapters**: submissions are written (redacted) to Vercel → Project → Logs; the
   double opt-in link appears in the logs instead of an email. Nothing reaches a CRM or real inboxes.
-- CV upload is refused (by design until real storage exists); candidates can submit with a LinkedIn URL.
+- CV uploads are validated and discarded (nothing is stored on previews).
+- Jelly Box address form works with invitation links from `npm run jelly-box:invite -- --base https://<project>.vercel.app …`; addresses are only logged (redacted).
+- The content panel (`/keystatic`) is hidden on deployments until GitHub mode is configured.
 - Placeholder check prints a warning in the build log but does not block.
 
 ## Stage 2 — launch on jellylabs.com

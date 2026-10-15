@@ -25,6 +25,7 @@ export type CampaignName = "jelly-drop" | "tech-bench-inbox" | "jelly-box";
 // Source originals live in assets/generated/.
 const RASTER: Partial<Record<CampaignName, string>> = {
   "jelly-drop": "/campaign/jelly-drop.jpg",
+  "tech-bench-inbox": "/campaign/tech-bench-inbox.jpg",
 };
 
 export function CampaignArt({ name, className = "", priority = false }: { name: CampaignName; className?: string; priority?: boolean }) {

@@ -9,6 +9,7 @@ import { getInsights } from "@/lib/adapters/insights";
 import { renderMdx } from "@/components/insights/Mdx";
 import { NewsletterCTA } from "@/components/ui/NewsletterCTA";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { plainHeadline } from "@/components/ui/NeonHeadline";
 import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 export async function generateStaticParams() {
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/insights
   const locale = toLocale((await params).locale);
   const a = await getInsights().get(locale, slug);
   if (!a) return {};
-  const title = a.seo?.title ?? a.title;
+  const title = a.seo?.title ?? plainHeadline(a.title);
   const description = a.seo?.description ?? a.excerpt;
   // Only declare alternates for locales where the same slug exists.
   const other = routing.locales.filter((l) => l !== locale);
@@ -33,8 +34,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/insights
     title,
     description,
     alternates: { canonical: alt.canonical, languages },
-    openGraph: { type: "article", title, description, publishedTime: a.publishedAt, modifiedTime: a.updatedAt, authors: [a.author.name], images: [a.seo?.ogImage ?? a.coverImage ?? ogImage(a.title, "THE JELLY SIGNAL")] },
-    twitter: { card: "summary_large_image", images: [a.seo?.ogImage ?? a.coverImage ?? ogImage(a.title, "THE JELLY SIGNAL").url] },
+    openGraph: { type: "article", title, description, publishedTime: a.publishedAt, modifiedTime: a.updatedAt, authors: [a.author.name], images: [a.seo?.ogImage ?? a.coverImage ?? ogImage(plainHeadline(a.title), "THE JELLY SIGNAL")] },
+    twitter: { card: "summary_large_image", images: [a.seo?.ogImage ?? a.coverImage ?? ogImage(plainHeadline(a.title), "THE JELLY SIGNAL").url] },
     robots: a.sample ? { index: false, follow: false } : undefined,
   };
 }
@@ -83,7 +84,7 @@ export default async function ArticlePage({ params }: PageProps<"/[locale]/insig
         data={{
           "@context": "https://schema.org",
           "@type": "Article",
-          headline: a.title,
+          headline: plainHeadline(a.title),
           description: a.excerpt,
           datePublished: a.publishedAt,
           dateModified: a.updatedAt ?? a.publishedAt,

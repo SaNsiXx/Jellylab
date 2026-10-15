@@ -125,6 +125,32 @@ await page.getByRole("button", { name: "JOIN JELLY CREW" }).last().click();
 await page.getByText("Welcome to the Jelly Crew pipeline.").waitFor({ timeout: 10000 }).catch(() => {});
 ok("candidate with PDF CV → success", await page.getByText("Welcome to the Jelly Crew pipeline.").isVisible());
 
+// ── Jelly Box delivery address (invitation-only) ──
+const boxToken = devToken({ id: "e2e-box", e: "ada@example-software.io", l: "en", p: "jelly_box" });
+await page.goto(`${base}/jelly-box/address?t=${boxToken}`, { waitUntil: "networkidle" });
+ok("jelly box: valid invitation shows the address form", await page.locator("#postalCode").isVisible());
+await page.fill("#company", "Example Software House");
+await page.fill("#recipientName", "Ada Tester");
+await page.fill("#street", "ul. Przykładowa 1/2");
+await page.fill("#postalCode", "44100");
+await page.fill("#city", "Gliwice");
+await page.fill("#phone", "+48 600 000 000");
+await page.locator("#postalCode").blur();
+await page.waitForTimeout(300);
+ok("jelly box: wrong postal code format rejected", await page.locator("#postalCode-error").isVisible());
+await page.fill("#postalCode", "44-100");
+await page.locator("#confirmCompanyAddress").check();
+await page.waitForTimeout(2100);
+await page.getByRole("button", { name: "SEND MY ADDRESS" }).click();
+await page.getByText("Address received.").waitFor({ timeout: 10000 }).catch(() => {});
+ok("jelly box: address submitted → success", await page.getByText("Address received.").isVisible());
+await page.goto(`${base}/jelly-box/address?t=forged.token`, { waitUntil: "networkidle" });
+ok("jelly box: forged token → invalid screen", (await page.locator("h1").textContent())?.includes("not valid") ?? false);
+await page.goto(`${base}/jelly-box/address?t=${devToken({ id: "x", e: "a@b.co", l: "en", p: "jelly_list" })}`, { waitUntil: "networkidle" });
+ok("jelly box: double opt-in token cannot open the address form", (await page.locator("h1").textContent())?.includes("not valid") ?? false);
+const invite = await page.request.post(`${base}/api/jelly-box/invite`, { data: { email: "a@b.co", submissionId: "x" } });
+ok("jelly box: invite endpoint disabled without ADMIN_API_KEY", invite.status() === 404, String(invite.status()));
+
 // ── Talent filters ──
 await page.goto(`${base}/talent`, { waitUntil: "networkidle" });
 const count = async () => page.locator("main ul li article").count();

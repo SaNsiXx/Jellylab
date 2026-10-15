@@ -6,7 +6,7 @@ export type ButtonVariant = "primary" | "secondary" | "ghost";
 const base =
   "group/btn relative inline-flex min-h-12 items-center justify-center gap-3 rounded-[var(--radius-button)] px-7 py-3 " +
   "font-display text-[0.8125rem] font-semibold tracking-[0.16em] whitespace-nowrap " +
-  "transition-[transform,box-shadow,background-color,border-color,color] duration-[var(--duration-micro)] ease-[var(--ease-jelly)] " +
+  "transition-[transform,translate,box-shadow,background-color,border-color,color] duration-[var(--duration-micro)] ease-[var(--ease-jelly)] " +
   "active:scale-[0.98] focus-visible:outline-offset-4";
 
 const variants: Record<ButtonVariant, string> = {

@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Typecheck · lint · build · e2e · a11y
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      # Preview-style build: console adapters, sample content visible, placeholder gate warns (no DEPLOY_ENV).
+      NEXT_PUBLIC_SHOW_PLACEHOLDERS: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx next typegen && npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: Install Playwright (Chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Start production server
+        run: |
+          npm start -- -p 3000 > .next-server.log 2>&1 &
+          for i in $(seq 1 30); do curl -fs http://localhost:3000/ > /dev/null && exit 0; sleep 1; done
+          cat .next-server.log; exit 1
+
+      - name: End-to-end flows
+        run: node scripts/e2e.mjs http://localhost:3000
+
+      - name: Accessibility + responsive (axe, WCAG 2.2 AA)
+        run: node scripts/qa.mjs http://localhost:3000 --paths=/,/contact,/talent,/jelly-list,/pl --widths=375,1440
+
+      - name: Upload QA artefacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-report
+          path: |
+            .qa/
+            .next-server.log
+          retention-days: 7

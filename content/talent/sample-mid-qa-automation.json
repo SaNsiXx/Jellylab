@@ -1,0 +1,33 @@
+{
+  "id": "JL-SAMPLE-05",
+  "publicTitle": {
+    "en": "QA Automation Engineer",
+    "pl": "QA Automation Engineer"
+  },
+  "role": "QA",
+  "seniority": "mid",
+  "coreStack": [
+    "Playwright",
+    "TypeScript",
+    "CI/CD"
+  ],
+  "secondaryStack": [],
+  "availability": "immediate",
+  "availabilityVerifiedAt": "2026-10-09",
+  "englishLevel": "B2",
+  "location": {
+    "en": "Poland",
+    "pl": "Polska"
+  },
+  "workModel": [
+    "remote",
+    "hybrid"
+  ],
+  "engagementModel": [
+    "B2B"
+  ],
+  "featured": false,
+  "published": true,
+  "consentToPublish": true,
+  "sample": true
+}

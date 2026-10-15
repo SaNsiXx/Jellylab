@@ -9,7 +9,8 @@ the site runs on **console adapters** (dev only). Secrets are server-only — ne
 | Email + double opt-in | `lib/adapters/mailing/index.ts` | `MAIL_PROVIDER` | `console` | `brevo` |
 | Rate limiting | `lib/adapters/ratelimit/index.ts` | `RATE_LIMIT_PROVIDER` | `memory` | `upstash` |
 | CV storage | `lib/adapters/storage/index.ts` | `CV_STORAGE_PROVIDER` | `mock` | *to implement* |
-| Talent data | `lib/adapters/talent/index.ts` | `TALENT_SOURCE` | `mock` | *CMS to implement* |
+| Talent data | `lib/adapters/talent/index.ts` | `TALENT_SOURCE` | `files` (`content/talent/*.json`) | `files` or external CMS |
+| Jelly Box addresses | `lib/adapters/shipping/index.ts` | `SHIPPING_PROVIDER` | `console` | `webhook` |
 | Insights | `lib/adapters/insights/index.ts` | — | MDX files | MDX or CMS |
 | Analytics | `components/consent/AnalyticsScripts.tsx`, `lib/analytics/track.ts` | `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_LINKEDIN_*` | off | on after consent |
 | Consent manager | `components/consent/ConsentBanner.tsx`, `lib/analytics/consent.ts` | — | built-in | built-in or CMP |
@@ -55,13 +56,20 @@ Fails open (never blocks real leads if Redis is down). The memory limiter is per
 
 ## CV storage (to implement)
 
-The mock accepts files in dev and **refuses in production** (form shows "add your LinkedIn URL instead").
+The mock validates files (type, size, magic bytes) and discards them on local, preview and CI runs. On the live site
+(`DEPLOY_ENV=production`) it **refuses** uploads ("add your LinkedIn URL instead") until real storage exists.
 Implement `CvStorage.save(file, id)` returning an opaque reference: private bucket (S3/R2/GCS), server-side encryption,
 malware scan before access, retention per the privacy policy. Never return a public URL.
 
-## Talent data (mock → CMS)
+## Talent data
 
-`data/talent.mock.ts` holds sample profiles (`isSample: true` → visible "Sample profile" badge). To connect a CMS:
+Default source (`TALENT_SOURCE=files`): one JSON file per profile in `content/talent/`, editable in the content panel
+(`/keystatic`, see `docs/CONTENT_EDITING.md`). Rules enforced by `lib/adapters/talent/index.ts`:
+- only `published && consentToPublish` profiles are shown; `privateCrmId` (if present) never leaves the server;
+- `sample: true` profiles show a "Sample profile" badge and are hidden on the live site;
+- the production build fails if there is no real (non-sample) published profile.
+
+To use an external CMS instead (Airtable, Notion, Sanity, Pipedrive…), add an adapter and select it:
 
 ```ts
 // lib/adapters/talent/index.ts
@@ -78,11 +86,28 @@ const cmsAdapter: TalentAdapter = {
     return profiles.filter((p) => matches(p, q)).slice(0, q.limit);
   },
 };
-// in getTalentAdapter(): case "cms": return cmsAdapter;
+// in getTalentAdapter(): case "cms": return cmsAdapter;   then set TALENT_SOURCE=cms
 ```
 
-Fields follow `talentProfile` in `08_CMS_CONTENT_MODEL.json` (see `lib/adapters/talent/types.ts`; `publicTitle` and
-`location` are `{ en, pl }`). Set `TALENT_SOURCE=cms`. Filters on `/talent` work on whatever the adapter returns.
+## Jelly Box (delivery address)
+
+Flow (05_FORMS_LEGAL_CRM.md §1, §4): Jelly List signup → double opt-in → sales qualifies the company →
+**invitation link** (signed token, 14 days) → `/jelly-box/address` form → address stored **outside the CRM** → CRM gets
+only a status note (`jelly_box_status=invited | address_received`).
+
+Issue an invitation, either:
+- CLI: `npm run jelly-box:invite -- --email cto@acme.com --id <submissionId> --locale pl --base https://jellylabs.com`
+  (prints the link; needs the same `DOI_SECRET` as the site), or
+- API (for CRM automations, e.g. a Pipedrive "Jelly Box approved" stage → Make/Zapier):
+  `POST /api/jelly-box/invite` with `Authorization: Bearer $ADMIN_API_KEY` and
+  `{"email":"…","submissionId":"…","locale":"pl","send":true}` → returns the link and, with `send: true`, emails it via the
+  mailing adapter. Disabled (404) unless `ADMIN_API_KEY` is set.
+
+Address storage: `SHIPPING_PROVIDER=webhook` + `JELLY_BOX_WEBHOOK_URL` (+ optional `JELLY_BOX_WEBHOOK_SECRET`, sent as
+`X-Jelly-Signature`) — e.g. a Make/Zapier scenario writing to an access-restricted sheet or the courier system. Delete
+addresses after the period stated in the Jelly Box Terms. `JELLY_BOX_ACTIVE=false` closes the form and the invite endpoint.
+Address rules enforced: company address in Poland, PL postal code format, confirmation checkbox, honeypot, rate limit;
+identity (email, submission id) comes only from the signed token.
 
 ## Analytics
 

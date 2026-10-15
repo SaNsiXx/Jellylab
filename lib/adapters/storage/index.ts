@@ -27,13 +27,13 @@ export async function validateCv(file: File): Promise<"pdf" | "docx"> {
 }
 
 /**
- * Mock storage: in development it accepts the file and discards it (logs size only).
- * In production it refuses, so CVs are never silently lost — configure real private storage
- * (e.g. S3/R2 with server-side encryption + malware scanning, 05_FORMS_LEGAL_CRM.md §8) first.
+ * Mock storage: in development / previews / CI it validates the file and discards it (logs size only).
+ * On the live site (DEPLOY_ENV=production) it refuses, so real CVs are never silently lost — configure private
+ * storage first (e.g. S3/R2 with server-side encryption + malware scanning, 05_FORMS_LEGAL_CRM.md §8).
  */
 const mock: CvStorage = {
   async save(file, id) {
-    if (env.isProd) throw new StorageUnavailableError("CV storage not configured");
+    if (env.isLive) throw new StorageUnavailableError("CV storage not configured");
     const ext = await validateCv(file);
     console.info(`[storage:mock] CV accepted (${ext}, ${Math.round(file.size / 1024)} KB) — discarded in dev`);
     return `mock://cv/${id}.${ext}`;

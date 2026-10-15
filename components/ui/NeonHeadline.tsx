@@ -1,8 +1,19 @@
 // Headline with its second half in the flowing neon gradient (same treatment as "Fluid teams." in the hero).
-// Split rule: two+ sentences → the last sentence glows; one sentence → split by words at ~half the characters;
-// a single word stays plain. Works for EN and PL copy without per-string configuration.
+// Manual override: put "|" in the copy where the split should fall ("Markets | we work with.").
+// Otherwise: two+ sentences → the last sentence glows; one sentence → split by words at ~half the characters;
+// a single word stays plain.
+
+const MARKER = /\s*\|\s*/;
+
+/** Text without the split marker — use wherever a headline appears outside a heading (meta, OG, cards, JSON-LD). */
+export const plainHeadline = (text: string) => text.replace(/\s*\|\s*/g, " ").trim();
 
 export function splitHeadline(text: string): [string, string] | null {
+  if (MARKER.test(text)) {
+    const [head, ...tail] = text.split(MARKER);
+    const neon = tail.join(" ").trim();
+    return head?.trim() && neon ? [head.trim(), neon] : null;
+  }
   const t = text.trim();
   const sentences = t.split(/(?<=[.!?])\s+/);
   if (sentences.length >= 2) {

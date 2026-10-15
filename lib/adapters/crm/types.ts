@@ -36,4 +36,6 @@ export interface CrmAdapter {
   createCandidate(record: SubmissionRecord): Promise<{ crmId?: string }>;
   /** Marks marketing_email_confirmed=true after double opt-in. */
   confirmEmail(input: { submissionId: string; email: string; confirmedAt: string; purpose: string }): Promise<void>;
+  /** Jelly Box status only — the address itself never goes to the CRM. */
+  updateJellyBoxStatus(input: { submissionId: string; email: string; status: "invited" | "address_received"; at: string }): Promise<void>;
 }

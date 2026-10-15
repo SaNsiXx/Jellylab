@@ -47,6 +47,10 @@
       "jellyBoxTerms": {
         "title": "Regulamin Jelly Box",
         "description": "Zasady akcji Jelly Box dla zweryfikowanych kontaktów B2B."
+      },
+      "jellyBox": {
+        "title": "Jelly Box — adres dostawy",
+        "description": "Adres dostawy Twojego Jelly Box."
       }
     }
   },
@@ -164,7 +168,7 @@
   },
   "talent": {
     "eyebrow": "LIVE SIGNAL",
-    "title": "Poznaj ludzi stojących za profilami.",
+    "title": "Poznaj ludzi | stojących za profilami.",
     "body": "Każdy pokazany profil oznacza prawdziwą rozmowę, zweryfikowane doświadczenie i aktualnie potwierdzoną dostępność.",
     "disclaimer": "Dostępność szybko się zmienia. Pobierz aktualny Jelly Drop.",
     "sampleBadge": "Przykładowy profil — placeholder",
@@ -233,7 +237,7 @@
   },
   "crew": {
     "eyebrow": "JELLY CREW",
-    "title": "Dobrzy ludzie zasługują na projekty, które mają sens.",
+    "title": "Dobrzy ludzie zasługują | na projekty, które mają sens.",
     "body": "Budujemy sieć dla specjalistów ceniących uczciwe stawki, jasne oczekiwania, sensowny feedback i pracę dopasowaną do doświadczenia.",
     "kicker": "Ty wnosisz kompetencje. My dajemy sygnał, kontekst i prawdziwą rozmowę."
   },
@@ -268,7 +272,7 @@
   },
   "proof": {
     "eyebrow": "PROOF",
-    "title": "Rynki, z którymi pracujemy.",
+    "title": "Rynki, | z którymi pracujemy.",
     "markets": [
       "Polska",
       "DACH",
@@ -314,7 +318,7 @@
     ]
   },
   "final": {
-    "title": "Gotowi, żeby Wasz zespół był mniej sztywny?",
+    "title": "Gotowi, żeby Wasz zespół | był mniej sztywny?",
     "body": "Pobierz Jelly Drop albo powiedz nam, co blokuje delivery."
   },
   "footer": {
@@ -413,7 +417,7 @@
     "newsletterBody": "Dołącz do Jelly List i otrzymuj regularne informacje o dostępności."
   },
   "howPage": {
-    "title": "Mniej szumu między potrzebą a delivery.",
+    "title": "Mniej szumu | między potrzebą a delivery.",
     "steps": [
       {
         "title": "Najpierw kontekst",
@@ -547,7 +551,7 @@
     "invalidBody": "Linki potwierdzające są ważne 7 dni. Zapisz się ponownie, a wyślemy nowy."
   },
   "contactPage": {
-    "title": "Powiedz nam, co jest zablokowane.",
+    "title": "Powiedz nam, | co jest zablokowane.",
     "intro": "Potrzebujesz jednego specjalisty, całego zespołu czy realistycznego obrazu rynku? Daj nam kontekst. Odpowie człowiek.",
     "tabs": {
       "label": "Czego potrzebujesz?",
@@ -712,7 +716,8 @@
       "cvUnavailable": "Wysyłka CV jest chwilowo niedostępna. Podaj adres LinkedIn.",
       "rateLimited": "Zbyt wiele prób. Odczekaj kilka minut i spróbuj ponownie.",
       "server": "Coś poszło nie tak po naszej stronie. Dane nie zostały utracone — spróbuj ponownie lub napisz do nas.",
-      "network": "Nie udało się połączyć z serwerem. Sprawdź połączenie i spróbuj ponownie."
+      "network": "Nie udało się połączyć z serwerem. Sprawdź połączenie i spróbuj ponownie.",
+      "postalCode": "Podaj kod pocztowy w formacie 00-000."
     },
     "consents": {
       "groupLabel": "Zgody",
@@ -752,10 +757,47 @@
     "doiBody": "Potwierdź adres e-mail, aby dołączyć do Jelly List i otrzymać aktualny Jelly Drop.",
     "doiButton": "Potwierdzam e-mail",
     "doiIgnore": "Jeśli to nie Ty — zignoruj tę wiadomość, nic się nie stanie.",
-    "doiFooter": "Jelly Labs · People. Solutions. Impact."
+    "doiFooter": "Jelly Labs · People. Solutions. Impact.",
+    "boxSubject": "Twój Jelly Box czeka na wysyłkę — Jelly Labs",
+    "boxHeading": "Twój Jelly Box jest na liście.",
+    "boxBody": "Twoja firma zakwalifikowała się do Jelly Box. Podaj adres dostawy — to zajmie minutę, a link jest ważny 14 dni.",
+    "boxButton": "Dodaj adres dostawy",
+    "boxNote": "Adres wykorzystamy wyłącznie do dostarczenia Jelly Box i usuniemy po zakończeniu akcji, zgodnie z regulaminem Jelly Box."
   },
   "legal": {
     "draftBanner": "WERSJA ROBOCZA — wyłącznie struktura, nie stanowi porady prawnej. Musi zostać uzupełniona i zatwierdzona przez prawnika / IOD przed publikacją.",
     "lastUpdated": "Ostatnia aktualizacja"
+  },
+  "jellyBox": {
+    "eyebrow": "JELLY BOX",
+    "title": "Gdzie mamy go wysłać?",
+    "intro": "Twoja firma zakwalifikowała się do Jelly Box. Podaj firmowy adres dostawy w Polsce.",
+    "formTitle": "Adres dostawy",
+    "submit": "WYŚLIJ ADRES",
+    "fields": {
+      "company": "Firma",
+      "recipientName": "Odbiorca (imię i nazwisko)",
+      "street": "Ulica, numer budynku i lokalu",
+      "postalCode": "Kod pocztowy",
+      "city": "Miejscowość",
+      "country": "Kraj",
+      "countryValue": "Polska",
+      "phone": "Telefon dla kuriera",
+      "notes": "Uwagi do dostawy"
+    },
+    "hints": {
+      "postalCode": "Format: 00-000",
+      "phone": "Wykorzystamy go wyłącznie do kontaktu kuriera przy tej dostawie.",
+      "notes": "Opcjonalnie, np. recepcja, piętro lub godziny otwarcia."
+    },
+    "confirm": "Potwierdzam, że to adres firmowy w Polsce i mogę odebrać Jelly Box w imieniu firmy.",
+    "notice": "Adres przechowujemy oddzielnie od CRM, wykorzystujemy wyłącznie do dostarczenia Jelly Box i usuwamy po zakończeniu akcji, zgodnie z regulaminem Jelly Box. Administrator: {controller}.",
+    "terms": "Regulamin Jelly Box",
+    "successTitle": "Adres otrzymany. Jelly Box jest w drodze.",
+    "successBody": "Dziękujemy. Wyślemy Jelly Box na podany adres. Jeśli coś będzie wymagało wyjaśnienia, skontaktujemy się z Tobą.",
+    "invalidTitle": "Ten link wygasł lub jest nieprawidłowy.",
+    "invalidBody": "Linki zaproszeń są ważne 14 dni. Odpowiedz na e-mail z zaproszeniem, a wyślemy nowy.",
+    "closedTitle": "Akcja Jelly Box została zakończona.",
+    "closedBody": "Dziękujemy za zainteresowanie. Nadal jesteś na Jelly List i będziesz otrzymywać Jelly Drop."
   }
 }

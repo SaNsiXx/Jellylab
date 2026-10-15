@@ -1,0 +1,34 @@
+{
+  "id": "JL-SAMPLE-03",
+  "publicTitle": {
+    "en": "Senior DevOps / Cloud Engineer",
+    "pl": "Senior DevOps / Cloud Engineer"
+  },
+  "role": "DevOps & Cloud",
+  "seniority": "senior",
+  "coreStack": [
+    "AWS",
+    "Kubernetes",
+    "Terraform"
+  ],
+  "secondaryStack": [
+    "GCP"
+  ],
+  "availability": "1_month",
+  "availabilityVerifiedAt": "2026-10-01",
+  "englishLevel": "C1",
+  "location": {
+    "en": "Central Europe",
+    "pl": "Europa Środkowa"
+  },
+  "workModel": [
+    "remote"
+  ],
+  "engagementModel": [
+    "B2B"
+  ],
+  "featured": true,
+  "published": true,
+  "consentToPublish": true,
+  "sample": true
+}

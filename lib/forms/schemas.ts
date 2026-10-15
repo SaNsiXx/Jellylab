@@ -114,6 +114,19 @@ export const candidateSchema = z
     if (!v.linkedin && !v.hasCv) ctx.addIssue({ code: "custom", path: ["linkedin"], message: "linkedinOrCv" });
   });
 
+/* 5 — Jelly Box delivery address (invitation-only, after double opt-in + B2B qualification). Company address in Poland. */
+export const jellyBoxAddressSchema = z.object({
+  company: required(120),
+  recipientName: required(120),
+  street: required(160),
+  postalCode: z.string({ error: "required" }).trim().regex(/^\d{2}-\d{3}$/, { error: "postalCode" }),
+  city: required(80),
+  phone: phoneRequired,
+  notes: optional(300),
+  confirmCompanyAddress: z.literal(true, { error: "consentRequired" }),
+});
+export type JellyBoxAddressInput = z.input<typeof jellyBoxAddressSchema>;
+
 /* Metadata sent with every form (never shown to the user). */
 const utm = optional(200);
 export const attributionSchema = z

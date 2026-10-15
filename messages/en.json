@@ -47,6 +47,10 @@
       "jellyBoxTerms": {
         "title": "Jelly Box Terms",
         "description": "Terms of the Jelly Box campaign for verified B2B contacts."
+      },
+      "jellyBox": {
+        "title": "Jelly Box — delivery address",
+        "description": "Delivery address for your Jelly Box."
       }
     }
   },
@@ -268,7 +272,7 @@
   },
   "proof": {
     "eyebrow": "PROOF",
-    "title": "Markets we work with.",
+    "title": "Markets | we work with.",
     "markets": [
       "Poland",
       "DACH",
@@ -314,7 +318,7 @@
     ]
   },
   "final": {
-    "title": "Ready to make your team less rigid?",
+    "title": "Ready to make your team | less rigid?",
     "body": "Get the current Jelly Drop or tell us what is blocking delivery."
   },
   "footer": {
@@ -413,7 +417,7 @@
     "newsletterBody": "Join the Jelly List for regular availability updates."
   },
   "howPage": {
-    "title": "Less noise between need and delivery.",
+    "title": "Less noise | between need and delivery.",
     "steps": [
       {
         "title": "Context first",
@@ -547,7 +551,7 @@
     "invalidBody": "Confirmation links are valid for 7 days. Sign up again and we will send you a fresh one."
   },
   "contactPage": {
-    "title": "Tell us what is blocked.",
+    "title": "Tell us | what is blocked.",
     "intro": "Need one specialist, a dedicated team or simply a realistic view of the market? Give us the context. A human will respond.",
     "tabs": {
       "label": "What do you need?",
@@ -712,7 +716,8 @@
       "cvUnavailable": "CV upload is temporarily unavailable. Please add your LinkedIn URL instead.",
       "rateLimited": "Too many attempts. Please wait a few minutes and try again.",
       "server": "Something went wrong on our side. Your data was not lost — please try again, or email us.",
-      "network": "We could not reach the server. Check your connection and try again."
+      "network": "We could not reach the server. Check your connection and try again.",
+      "postalCode": "Enter a Polish postal code in the format 00-000."
     },
     "consents": {
       "groupLabel": "Consents",
@@ -752,10 +757,47 @@
     "doiBody": "Confirm your email address to join the Jelly List and receive the current Jelly Drop.",
     "doiButton": "Confirm my email",
     "doiIgnore": "If you did not request this, ignore this email — nothing will happen.",
-    "doiFooter": "Jelly Labs · People. Solutions. Impact."
+    "doiFooter": "Jelly Labs · People. Solutions. Impact.",
+    "boxSubject": "Your Jelly Box is ready to ship — Jelly Labs",
+    "boxHeading": "Your Jelly Box is on the list.",
+    "boxBody": "Your company qualified for the Jelly Box. Tell us where to deliver it — it takes a minute and the link is valid for 14 days.",
+    "boxButton": "Add delivery address",
+    "boxNote": "The address is used only to deliver the Jelly Box and is deleted after the campaign, as described in the Jelly Box Terms."
   },
   "legal": {
     "draftBanner": "DRAFT — structure only, not legal advice. Must be completed and approved by legal counsel / DPO before publication.",
     "lastUpdated": "Last updated"
+  },
+  "jellyBox": {
+    "eyebrow": "JELLY BOX",
+    "title": "Where should we send it?",
+    "intro": "Your company qualified for the Jelly Box. Add a company delivery address in Poland.",
+    "formTitle": "Delivery address",
+    "submit": "SEND MY ADDRESS",
+    "fields": {
+      "company": "Company",
+      "recipientName": "Recipient (first and last name)",
+      "street": "Street, building and office number",
+      "postalCode": "Postal code",
+      "city": "City",
+      "country": "Country",
+      "countryValue": "Poland",
+      "phone": "Phone for the courier",
+      "notes": "Delivery notes"
+    },
+    "hints": {
+      "postalCode": "Format: 00-000",
+      "phone": "Used only by the courier for this delivery.",
+      "notes": "Optional, e.g. reception, floor or opening hours."
+    },
+    "confirm": "I confirm this is a company address in Poland and that I may receive the Jelly Box on behalf of the company.",
+    "notice": "The address is stored separately from our CRM, used only to deliver the Jelly Box and deleted after the campaign, as described in the Jelly Box Terms. Controller: {controller}.",
+    "terms": "Jelly Box Terms",
+    "successTitle": "Address received. The Jelly Box is coming.",
+    "successBody": "Thank you. We will send the Jelly Box to the address provided. If anything needs clarifying, we will contact you.",
+    "invalidTitle": "This link has expired or is not valid.",
+    "invalidBody": "Invitation links are valid for 14 days. Reply to the invitation email and we will send you a new one.",
+    "closedTitle": "The Jelly Box campaign has ended.",
+    "closedBody": "Thank you for your interest. You are still on the Jelly List and will receive the Jelly Drop."
   }
 }

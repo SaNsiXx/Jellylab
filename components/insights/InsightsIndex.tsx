@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { ArticleMeta, Category } from "@/lib/adapters/insights";
+import { plainHeadline } from "@/components/ui/NeonHeadline";
 
 const CATS: Category[] = ["jelly_drop", "market_signals", "delivery", "people", "ai_technology"];
 
@@ -18,7 +19,7 @@ export function ArticleCard({ a }: { a: ArticleMeta }) {
       </div>
       <h2 className="h3 mt-6 text-2xl">
         <Link href={`/insights/${a.slug}`} className="after:absolute after:inset-0 after:rounded-[var(--radius-card)] hover:text-cyan">
-          {a.title}
+          {plainHeadline(a.title)}
         </Link>
       </h2>
       <p className="mt-3 text-muted">{a.excerpt}</p>

@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
   const isProd = process.env.DEPLOY_ENV === "production";
   if (!isProd) return { rules: { userAgent: "*", disallow: "/" } };
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/api/", "/jelly-list/confirm", "/pl/jelly-list/confirm"] },
+    rules: { userAgent: "*", allow: "/", disallow: ["/api/", "/jelly-list/confirm", "/pl/jelly-list/confirm", "/jelly-box/", "/pl/jelly-box/"] },
     sitemap: absoluteUrl("/sitemap.xml"),
   };
 }

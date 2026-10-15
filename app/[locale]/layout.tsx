@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { AnalyticsScripts } from "@/components/consent/AnalyticsScripts";
+import { MicroInteractions } from "@/components/ui/MicroInteractions";
 import "../globals.css";
 import { toLocale } from "@/i18n/locale";
 
@@ -79,6 +80,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <SiteFooter />
           <ConsentBanner />
           <AnalyticsScripts />
+          <MicroInteractions />
         </NextIntlClientProvider>
       </body>
     </html>

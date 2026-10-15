@@ -25,6 +25,9 @@ const consoleCrm: CrmAdapter = {
   async confirmEmail(i) {
     console.info("[crm:console] email confirmed", { submissionId: i.submissionId, purpose: i.purpose, at: i.confirmedAt });
   },
+  async updateJellyBoxStatus(i) {
+    console.info("[crm:console] jelly box status", { submissionId: i.submissionId, status: i.status, at: i.at });
+  },
 };
 
 /**
@@ -63,6 +66,11 @@ function pipedrive(token: string): CrmAdapter {
     });
   }
 
+  async function personIdByEmail(email: string) {
+    const found = await call<{ items: { item: { id: number } }[] }>(`/persons/search?term=${encodeURIComponent(email)}&fields=email&exact_match=true`);
+    return found.items[0]?.item.id;
+  }
+
   return {
     name: "pipedrive",
     async createLead(r) {
@@ -79,13 +87,17 @@ function pipedrive(token: string): CrmAdapter {
       return { crmId: String(p.id) };
     },
     async confirmEmail(i) {
-      const found = await call<{ items: { item: { id: number } }[] }>(`/persons/search?term=${encodeURIComponent(i.email)}&fields=email&exact_match=true`);
-      const id = found.items[0]?.item.id;
+      const id = await personIdByEmail(i.email);
       if (!id) return;
       await call("/notes", {
         method: "POST",
         body: { content: `marketing_email_confirmed=true (double opt-in, ${i.purpose}) at ${i.confirmedAt}; submission ${i.submissionId}`, person_id: id },
       });
+    },
+    async updateJellyBoxStatus(i) {
+      const id = await personIdByEmail(i.email);
+      if (!id) return;
+      await call("/notes", { method: "POST", body: { content: `jelly_box_status=${i.status} at ${i.at}; submission ${i.submissionId}`, person_id: id } });
     },
   };
 }

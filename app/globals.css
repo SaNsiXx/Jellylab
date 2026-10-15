@@ -422,3 +422,31 @@ a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
 }
 .jelly-accent { animation: jl-accent-float 9s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgb(0 0 0 / 0.45)); }
 @media (prefers-reduced-motion: reduce) { .jelly-accent { animation: none; } }
+
+/* ---------- Micro-interactions (vars set by components/ui/MicroInteractions.tsx) ---------- */
+/* Magnetic neon buttons: individual `translate` so it never fights hover/active `transform`. */
+.btn-neon,
+.btn-neon-ghost { translate: var(--mx, 0px) var(--my, 0px); }
+/* Card spotlight: a soft lab lamp following the cursor. Off-card by default. */
+.card {
+  background:
+    radial-gradient(420px circle at var(--sx, -1000px) var(--sy, -1000px), rgb(19 200 255 / 0.07), transparent 45%),
+    linear-gradient(180deg, color-mix(in oklab, var(--color-surface) 92%, white 2%), var(--color-surface));
+}
+/* Form success: one light pulse sweeps across the panel. */
+.success-sweep { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.success-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -45%;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgb(141 255 69 / 0.16), rgb(19 200 255 / 0.12), transparent);
+  animation: jl-sweep 1.4s var(--ease-jelly) 0.1s 1 forwards;
+}
+@keyframes jl-sweep { to { transform: translate3d(330%, 0, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .btn-neon, .btn-neon-ghost { translate: none; }
+  .success-sweep::after { animation: none; display: none; }
+}

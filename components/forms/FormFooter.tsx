@@ -12,7 +12,7 @@ export function PrivacyNotice() {
   return (
     <p className="text-xs leading-relaxed text-muted">
       {t("notice", { controller: controllerWithAddress(locale) })}{" "}
-      <Link href={routes.privacy} className="text-fg underline underline-offset-4 hover:text-cyan">
+      <Link href={routes.privacy} prefetch={false} className="text-fg underline underline-offset-4 hover:text-cyan">
         {t("privacyLink")}
       </Link>
     </p>

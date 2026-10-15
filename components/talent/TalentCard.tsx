@@ -77,6 +77,7 @@ export function TalentCard({ profile, headingLevel = "h3" }: { profile: TalentPr
         </p>
         <TrackedLink
           href={crewHref(profile.id)}
+          prefetch={false}
           event="talent_profile_request"
           eventProps={{ profile_id: profile.id }}
           variant="secondary"

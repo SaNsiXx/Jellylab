@@ -2,6 +2,7 @@
 // Production deploys (DEPLOY_ENV=production) FAIL while placeholders remain.
 // Every other build prints a loud warning listing what is still missing.
 import { readFile, readdir } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -32,8 +33,15 @@ for (const locale of ["en", "pl"]) {
     if (n) issues.push(`${rel}  ${n}× [DO UZUPEŁNIENIA]`);
   }
 }
-// 4. Talent data source must not be the mock in production
-if ((process.env.TALENT_SOURCE ?? "mock") === "mock") issues.push("TALENT_SOURCE=mock — sample profiles would be published");
+// 4. Talent: at least one real (non-sample, published, consented) profile when using content/talent files
+if ((process.env.TALENT_SOURCE ?? "files") === "files") {
+  const dir = path.join(root, "content/talent");
+  const real = (await readdir(dir))
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(path.join(dir, f), "utf8")))
+    .filter((p) => p.published && p.consentToPublish && !p.sample);
+  if (!real.length) issues.push("content/talent has no real profiles (only samples) — /talent would be empty on the live site");
+}
 // 5. Required production configuration
 const need = {
   NEXT_PUBLIC_SITE_URL: "canonical URLs / sitemap / emails",
@@ -43,6 +51,9 @@ for (const [k, why] of Object.entries(need)) if (!process.env[k]) issues.push(`e
 if ((process.env.CRM_PROVIDER ?? "console") === "console") issues.push("CRM_PROVIDER=console — leads would only be logged");
 if ((process.env.MAIL_PROVIDER ?? "console") === "console") issues.push("MAIL_PROVIDER=console — double opt-in emails would not be sent");
 if ((process.env.RATE_LIMIT_PROVIDER ?? "memory") === "memory") issues.push("RATE_LIMIT_PROVIDER=memory — not effective on serverless");
+if ((process.env.CV_STORAGE_PROVIDER ?? "mock") === "mock") issues.push("CV_STORAGE_PROVIDER=mock — CV uploads are refused on the live site (LinkedIn URL still works)");
+if (process.env.JELLY_BOX_ACTIVE !== "false" && (process.env.SHIPPING_PROVIDER ?? "console") === "console")
+  issues.push("SHIPPING_PROVIDER=console while the Jelly Box campaign is active — delivery addresses would not be stored (or set JELLY_BOX_ACTIVE=false)");
 
 if (!issues.length) {
   console.log("✓ placeholder check passed");

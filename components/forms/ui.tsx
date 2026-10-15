@@ -220,6 +220,7 @@ export function ErrorSummary({ errors, labels, summaryRef }: { errors: [string, 
 export function SuccessPanel({ title, body, extra, onReset, resetLabel }: { title: string; body: string; extra?: string; onReset?: () => void; resetLabel?: string }) {
   return (
     <div role="status" className="card p-8 sm:p-10">
+      <span aria-hidden="true" className="success-sweep" />
       <span aria-hidden="true" className="live-dot inline-block size-3 rounded-full bg-green shadow-[0_0_14px_var(--color-green)]" />
       <h3 className="h3 mt-6 text-2xl sm:text-3xl" tabIndex={-1} ref={(el) => el?.focus()}>
         {title}

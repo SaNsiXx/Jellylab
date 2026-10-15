@@ -258,7 +258,8 @@ for (const energy of Object.keys(ENERGIES)) {
 const cards = [
   // 01 uses the supplied artwork (assets/generated/01_Get_The_Jelly_Drop_source.webp) — don't overwrite its PNG.
   ["jelly-drop", cardDrop(), null],
-  ["tech-bench-inbox", cardInbox(), "02_Your_Tech_Bench_Inbox_1200.png"],
+  // 02 uses the supplied artwork (assets/concepts/02_Your_Tech_Bench_Inbox_1200.png) — don't overwrite its PNG.
+  ["tech-bench-inbox", cardInbox(), null],
   ["jelly-box", cardBox(), "03_Drop_Your_Contact_1200.png"],
 ];
 for (const [name, markup, png] of cards) {

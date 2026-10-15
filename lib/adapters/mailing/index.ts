@@ -12,9 +12,13 @@ export type DoiEmail = {
   text: string;
 };
 
+export type OutgoingEmail = { to: string; subject: string; html: string; text: string; tag: string; logUrl?: string };
+
 export interface MailingAdapter {
   readonly name: string;
   sendDoubleOptIn(mail: DoiEmail): Promise<void>;
+  /** Any other transactional email (e.g. Jelly Box address invitation). */
+  sendEmail(mail: OutgoingEmail): Promise<void>;
   /** Called only AFTER double opt-in. Adds the contact to the right list(s); the ESP automation sends the Jelly Drop. */
   subscribe(input: { email: string; locale: "en" | "pl"; purpose: DoiPurpose; interest?: string }): Promise<void>;
 }
@@ -24,6 +28,9 @@ const consoleMailer: MailingAdapter = {
   name: "console",
   async sendDoubleOptIn(m) {
     console.info(`[mail:console] DOI email (${m.locale}) → confirm at:\n  ${m.confirmUrl}`);
+  },
+  async sendEmail(m) {
+    console.info(`[mail:console] ${m.tag} email "${m.subject}"${m.logUrl ? ` → ${m.logUrl}` : ""}`);
   },
   async subscribe(i) {
     console.info("[mail:console] subscribed", { purpose: i.purpose, locale: i.locale, interest: i.interest });
@@ -51,6 +58,16 @@ function brevo(apiKey: string): MailingAdapter {
         htmlContent: m.html,
         textContent: m.text,
         tags: ["doi"],
+      });
+    },
+    async sendEmail(m) {
+      await call("/smtp/email", {
+        sender: { email: env.mailFrom, name: env.mailFromName },
+        to: [{ email: m.to }],
+        subject: m.subject,
+        htmlContent: m.html,
+        textContent: m.text,
+        tags: [m.tag],
       });
     },
     async subscribe(i) {

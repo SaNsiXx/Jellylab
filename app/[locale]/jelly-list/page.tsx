@@ -52,7 +52,7 @@ export default async function JellyListPage({ params }: PageProps<"/[locale]/jel
                 <li key={li}>— {li}</li>
               ))}
             </ul>
-            <Link href={routes.jellyBoxTerms} className="mt-5 inline-flex min-h-11 items-center text-sm text-fg underline underline-offset-4 hover:text-cyan">
+            <Link href={routes.jellyBoxTerms} prefetch={false} className="mt-5 inline-flex min-h-11 items-center text-sm text-fg underline underline-offset-4 hover:text-cyan">
               {t("jellyListPage.boxTerms")}
             </Link>
           </div>

@@ -25,6 +25,7 @@ In dev, form submissions are logged (redacted) and the double opt-in link is pri
 | `qa` | Playwright + axe (WCAG 2.2 AA) at 375/768/1024/1440/1920, overflow + one-H1 checks → `.qa/` |
 | `e2e` | end-to-end flows: consent, Jelly List + double opt-in, crew, contact, candidate, talent filters, Insights |
 | `lighthouse` | Lighthouse mobile + desktop (with/without WebGL) against `next start -p 3100` |
+| `jelly-box:invite` | prints a signed Jelly Box delivery-address invitation link |
 | `tokens` | `assets/current_brand/07_DESIGN_TOKENS.json` → `app/tokens.css` |
 | `brand`, `brand:svgs` | wordmark layers; jelly elements, campaign cards, icons |
 
@@ -40,7 +41,7 @@ components/           hero (WebGL + SVG fallback), forms, consent, talent, insig
 lib/adapters/         crm · mailing · ratelimit · storage · talent · insights  (swap via env)
 lib/forms/            shared Zod schemas + consent texts/versions
 messages/{en,pl}.json all UI copy (keys must match)
-content/              insights/*.mdx, legal/*.mdx
+content/              talent/*.json, insights/*.mdx, legal/*.mdx  (editable at /keystatic)
 scripts/              build/QA tooling
 ```
 
@@ -56,7 +57,9 @@ EN at `https://jellylabs.com`, PL at `https://jellylabs.com/pl`. Step-by-step: `
 - Lighthouse mobile 89–93 (home 92–93 over 3 runs), desktop 98–100 (home with WebGL 98, without 100); a11y 100; best practices 100; CLS 0. SEO 69 only because non-production robots blocks crawling (expected).
 - axe: 0 violations, 60 route×width combinations EN+PL; reduced-motion clean.
 - Mobile never downloads three.js (~268 KB gzip JS total); desktop loads it (240 KB gzip) after idle.
-- E2E 26/26.
+- E2E 32/32 (incl. Jelly Box address flow).
+
+CI (`.github/workflows/ci.yml`) runs typecheck, lint, production build, the e2e suite and axe on every push and PR.
 
 ## Documentation
 

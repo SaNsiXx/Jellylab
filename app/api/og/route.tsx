@@ -13,7 +13,7 @@ async function getWordmark() {
 /** 1200×630 Open Graph image: dark lab grid, three jelly glows, page title. /api/og?title=…&eyebrow=… */
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const title = (searchParams.get("title") ?? "Hard problems. Fluid teams.").slice(0, 110);
+  const title = (searchParams.get("title") ?? "Hard problems. Fluid teams.").replace(/\s*\|\s*/g, " ").slice(0, 110);
   const eyebrow = (searchParams.get("eyebrow") ?? "VERIFIED TECH TALENT. READY WHEN YOU ARE.").slice(0, 60);
   const logo = await getWordmark();
 

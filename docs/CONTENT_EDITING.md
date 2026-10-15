@@ -2,11 +2,26 @@
 
 All changes go through git; run `npm run dev` to preview and `npm run build` before deploying.
 
+## Content panel (Keystatic)
+
+`npm run dev` → **http://localhost:3000/keystatic**. Edits Talent profiles, Insights (EN/PL) and the six legal documents
+and saves straight into the repo files (commit + push as usual). On deployments the panel is hidden until GitHub mode is set up.
+
+GitHub mode (edit on the live site, changes are committed to the repo):
+1. Set `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO=SaNsiXx/Jellylab` locally, run `npm run dev`, open `/keystatic` and follow the
+   prompt to create the Keystatic GitHub App (it writes `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`,
+   `KEYSTATIC_SECRET`, `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` to `.env`).
+2. Copy those five variables to Vercel → Settings → Environment Variables, add the deployment URL as a callback URL in
+   the GitHub App, redeploy. Editors sign in with GitHub at `https://<site>/keystatic`.
+
 ## Page copy (EN + PL)
 
 All UI text lives in `messages/en.json` and `messages/pl.json`. Both files must have **identical keys**; message keys
 are type-checked, so a missing or misspelled key fails `npm run typecheck`. Polish plurals use ICU syntax
 (`one / few / many / other`), e.g. `talentPage.results`.
+
+Neon headlines: the second half of every big heading glows. To choose where it starts, put `|` in the text,
+e.g. `"Markets | we work with."` — the marker is never displayed (also stripped from SEO titles and previews).
 
 Source of truth for wording: `assets/current_brand/03_SITE_COPY_EN.md` and `04_SITE_COPY_PL.md`. Text that was written
 or translated during the build (not in the pack) is listed in `docs/LAUNCH_CHECKLIST.md` → "Review copy".
@@ -52,8 +67,9 @@ stores the exact text and version shown. Cookie banner policy version: `lib/anal
 
 ## Talent profiles
 
-Today: `data/talent.mock.ts` (sample data, badged). Production: connect a CMS — see `docs/INTEGRATIONS.md` → "Talent data".
-Only publish profiles with `consentToPublish: true`; no names, employers or contact data.
+One JSON file per profile in `content/talent/` — edit in the content panel (Talent profiles) or by hand. Required for a
+profile to appear: **Published** and **Candidate consented to publication**. Use an anonymised public ID (e.g. `JL-0142`),
+never names, employers or contact data. Delete the `sample-*.json` files (or untick Published) before launch.
 
 ## Design tokens
 

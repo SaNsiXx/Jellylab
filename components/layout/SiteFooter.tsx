@@ -84,7 +84,8 @@ export async function SiteFooter() {
             <ul className="flex flex-wrap gap-x-6 gap-y-1">
               {legal.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="inline-flex min-h-10 items-center hover:text-fg">
+                  {/* prefetch off: rarely visited; also avoids a Next 16 route-prediction 404 on unprefixed EN paths */}
+                  <Link href={l.href} prefetch={false} className="inline-flex min-h-10 items-center hover:text-fg">
                     {l.label}
                   </Link>
                 </li>

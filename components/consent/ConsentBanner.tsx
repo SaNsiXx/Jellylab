@@ -65,7 +65,7 @@ export function ConsentBanner() {
       <h2 id="consent-title" className="font-display text-lg font-semibold tracking-tight">{t("title")}</h2>
       <p className="mt-2 text-sm text-muted">
         {t("body")}{" "}
-        <Link href={routes.cookies} className="text-fg underline underline-offset-4 hover:text-cyan">
+        <Link href={routes.cookies} prefetch={false} className="text-fg underline underline-offset-4 hover:text-cyan">
           {t("policy")}
         </Link>
       </p>
