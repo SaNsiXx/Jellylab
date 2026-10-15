@@ -1,9 +1,9 @@
 // Route and navigation config. Slugs are identical in EN and PL (brief §13.5).
 
-// Production: NEXT_PUBLIC_SITE_URL=https://jellylabs.com. Vercel previews fall back to their own deployment URL
+// Production: NEXT_PUBLIC_SITE_URL=https://jellylabs.com. Vercel previews fall back to the project's stable alias
 // (server-side only: canonical, sitemap, structured data), local dev to localhost.
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? (vercelHost ? `https://${vercelHost}` : "http://localhost:3000");
 
 export const routes = {
   home: "/",

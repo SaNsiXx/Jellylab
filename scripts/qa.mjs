@@ -17,8 +17,9 @@ const report = [];
 
 for (const path of paths) {
   for (const width of widths) {
-    const ctx = await browser.newContext({ viewport: { width, height: width < 768 ? 812 : 900 }, reducedMotion: reduce ? "reduce" : "no-preference" });
+    const ctx = await browser.newContext({ viewport: { width, height: width < 768 ? 812 : 900 }, reducedMotion: reduce ? "reduce" : "no-preference", ...(process.env.VERCEL_SHARE ? { extraHTTPHeaders: { "x-vercel-skip-toolbar": "1" } } : {}) });
     const page = await ctx.newPage();
+    if (process.env.VERCEL_SHARE) await page.goto(`${base}/?_vercel_share=${process.env.VERCEL_SHARE}`, { waitUntil: "domcontentloaded" });
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
