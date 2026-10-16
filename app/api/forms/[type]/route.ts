@@ -4,11 +4,11 @@ import { FORM_SCHEMAS, isFormType, metaSchema, fieldErrors, type FormType, type 
 import { CONSENT_VERSIONS, consentRecord, type ConsentRecord } from "@/lib/forms/consents";
 import { getCrm } from "@/lib/adapters/crm";
 import type { SubmissionRecord } from "@/lib/adapters/crm/types";
-import { getMailer, type DoiPurpose } from "@/lib/adapters/mailing";
+import { getMailer, type DoiPurpose, type EmailAttachment } from "@/lib/adapters/mailing";
 import { getRateLimiter } from "@/lib/adapters/ratelimit";
-import { getCvStorage, InvalidFileError, StorageUnavailableError } from "@/lib/adapters/storage";
+import { getCvStorage, validateCv, InvalidFileError, StorageUnavailableError } from "@/lib/adapters/storage";
 import { createDoiToken } from "@/lib/server/doi";
-import { buildDoiEmail } from "@/lib/server/emails";
+import { buildDoiEmail, buildSubmissionNotification } from "@/lib/server/emails";
 import { env } from "@/lib/server/env";
 
 export const runtime = "nodejs";
@@ -65,11 +65,21 @@ export async function POST(req: Request, ctx: RouteContext<"/api/forms/[type]">)
   const doi = doiPurpose(type, record);
   record.flags.doiRequested = !!doi;
 
+  const notifyTo = type === "candidate" ? env.notifyEmailCandidates : env.notifyEmailLeads;
+  let attachments: EmailAttachment[] | undefined;
+
   try {
     if (type === "candidate") {
       if (body.cv) {
         try {
-          record.cvRef = await getCvStorage().save(body.cv, id);
+          if (env.cvStorageProvider === "mock" && notifyTo) {
+            // No file storage yet: the CV travels only as an attachment of the internal notification email.
+            const ext = await validateCv(body.cv);
+            attachments = [{ name: `CV-${record.person.name.replace(/[^\p{L}\p{N}]+/gu, "-")}.${ext}`, contentBase64: Buffer.from(await body.cv.arrayBuffer()).toString("base64") }];
+            record.cvRef = `email://${notifyTo}`;
+          } else {
+            record.cvRef = await getCvStorage().save(body.cv, id);
+          }
         } catch (e) {
           if (e instanceof InvalidFileError) return json({ ok: false, fieldErrors: { cv: e.reason } }, 422);
           if (e instanceof StorageUnavailableError) return json({ ok: false, fieldErrors: { cv: "cvUnavailable" } }, 422);
@@ -79,6 +89,16 @@ export async function POST(req: Request, ctx: RouteContext<"/api/forms/[type]">)
       await getCrm().createCandidate(record);
     } else {
       await getCrm().createLead(record);
+    }
+
+    if (notifyTo) {
+      try {
+        await getMailer().sendEmail(buildSubmissionNotification(notifyTo, record, attachments));
+      } catch (e) {
+        // With a real CRM the submission is already safe; without one, the email IS the record → fail loudly.
+        if (getCrm().name === "console") throw e;
+        console.error(`[forms] ${type} ${id} notification failed:`, e instanceof Error ? e.message : e);
+      }
     }
 
     if (doi) {

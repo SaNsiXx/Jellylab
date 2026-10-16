@@ -4,8 +4,6 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { NeonHeadline } from "@/components/ui/NeonHeadline";
 import { BrandIcon, CampaignArt, type IconName } from "@/components/ui/BrandArt";
-import { TalentCard } from "@/components/talent/TalentCard";
-import { getTalentAdapter } from "@/lib/adapters/talent";
 import { crewHref, developerJoinHref, routes } from "@/lib/site";
 import { showDevPlaceholders } from "@/lib/legal/entity";
 
@@ -81,40 +79,6 @@ export async function SolutionsPreview() {
           </li>
         ))}
       </ul>
-    </Section>
-  );
-}
-
-/* 5 — Available talent preview */
-export async function TalentPreview() {
-  const t = await getTranslations();
-  const profiles = await getTalentAdapter().list({ featured: true, limit: 3 });
-  return (
-    <Section labelledBy="talent-title" className="border-t border-line">
-      <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-        <Reveal className="lg:col-span-7">
-          <Eyebrow accent="green">{t("talent.eyebrow")}</Eyebrow>
-          <h2 id="talent-title" className="h2 mt-5"><NeonHeadline text={t("talent.title")} /></h2>
-        </Reveal>
-        <Reveal className="lg:col-span-5" delay={120}>
-          <p className="lead">{t("talent.body")}</p>
-        </Reveal>
-      </div>
-      <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {profiles.map((p, i) => (
-          <li key={p.id}>
-            <Reveal delay={i * 80} className="h-full">
-              <TalentCard profile={p} />
-            </Reveal>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xl text-sm text-muted">{t("talent.disclaimer")}</p>
-        <ButtonLink href={routes.talent} variant="secondary" arrow>
-          {t("cta.seeTalent")}
-        </ButtonLink>
-      </div>
     </Section>
   );
 }

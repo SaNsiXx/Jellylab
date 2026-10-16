@@ -1,7 +1,7 @@
 # Deployment — Vercel → jellylabs.com
 
 URL structure (already implemented): **https://jellylabs.com** = English (default), **https://jellylabs.com/pl/…** = Polish,
-identical slugs (`/talent` ↔ `/pl/talent`).
+identical slugs (`/careers` ↔ `/pl/careers`).
 
 ## Stage 1 — preview (now)
 
@@ -17,7 +17,7 @@ What the preview does:
 - Forms work end-to-end with **console adapters**: submissions are written (redacted) to Vercel → Project → Logs; the
   double opt-in link appears in the logs instead of an email. Nothing reaches a CRM or real inboxes.
 - CV uploads are validated and discarded (nothing is stored on previews).
-- Jelly Box address form works with invitation links from `npm run jelly-box:invite -- --base https://<project>.vercel.app …`; addresses are only logged (redacted).
+- Form submissions are only logged on previews (console mailer) unless `MAIL_PROVIDER` and `NOTIFY_EMAIL*` are set.
 - The content panel (`/keystatic`) is hidden on deployments until GitHub mode is configured.
 - Placeholder check prints a warning in the build log but does not block.
 

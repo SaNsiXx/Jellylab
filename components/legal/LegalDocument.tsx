@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { renderMdx } from "./Mdx";
 import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
-export type LegalDoc = "privacy" | "cookies" | "jelly-box-terms";
+export type LegalDoc = "privacy" | "cookies";
 
 export async function loadLegal(locale: "en" | "pl", doc: LegalDoc) {
   const raw = await readFile(path.join(process.cwd(), "content", "legal", locale, `${doc}.mdx`), "utf8");

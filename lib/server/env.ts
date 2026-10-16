@@ -32,11 +32,7 @@ export const env = {
 
   cvStorageProvider: (read("CV_STORAGE_PROVIDER") ?? "mock") as "mock",
 
-  /** Jelly Box campaign switch — set JELLY_BOX_ACTIVE=false to close the address form. */
-  jellyBoxActive: read("JELLY_BOX_ACTIVE") !== "false",
-  shippingProvider: (read("SHIPPING_PROVIDER") ?? "console") as "console" | "webhook",
-  jellyBoxWebhookUrl: read("JELLY_BOX_WEBHOOK_URL"),
-  jellyBoxWebhookSecret: read("JELLY_BOX_WEBHOOK_SECRET"),
-  /** Protects /api/jelly-box/invite (called by sales tooling / CRM automation). Unset → endpoint disabled. */
-  adminApiKey: read("ADMIN_API_KEY"),
+  /** Where submissions are emailed (internal inboxes). NOTIFY_EMAIL is the fallback for both. */
+  notifyEmailLeads: read("NOTIFY_EMAIL_LEADS") ?? read("NOTIFY_EMAIL"),
+  notifyEmailCandidates: read("NOTIFY_EMAIL_CANDIDATES") ?? read("NOTIFY_EMAIL"),
 };

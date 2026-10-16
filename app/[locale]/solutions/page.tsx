@@ -27,8 +27,6 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
 
   const services = [
     { key: "staffAug", icon: "staff-augmentation" as IconName, list: t.raw("staffAug.list") as string[], cta: tc("requestSpecialists") },
-    { key: "teams", icon: "dedicated-teams" as IconName, list: t.raw("teams.list") as string[], cta: tc("designTeam") },
-    { key: "leadership", icon: "leadership" as IconName, list: [] as string[], cta: tc("talkProblem") },
   ] as const;
 
   return (
@@ -53,8 +51,7 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
                 </div>
                 {list.length > 0 && (
                   <div className="lg:col-span-5 lg:col-start-8">
-                    <p className="eyebrow">{t(`${key}.listTitle` as "staffAug.listTitle")}</p>
-                    <ul className="mt-5 grid gap-3">
+                    <ul className="grid gap-3">
                       {list.map((li) => (
                         <li key={li} className="flex gap-3 border-b border-line pb-3 text-fg/90">
                           <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-cyan shadow-[0_0_8px_var(--color-cyan)]" />

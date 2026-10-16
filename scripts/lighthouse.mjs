@@ -8,10 +8,10 @@ const base = process.argv[2] ?? "http://localhost:3100";
 const chromePath = process.env.CHROME_PATH ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 
 const runs = [
-  ...["/", "/talent", "/contact", "/jelly-list", "/for-developers", "/insights"].map((path) => ({ path, device: "mobile" })),
+  ...["/", "/solutions", "/contact", "/jelly-list", "/for-developers", "/careers"].map((path) => ({ path, device: "mobile" })),
   { path: "/", device: "desktop", label: "home · WebGL" },
   { path: "/", device: "desktop", label: "home · no WebGL", flags: ["--disable-webgl"] },
-  { path: "/talent", device: "desktop" },
+  { path: "/careers", device: "desktop" },
   { path: "/contact", device: "desktop" },
 ];
 

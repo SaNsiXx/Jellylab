@@ -25,9 +25,6 @@ const consoleCrm: CrmAdapter = {
   async confirmEmail(i) {
     console.info("[crm:console] email confirmed", { submissionId: i.submissionId, purpose: i.purpose, at: i.confirmedAt });
   },
-  async updateJellyBoxStatus(i) {
-    console.info("[crm:console] jelly box status", { submissionId: i.submissionId, status: i.status, at: i.at });
-  },
 };
 
 /**
@@ -93,11 +90,6 @@ function pipedrive(token: string): CrmAdapter {
         method: "POST",
         body: { content: `marketing_email_confirmed=true (double opt-in, ${i.purpose}) at ${i.confirmedAt}; submission ${i.submissionId}`, person_id: id },
       });
-    },
-    async updateJellyBoxStatus(i) {
-      const id = await personIdByEmail(i.email);
-      if (!id) return;
-      await call("/notes", { method: "POST", body: { content: `jelly_box_status=${i.status} at ${i.at}; submission ${i.submissionId}`, person_id: id } });
     },
   };
 }

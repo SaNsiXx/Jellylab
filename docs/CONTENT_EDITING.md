@@ -4,7 +4,7 @@ All changes go through git; run `npm run dev` to preview and `npm run build` bef
 
 ## Content panel (Keystatic)
 
-`npm run dev` → **http://localhost:3000/keystatic**. Edits Talent profiles, Insights (EN/PL) and the six legal documents
+`npm run dev` → **http://localhost:3000/keystatic**. Edits job offers (Careers) and the four legal documents
 and saves straight into the repo files (commit + push as usual). On deployments the panel is hidden until GitHub mode is set up.
 
 GitHub mode (edit on the live site, changes are committed to the repo):
@@ -18,7 +18,7 @@ GitHub mode (edit on the live site, changes are committed to the repo):
 
 All UI text lives in `messages/en.json` and `messages/pl.json`. Both files must have **identical keys**; message keys
 are type-checked, so a missing or misspelled key fails `npm run typecheck`. Polish plurals use ICU syntax
-(`one / few / many / other`), e.g. `talentPage.results`.
+(`one / few / many / other`), e.g. `forms.errorSummary`.
 
 Neon headlines: the second half of every big heading glows. To choose where it starts, put `|` in the text,
 e.g. `"Markets | we work with."` — the marker is never displayed (also stripped from SEO titles and previews).
@@ -26,32 +26,20 @@ e.g. `"Markets | we work with."` — the marker is never displayed (also strippe
 Source of truth for wording: `assets/current_brand/03_SITE_COPY_EN.md` and `04_SITE_COPY_PL.md`. Text that was written
 or translated during the build (not in the pack) is listed in `docs/LAUNCH_CHECKLIST.md` → "Review copy".
 
-## Insights (The Jelly Signal)
+## Job offers (Careers)
 
-Add `content/insights/en/<slug>.mdx` and, for the Polish version, `content/insights/pl/<slug>.mdx` (same slug → linked via
-hreflang). Frontmatter:
+`/keystatic` → **Job offers** (or one JSON file per offer in `content/careers/`). Fields: title, short description (EN + PL),
+seniority, tech stack, contract (B2B / employment / both), work model, location, optional rate, posted date, optional
+"valid until" (the offer disappears automatically after it). An offer appears on `/careers` only when **Published** is ticked.
 
-```yaml
----
-title: "Headline"
-excerpt: "One or two sentences for cards and meta description."
-category: market_signals        # jelly_drop | market_signals | delivery | people | ai_technology
-author: "Jelly Labs"            # optional authorRole: "…"
-publishedAt: "2026-11-03"
-updatedAt: "2026-11-10"         # optional
-coverImage: "/insights/my-cover.jpg"   # optional, put the file in public/insights/
-draft: true                     # optional: hidden everywhere
-seo: { title: "…", description: "…", ogImage: "/…" }   # optional
----
-```
-
-Body is Markdown/MDX (headings `##`, lists, quotes, tables). Reading time, Article schema, OG image and the newsletter CTA
-are added automatically. Delete `content/insights/*/sample-article-template.mdx` before launch (it is already hidden in
-production via `sample: true`). Never publish unverified figures (rates, availability, placement speed).
+Each offer has an **Apply** button → `/for-developers?offer=<file name>#join`: the candidate form shows "Applying for: …" and the
+offer id is sent with the application (and in the notification email). Offers are also published as schema.org
+`JobPosting` (Google for Jobs). Delete `content/careers/sample-senior-dotnet-engineer.json` (or untick Published) before
+launch — sample offers carry a badge and are hidden on the live site anyway.
 
 ## Legal pages
 
-`content/legal/{en,pl}/privacy.mdx`, `cookies.mdx`, `jelly-box-terms.mdx`. Replace every `[DO UZUPEŁNIENIA]`, set
+`content/legal/{en,pl}/privacy.mdx`, `cookies.mdx`. Replace every `[DO UZUPEŁNIENIA]`, set
 `updatedAt`, and change `status: DRAFT` to `status: FINAL` (removes the draft banner and allows indexing).
 
 ## Legal entity & contact
@@ -64,12 +52,6 @@ texts, privacy notice under forms and Organization schema.
 `lib/forms/consents.ts`. **Whenever wording changes, bump the matching version** in `CONSENT_VERSIONS` — every submission
 stores the exact text and version shown. Cookie banner policy version: `lib/analytics/consent.ts → CONSENT_POLICY_VERSION`
 (bumping it asks every visitor again).
-
-## Talent profiles
-
-One JSON file per profile in `content/talent/` — edit in the content panel (Talent profiles) or by hand. Required for a
-profile to appear: **Published** and **Candidate consented to publication**. Use an anonymised public ID (e.g. `JL-0142`),
-never names, employers or contact data. Delete the `sample-*.json` files (or untick Published) before launch.
 
 ## Design tokens
 

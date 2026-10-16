@@ -5,7 +5,6 @@ import { SignalBar } from "@/components/home/SignalBar";
 import {
   ProblemSection,
   SolutionsPreview,
-  TalentPreview,
   ProcessSteps,
   JellyDropBlock,
   JellyCrewBlock,
@@ -44,7 +43,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <SignalBar />
       <ProblemSection />
       <SolutionsPreview />
-      <TalentPreview />
       <ProcessSteps />
       <JellyDropBlock />
       <JellyCrewBlock />
@@ -62,7 +60,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           logo: `${SITE_URL}/brand/jellylabs-wordmark.png`,
           slogan: "Hard problems. Fluid teams.",
           description: "Verified tech talent and flexible delivery teams.",
-          address: { "@type": "PostalAddress", addressLocality: "Gliwice", addressCountry: "PL" },
           areaServed: ["PL", "DE", "AT", "CH", "GB", "EU"],
           ...(isPlaceholder(legalEntity.linkedinUrl) ? {} : { sameAs: [legalEntity.linkedinUrl] }),
           ...(isPlaceholder(legalEntity.companyLegalName) ? {} : { legalName: legalEntity.companyLegalName }),

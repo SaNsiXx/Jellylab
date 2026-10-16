@@ -4,7 +4,7 @@ Run `npm run check:placeholders` — it lists everything below that is still ope
 
 ## Legal & entity (blocking)
 - [ ] `lib/legal/entity.ts`: company legal name, registered address, KRS, NIP, contact email, LinkedIn URL
-- [ ] `content/legal/{en,pl}/privacy.mdx`, `cookies.mdx`, `jelly-box-terms.mdx`: fill every `[DO UZUPEŁNIENIA]`, set `status` to something other than `DRAFT`, set `updatedAt`
+- [ ] `content/legal/{en,pl}/privacy.mdx`, `cookies.mdx`: fill every `[DO UZUPEŁNIENIA]`, set `status` to something other than `DRAFT`, set `updatedAt`
 - [ ] `lib/forms/consents.ts`: consent wording approved by counsel/DPO (recruitment + future-offers texts are drafts); replace each `…-DRAFT-1` version
 - [ ] `lib/analytics/consent.ts`: `CONSENT_POLICY_VERSION` (bump re-asks all visitors)
 - [ ] Retention periods, processor agreements (hosting, CRM, ESP, analytics), decision on IP storage (currently not stored)
@@ -14,17 +14,16 @@ Run `npm run check:placeholders` — it lists everything below that is still ope
 - [ ] `CRM_PROVIDER=pipedrive` + `PIPEDRIVE_API_TOKEN` (or another adapter in `lib/adapters/crm`)
 - [ ] `MAIL_PROVIDER=brevo` + key, list IDs, `MAIL_FROM` (verified sender); ESP automation sends the Jelly Drop after subscribe
 - [ ] `RATE_LIMIT_PROVIDER=upstash` + URL/token
-- [ ] Real talent profiles in `content/talent/` (published + consent), samples removed — or an external CMS adapter (`TALENT_SOURCE`)
+- [ ] `NOTIFY_EMAIL_LEADS` / `NOTIFY_EMAIL_CANDIDATES` (or `NOTIFY_EMAIL`) set, `MAIL_PROVIDER=brevo` with a verified sender — every submission is emailed there
 - [ ] CV storage: implement private storage + malware scanning in `lib/adapters/storage` (the mock refuses uploads on the live site; LinkedIn URL still works)
-- [ ] Jelly Box: `SHIPPING_PROVIDER=webhook` + `JELLY_BOX_WEBHOOK_URL` (address store outside the CRM), `ADMIN_API_KEY` if a CRM automation sends invitations — or `JELLY_BOX_ACTIVE=false`
 - [ ] Optional: content panel on the live site (Keystatic GitHub mode, see `docs/CONTENT_EDITING.md`)
 - [ ] Optional: `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_LINKEDIN_PARTNER_ID`, `NEXT_PUBLIC_LINKEDIN_CONVERSIONS`
 
 ## Content to supply / approve
 - [ ] Official `JellyLabs-wordmark.svg` (current logo is extracted from the JPG — see `components/layout/Wordmark.tsx`)
 - [ ] Rights/provenance for the supplied campaign images `01_Get_The_Jelly_Drop` and `02_Your_Tech_Bench_Inbox` (`assets/`)
-- [ ] Real talent profiles, case studies (with permission), team bios/photos, first Insights articles
-- [ ] Review copy written/translated during the build (not in the brand pack): form labels/errors/success texts, cookie banner, DOI emails & screens, Insights empty state, PL dev FAQ, PL capability areas, PL talent/insights newsletter lines, Proof heading
+- [ ] Real job offers in `/keystatic` → Job offers (sample removed), case studies (with permission), team bios/photos
+- [ ] Review copy written/translated during the build (not in the brand pack): form labels/errors/success texts, cookie banner, DOI emails & screens, Careers page and empty state, PL dev FAQ, PL capability areas, PL talent/insights newsletter lines, Proof heading
 - [ ] Confirm the public promise "reply within one business day" (crew form success text)
 - [ ] PL FAQ likely typo: "Przedstawiamy doświadczenie…" → "Sprawdzamy…"?
 

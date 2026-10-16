@@ -6,14 +6,11 @@ export const NEEDS = ["frontend", "backend", "devops_cloud", "data_ai", "qa", "e
 export const TIMELINE = ["immediately", "2_4_weeks", "1_3_months", "exploring"] as const;
 export const INTEREST = ["jelly_drop", "jelly_signal", "both"] as const;
 export const PREFERRED_CONTACT = ["email", "phone"] as const;
-export const CREW_SENIORITY = ["mid", "senior", "lead", "architect", "mixed"] as const;
-export const START_DATE = ["asap", "2_4_weeks", "1_3_months", "flexible"] as const;
-export const DURATION = ["lt_3", "3_6", "6_12", "gt_12", "unknown"] as const;
 export const WORK_MODEL = ["remote", "hybrid", "onsite"] as const;
 export const MAIN_ROLE = ["frontend", "backend", "fullstack", "mobile", "devops_cloud", "data_ai", "qa", "ecommerce", "tech_lead", "other"] as const;
-export const DEV_SENIORITY = ["mid", "senior", "lead", "architect"] as const;
+export const DEV_SENIORITY = ["junior", "mid", "senior", "lead", "architect"] as const;
 export const ENGLISH = ["b1", "b2", "c1", "c2"] as const;
-export const DEV_AVAILABILITY = ["immediate", "2_weeks", "1_month", "later"] as const;
+export const DEV_AVAILABILITY = ["immediate", "2_weeks", "1_month", "later", "other"] as const;
 export const CONTRACT_TYPE = ["b2b", "employment", "open"] as const;
 
 export const CV_MAX_BYTES = 5 * 1024 * 1024;
@@ -62,17 +59,9 @@ export const crewSchema = z
     company: required(120),
     email,
     phone: phoneOptional,
-    roles: required(300),
-    headcount: z.coerce.number({ error: "headcount" }).int({ error: "headcount" }).min(1, { error: "headcount" }).max(50, { error: "headcount" }),
-    stack: required(300),
-    seniority: choice(CREW_SENIORITY),
-    startDate: choice(START_DATE),
-    duration: choice(DURATION),
-    workModel: choice(WORK_MODEL),
-    budget: optional(120),
-    description: z.string({ error: "required" }).trim().min(20, { error: "tooShort" }).max(4000, { error: "tooLong" }),
+    /** Roles, headcount, stack, start, duration, model, budget — in the client's own words. */
+    needs: z.string({ error: "required" }).trim().min(10, { error: "tooShort" }).max(4000, { error: "tooLong" }),
     preferredContact: choice(PREFERRED_CONTACT),
-    profileId: optional(40).refine((v) => v === "" || /^[A-Z0-9-]+$/.test(v), { error: "required" }),
     consentEmail: z.boolean({ error: "required" }),
     consentPhone: z.boolean({ error: "required" }),
   })
@@ -101,31 +90,19 @@ export const candidateSchema = z
     linkedin: optional(300).refine((v) => v === "" || /^https:\/\/([a-z]{2,3}\.)?linkedin\.com\/in\/[^\s/]+\/?$/i.test(v), { error: "linkedin" }),
     hasCv: z.boolean({ error: "required" }),
     mainRole: choice(MAIN_ROLE),
-    technologies: required(400),
     seniority: choice(DEV_SENIORITY),
     english: choice(ENGLISH),
     availability: choice(DEV_AVAILABILITY),
     rate: optional(120),
     contractType: choice(CONTRACT_TYPE),
+    /** Set when applying from /careers (offer id); empty for a general Jelly Crew application. */
+    offerId: optional(80).refine((v) => v === "" || /^[a-z0-9-]+$/.test(v), { error: "required" }),
     consentRecruitment: z.literal(true, { error: "consentRequired" }),
     consentFuture: z.boolean({ error: "required" }),
   })
   .superRefine((v, ctx) => {
     if (!v.linkedin && !v.hasCv) ctx.addIssue({ code: "custom", path: ["linkedin"], message: "linkedinOrCv" });
   });
-
-/* 5 — Jelly Box delivery address (invitation-only, after double opt-in + B2B qualification). Company address in Poland. */
-export const jellyBoxAddressSchema = z.object({
-  company: required(120),
-  recipientName: required(120),
-  street: required(160),
-  postalCode: z.string({ error: "required" }).trim().regex(/^\d{2}-\d{3}$/, { error: "postalCode" }),
-  city: required(80),
-  phone: phoneRequired,
-  notes: optional(300),
-  confirmCompanyAddress: z.literal(true, { error: "consentRequired" }),
-});
-export type JellyBoxAddressInput = z.input<typeof jellyBoxAddressSchema>;
 
 /* Metadata sent with every form (never shown to the user). */
 const utm = optional(200);

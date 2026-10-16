@@ -70,8 +70,8 @@ export function JellyListForm() {
         <TextField id="lastName" label={t("fields.lastName")} required autoComplete="family-name" error={errors.lastName?.message} {...register("lastName")} />
         <TextField id="company" label={t("fields.company")} required autoComplete="organization" error={errors.company?.message} {...register("company")} />
         <TextField id="role" label={t("fields.role")} required autoComplete="organization-title" error={errors.role?.message} {...register("role")} />
-        <TextField id="email" type="email" label={t("fields.businessEmail")} hint={t("hints.businessEmail")} required autoComplete="email" inputMode="email" error={errors.email?.message} {...register("email")} />
-        <TextField id="phone" type="tel" label={t("fields.phone")} hint={t("hints.phone")} autoComplete="tel" inputMode="tel" error={errors.phone?.message} {...register("phone")} />
+        <TextField id="email" type="email" label={t("fields.businessEmail")} required autoComplete="email" inputMode="email" error={errors.email?.message} {...register("email")} />
+        <TextField id="phone" type="tel" label={t("fields.phone")} autoComplete="tel" inputMode="tel" error={errors.phone?.message} {...register("phone")} />
       </div>
       <ChoiceGroup id="needs" legend={t("fields.needs")} type="checkbox" required options={opts("needs")} error={errors.needs?.message} inputProps={() => register("needs")} />
       <ChoiceGroup id="timeline" legend={t("fields.timeline")} type="radio" required options={opts("timeline")} error={errors.timeline?.message} inputProps={() => register("timeline")} />

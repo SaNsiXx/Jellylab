@@ -15,20 +15,18 @@ export function ContactSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const form = params.get("form") === "contact" ? "contact" : "crew";
-  const profile = (params.get("profile") ?? "").toUpperCase().replace(/[^A-Z0-9-]/g, "").slice(0, 40);
 
   const select = (value: "crew" | "contact") => {
     const next = new URLSearchParams(params.toString());
     next.set("form", value);
-    if (value === "contact") next.delete("profile");
     router.replace(`${pathname}?${next.toString()}`, { scroll: false });
   };
 
   return (
     <div>
       <fieldset>
-        <legend className="eyebrow">{t("label")}</legend>
-        <div className="mt-4 inline-flex rounded-full border border-line p-1">
+        <legend className="sr-only">{t("label")}</legend>
+        <div className="inline-flex rounded-full border border-line p-1">
           {(["crew", "contact"] as const).map((v) => (
             <label
               key={v}
@@ -42,7 +40,7 @@ export function ContactSwitcher() {
       </fieldset>
       <div className="mt-10">
         <FormBoundary fallback={<p role="alert">{te("server")}</p>}>
-          {form === "crew" ? <CrewForm key={`crew-${profile}`} profileId={profile} /> : <ContactForm key="contact" />}
+          {form === "crew" ? <CrewForm key="crew" /> : <ContactForm key="contact" />}
         </FormBoundary>
       </div>
     </div>

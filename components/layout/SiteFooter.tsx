@@ -13,16 +13,14 @@ export async function SiteFooter() {
   const t = await getTranslations();
   const links = [
     { href: routes.solutions, label: t("nav.solutions") },
-    { href: routes.talent, label: t("nav.talent") },
     { href: routes.forDevelopers, label: t("nav.forDevelopers") },
+    { href: routes.careers, label: t("nav.careers") },
     { href: routes.about, label: t("nav.about") },
-    { href: routes.insights, label: t("nav.insights") },
     { href: routes.contact, label: t("nav.contact") },
   ];
   const legal = [
     { href: routes.privacy, label: t("footer.legal.privacy") },
     { href: routes.cookies, label: t("footer.legal.cookies") },
-    { href: routes.jellyBoxTerms, label: t("footer.legal.jellyBox") },
   ];
   const { companyLegalName, registeredAddress, companyRegisterId, taxId, contactEmail, linkedinUrl } = legalEntity;
   const companyLine = [companyLegalName, registeredAddress, companyRegisterId, taxId];
@@ -49,7 +47,6 @@ export async function SiteFooter() {
         </nav>
 
         <address className="grid content-start gap-3 not-italic text-muted lg:col-span-4">
-          <p>{t("footer.location")}</p>
           <p>
             {isPlaceholder(contactEmail) ? (
               <Placeholder>{`E-mail: ${contactEmail}`}</Placeholder>

@@ -5,7 +5,6 @@
 export type AnalyticsEvent =
   | "hero_get_jelly_drop_click"
   | "hero_build_crew_click"
-  | "talent_profile_request"
   | "jelly_list_form_start"
   | "jelly_list_submit"
   | "double_opt_in_confirmed"

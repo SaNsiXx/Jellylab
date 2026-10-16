@@ -33,27 +33,29 @@ for (const locale of ["en", "pl"]) {
     if (n) issues.push(`${rel}  ${n}× [DO UZUPEŁNIENIA]`);
   }
 }
-// 4. Talent: at least one real (non-sample, published, consented) profile when using content/talent files
-if ((process.env.TALENT_SOURCE ?? "files") === "files") {
-  const dir = path.join(root, "content/talent");
-  const real = (await readdir(dir))
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(readFileSync(path.join(dir, f), "utf8")))
-    .filter((p) => p.published && p.consentToPublish && !p.sample);
-  if (!real.length) issues.push("content/talent has no real profiles (only samples) — /talent would be empty on the live site");
-}
-// 5. Required production configuration
+// 4. Required production configuration
 const need = {
   NEXT_PUBLIC_SITE_URL: "canonical URLs / sitemap / emails",
   DOI_SECRET: "signing double opt-in links",
 };
 for (const [k, why] of Object.entries(need)) if (!process.env[k]) issues.push(`env ${k} missing (${why})`);
-if ((process.env.CRM_PROVIDER ?? "console") === "console") issues.push("CRM_PROVIDER=console — leads would only be logged");
-if ((process.env.MAIL_PROVIDER ?? "console") === "console") issues.push("MAIL_PROVIDER=console — double opt-in emails would not be sent");
+const notifyLeads = process.env.NOTIFY_EMAIL_LEADS || process.env.NOTIFY_EMAIL;
+const notifyCandidates = process.env.NOTIFY_EMAIL_CANDIDATES || process.env.NOTIFY_EMAIL;
+const crmOff = (process.env.CRM_PROVIDER ?? "console") === "console";
+if (crmOff && !notifyLeads) issues.push("CRM_PROVIDER=console and no NOTIFY_EMAIL(_LEADS) — client requests would only be logged");
+if (crmOff && !notifyCandidates) issues.push("CRM_PROVIDER=console and no NOTIFY_EMAIL(_CANDIDATES) — applications would only be logged");
+if ((process.env.MAIL_PROVIDER ?? "console") === "console") issues.push("MAIL_PROVIDER=console — double opt-in and notification emails would not be sent");
 if ((process.env.RATE_LIMIT_PROVIDER ?? "memory") === "memory") issues.push("RATE_LIMIT_PROVIDER=memory — not effective on serverless");
-if ((process.env.CV_STORAGE_PROVIDER ?? "mock") === "mock") issues.push("CV_STORAGE_PROVIDER=mock — CV uploads are refused on the live site (LinkedIn URL still works)");
-if (process.env.JELLY_BOX_ACTIVE !== "false" && (process.env.SHIPPING_PROVIDER ?? "console") === "console")
-  issues.push("SHIPPING_PROVIDER=console while the Jelly Box campaign is active — delivery addresses would not be stored (or set JELLY_BOX_ACTIVE=false)");
+if ((process.env.CV_STORAGE_PROVIDER ?? "mock") === "mock" && !notifyCandidates)
+  issues.push("CV_STORAGE_PROVIDER=mock and no NOTIFY_EMAIL(_CANDIDATES) — CV uploads are refused on the live site (LinkedIn URL still works)");
+// 5. Careers: sample offers are hidden on the live site — warn if nothing real is published.
+{
+  const dir = path.join(root, "content/careers");
+  let files = [];
+  try { files = (await readdir(dir)).filter((f) => f.endsWith(".json")); } catch {}
+  const real = files.map((f) => JSON.parse(readFileSync(path.join(dir, f), "utf8"))).filter((o) => o.published && !o.sample);
+  if (!real.length) console.warn("ℹ content/careers has no real published offers — /careers will show the empty state (not blocking).");
+}
 
 if (!issues.length) {
   console.log("✓ placeholder check passed");

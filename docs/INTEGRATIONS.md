@@ -9,9 +9,7 @@ the site runs on **console adapters** (dev only). Secrets are server-only — ne
 | Email + double opt-in | `lib/adapters/mailing/index.ts` | `MAIL_PROVIDER` | `console` | `brevo` |
 | Rate limiting | `lib/adapters/ratelimit/index.ts` | `RATE_LIMIT_PROVIDER` | `memory` | `upstash` |
 | CV storage | `lib/adapters/storage/index.ts` | `CV_STORAGE_PROVIDER` | `mock` | *to implement* |
-| Talent data | `lib/adapters/talent/index.ts` | `TALENT_SOURCE` | `files` (`content/talent/*.json`) | `files` or external CMS |
-| Jelly Box addresses | `lib/adapters/shipping/index.ts` | `SHIPPING_PROVIDER` | `console` | `webhook` |
-| Insights | `lib/adapters/insights/index.ts` | — | MDX files | MDX or CMS |
+| Job offers | `lib/adapters/careers/index.ts` | — | JSON files (`content/careers/`) | JSON files via /keystatic |
 | Analytics | `components/consent/AnalyticsScripts.tsx`, `lib/analytics/track.ts` | `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_LINKEDIN_*` | off | on after consent |
 | Consent manager | `components/consent/ConsentBanner.tsx`, `lib/analytics/consent.ts` | — | built-in | built-in or CMP |
 
@@ -36,7 +34,7 @@ the site runs on **console adapters** (dev only). Secrets are server-only — ne
   full structured record (needs, timeline, UTM, consents with text/version).
 - Candidates: Person + note. Pipedrive is not an ATS — swap `createCandidate` to your ATS when ready.
 - DOI: finds the person by email and adds a `marketing_email_confirmed=true` note.
-- Recommended next step: create custom fields (consent version, Jelly Drop status, Jelly Box status, UTM source) and map them in
+- Recommended next step: create custom fields (consent version, Jelly Drop status, UTM source) and map them in
   `pipedrive().createLead`; build the pipeline from 05_FORMS_LEGAL_CRM.md §6.
 
 ## Brevo (email)
@@ -54,60 +52,30 @@ the site runs on **console adapters** (dev only). Secrets are server-only — ne
 `RATE_LIMIT_PROVIDER=upstash`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Uses the REST pipeline API, no SDK.
 Fails open (never blocks real leads if Redis is down). The memory limiter is per-instance and ineffective on serverless.
 
-## CV storage (to implement)
+## Submission emails
 
-The mock validates files (type, size, magic bytes) and discards them on local, preview and CI runs. On the live site
-(`DEPLOY_ENV=production`) it **refuses** uploads ("add your LinkedIn URL instead") until real storage exists.
-Implement `CvStorage.save(file, id)` returning an opaque reference: private bucket (S3/R2/GCS), server-side encryption,
-malware scan before access, retention per the privacy policy. Never return a public URL.
+Every form submission is emailed to an internal inbox through the mailing adapter (`MAIL_PROVIDER=brevo` in production):
+- `NOTIFY_EMAIL_LEADS` — client requests ("Daj nam znać, kogo potrzebujesz"), general questions, Jelly List sign-ups;
+- `NOTIFY_EMAIL_CANDIDATES` — Jelly Crew applications / job offers, **with the CV attached**;
+- `NOTIFY_EMAIL` — fallback for both.
 
-## Talent data
+The email is a plain table of all fields, consents (with versions in the CRM record), page URL and UTM attribution, with
+**Reply-To set to the person who submitted**, so replying goes straight to them. Built in `lib/server/emails.ts →
+buildSubmissionNotification`. If the CRM is `console` (no CRM yet), the email is the only record: a send failure returns
+an error to the visitor instead of silently losing the submission. With a real CRM, a failed email is only logged.
 
-Default source (`TALENT_SOURCE=files`): one JSON file per profile in `content/talent/`, editable in the content panel
-(`/keystatic`, see `docs/CONTENT_EDITING.md`). Rules enforced by `lib/adapters/talent/index.ts`:
-- only `published && consentToPublish` profiles are shown; `privateCrmId` (if present) never leaves the server;
-- `sample: true` profiles show a "Sample profile" badge and are hidden on the live site;
-- the production build fails if there is no real (non-sample) published profile.
+## CV storage
 
-To use an external CMS instead (Airtable, Notion, Sanity, Pipedrive…), add an adapter and select it:
+With `CV_STORAGE_PROVIDER=mock` and a candidates inbox configured, the CV is validated (type, size, magic bytes) and sent
+**only as an attachment** of the notification email — it is not stored on the server. Without a notification inbox the
+mock discards files on local/preview runs and refuses uploads on the live site ("add your LinkedIn URL instead").
+For file storage later, implement `CvStorage.save(file, id)` (private bucket, server-side encryption, malware scan,
+retention per the privacy policy; never a public URL). Mailbox retention for CVs must match the privacy policy.
 
-```ts
-// lib/adapters/talent/index.ts
-const cmsAdapter: TalentAdapter = {
-  async list(q = {}) {
-    const res = await fetch(`${process.env.CMS_URL}/talent?published=true`, {
-      headers: { Authorization: `Bearer ${process.env.CMS_TOKEN}` },
-      next: { revalidate: 300 },
-    });
-    const rows = (await res.json()) as CmsTalent[];
-    const profiles = rows
-      .filter((r) => r.published && r.consentToPublish)            // never publish without consent
-      .map(({ privateCrmId, ...r }) => ({ ...r, isSample: false })); // never expose CRM ids
-    return profiles.filter((p) => matches(p, q)).slice(0, q.limit);
-  },
-};
-// in getTalentAdapter(): case "cms": return cmsAdapter;   then set TALENT_SOURCE=cms
-```
+## Job offers (Careers)
 
-## Jelly Box (delivery address)
-
-Flow (05_FORMS_LEGAL_CRM.md §1, §4): Jelly List signup → double opt-in → sales qualifies the company →
-**invitation link** (signed token, 14 days) → `/jelly-box/address` form → address stored **outside the CRM** → CRM gets
-only a status note (`jelly_box_status=invited | address_received`).
-
-Issue an invitation, either:
-- CLI: `npm run jelly-box:invite -- --email cto@acme.com --id <submissionId> --locale pl --base https://jellylabs.com`
-  (prints the link; needs the same `DOI_SECRET` as the site), or
-- API (for CRM automations, e.g. a Pipedrive "Jelly Box approved" stage → Make/Zapier):
-  `POST /api/jelly-box/invite` with `Authorization: Bearer $ADMIN_API_KEY` and
-  `{"email":"…","submissionId":"…","locale":"pl","send":true}` → returns the link and, with `send: true`, emails it via the
-  mailing adapter. Disabled (404) unless `ADMIN_API_KEY` is set.
-
-Address storage: `SHIPPING_PROVIDER=webhook` + `JELLY_BOX_WEBHOOK_URL` (+ optional `JELLY_BOX_WEBHOOK_SECRET`, sent as
-`X-Jelly-Signature`) — e.g. a Make/Zapier scenario writing to an access-restricted sheet or the courier system. Delete
-addresses after the period stated in the Jelly Box Terms. `JELLY_BOX_ACTIVE=false` closes the form and the invite endpoint.
-Address rules enforced: company address in Poland, PL postal code format, confirmation checkbox, honeypot, rate limit;
-identity (email, submission id) comes only from the signed token.
+`lib/adapters/careers/index.ts` reads `content/careers/*.json` (edited in `/keystatic`). Only `published` offers are shown,
+`sample` offers are hidden on the live site, offers past `validThrough` disappear automatically. See `docs/CONTENT_EDITING.md`.
 
 ## Analytics
 
@@ -116,7 +84,7 @@ Nothing loads without consent. Google Consent Mode v2 defaults to `denied`.
 - LinkedIn Insight Tag: `NEXT_PUBLIC_LINKEDIN_PARTNER_ID` → loaded after **marketing** consent.
 - LinkedIn conversions: `NEXT_PUBLIC_LINKEDIN_CONVERSIONS={"jelly_list_submit":123,"client_request_submit":456}`.
 
-Events (`lib/analytics/track.ts`): `hero_get_jelly_drop_click`, `hero_build_crew_click`, `talent_profile_request`,
+Events (`lib/analytics/track.ts`): `hero_get_jelly_drop_click`, `hero_build_crew_click`,
 `jelly_list_form_start`, `jelly_list_submit`, `double_opt_in_confirmed`, `client_request_submit`,
 `developer_form_submit`, `newsletter_signup`, `language_change`, `contact_click`. In dev they are logged to the console.
 

@@ -2,7 +2,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import type { ComponentProps } from "react";
 import remarkGfm from "remark-gfm";
 
-// Styled MDX elements shared by Insights articles and legal documents. No raw HTML/JS execution
+// Styled MDX elements for legal documents. No raw HTML/JS execution
 // beyond MDX's own compile step; content is first-party (repo or CMS), never user input.
 const components = {
   h2: (p: ComponentProps<"h2">) => <h2 className="h3 mt-14 text-2xl sm:text-3xl" {...p} />,

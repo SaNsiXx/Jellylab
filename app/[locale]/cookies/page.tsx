@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { toLocale } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
-import { LegalDocument, loadLegal } from "@/components/insights/LegalDocument";
+import { LegalDocument, loadLegal } from "@/components/legal/LegalDocument";
 import { CookieSettingsButton } from "@/components/consent/ConsentBanner";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/cookies">) {

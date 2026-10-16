@@ -76,7 +76,7 @@ export function SiteHeader() {
           <div className="hidden xl:block">
             <LocaleSwitch />
           </div>
-          <div className="hidden md:block">
+          <div className={isActive(routes.jellyList) ? "hidden" : "hidden md:block"}>
             <ButtonLink href={routes.jellyList} className="min-h-11 px-5">
               {t("cta.getDrop")}
             </ButtonLink>

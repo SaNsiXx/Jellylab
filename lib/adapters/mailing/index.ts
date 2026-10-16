@@ -12,12 +12,23 @@ export type DoiEmail = {
   text: string;
 };
 
-export type OutgoingEmail = { to: string; subject: string; html: string; text: string; tag: string; logUrl?: string };
+export type EmailAttachment = { name: string; contentBase64: string };
+
+export type OutgoingEmail = {
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+  tag: string;
+  replyTo?: string;
+  attachments?: EmailAttachment[];
+  logUrl?: string;
+};
 
 export interface MailingAdapter {
   readonly name: string;
   sendDoubleOptIn(mail: DoiEmail): Promise<void>;
-  /** Any other transactional email (e.g. Jelly Box address invitation). */
+  /** Any other transactional email (e.g. internal notification about a new submission). */
   sendEmail(mail: OutgoingEmail): Promise<void>;
   /** Called only AFTER double opt-in. Adds the contact to the right list(s); the ESP automation sends the Jelly Drop. */
   subscribe(input: { email: string; locale: "en" | "pl"; purpose: DoiPurpose; interest?: string }): Promise<void>;
@@ -30,7 +41,8 @@ const consoleMailer: MailingAdapter = {
     console.info(`[mail:console] DOI email (${m.locale}) → confirm at:\n  ${m.confirmUrl}`);
   },
   async sendEmail(m) {
-    console.info(`[mail:console] ${m.tag} email "${m.subject}"${m.logUrl ? ` → ${m.logUrl}` : ""}`);
+    // Subject/body may contain personal data — log only the tag and attachment count.
+    console.info(`[mail:console] ${m.tag} email${m.attachments?.length ? ` (+${m.attachments.length} attachment)` : ""}${m.logUrl ? ` → ${m.logUrl}` : ""}`);
   },
   async subscribe(i) {
     console.info("[mail:console] subscribed", { purpose: i.purpose, locale: i.locale, interest: i.interest });
@@ -68,6 +80,8 @@ function brevo(apiKey: string): MailingAdapter {
         htmlContent: m.html,
         textContent: m.text,
         tags: [m.tag],
+        ...(m.replyTo ? { replyTo: { email: m.replyTo } } : {}),
+        ...(m.attachments?.length ? { attachment: m.attachments.map((a) => ({ name: a.name, content: a.contentBase64 })) } : {}),
       });
     },
     async subscribe(i) {

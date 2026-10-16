@@ -1,0 +1,29 @@
+{
+  "title": {
+    "en": "Senior .NET Engineer",
+    "pl": "Senior .NET Engineer"
+  },
+  "summary": {
+    "en": "Sample offer — placeholder. Replace with a real opening in the content panel before launch.",
+    "pl": "Przykładowa oferta — placeholder. Zastąp prawdziwą ofertą w panelu treści przed publikacją."
+  },
+  "seniority": "senior",
+  "stack": [
+    ".NET",
+    "C#",
+    "Azure"
+  ],
+  "contractType": "b2b",
+  "workModel": [
+    "remote"
+  ],
+  "location": {
+    "en": "Poland",
+    "pl": "Polska"
+  },
+  "rate": "",
+  "datePosted": "2026-10-16",
+  "validThrough": "",
+  "published": true,
+  "sample": true
+}

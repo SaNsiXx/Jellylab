@@ -7,7 +7,7 @@
 | Reference renders & moodboards | `assets/concepts/*.jpg` | Client brand pack | Reference only, not shipped |
 | 01 Get the Jelly Drop | `public/campaign/jelly-drop.jpg`, `01_Get_The_Jelly_Drop_1200.png`; original `assets/generated/01_Get_The_Jelly_Drop_source.webp` | Supplied by client (frame cropped) | **Confirm usage rights / provenance** |
 | 02 Your Tech Bench Inbox | `public/campaign/tech-bench-inbox.jpg`, `02_Your_Tech_Bench_Inbox_1200.png`; original `assets/concepts/02_Your_Tech_Bench_Inbox_1200.png` (SVG version kept as fallback) | Supplied by client | **Confirm usage rights / provenance** |
-| 03 Drop Your Contact / Jelly Box | `public/campaign/jelly-box.svg`, `03_Drop_Your_Contact_1200.png` | Generated in code | Ready |
+| 03 Drop Your Contact | `public/campaign/jelly-box.svg`, `03_Drop_Your_Contact_1200.png` | Generated in code | Not used since the Jelly Box campaign was removed (kept for later) |
 | 36 jelly elements (12 shapes × 3 energies) | `public/jelly/*.svg` | Generated in code | Ready |
 | 10 service/capability icons | `public/icons/*.svg` | Generated in code | Ready |
 | Hero Jellies | `components/hero/*` | WebGL shaders + SVG fallback, in code | Ready |
@@ -21,6 +21,5 @@
 - Official logo SVG (designer source file or professional vectorisation).
 - Team / founder photography (real people, with consent — do not generate).
 - Case studies with client permission and verified results.
-- Cover images for Insights articles (optional — articles fall back to the generated OG image).
 
 No stock photography, client logos, testimonials or invented statistics are used anywhere on the site.

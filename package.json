@@ -17,8 +17,7 @@
     "check:placeholders": "node scripts/check-placeholders.mjs",
     "qa": "node scripts/qa.mjs",
     "e2e": "node scripts/e2e.mjs",
-    "lighthouse": "node scripts/lighthouse.mjs",
-    "jelly-box:invite": "node scripts/jelly-box-invite.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "5.9.1",

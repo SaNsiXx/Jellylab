@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
@@ -18,7 +19,14 @@ type Out = z.output<typeof candidateSchema>;
 
 const optionsMap = { mainRole: MAIN_ROLE, seniority: DEV_SENIORITY, english: ENGLISH, availability: DEV_AVAILABILITY, contractType: CONTRACT_TYPE } as const;
 
-export function CandidateForm() {
+/** Reads ?offer=<id> (links from /careers) and prefills the application with that offer. */
+export function CandidateFormWithOffer({ offers = {} }: { offers?: Record<string, string> }) {
+  const id = (useSearchParams().get("offer") ?? "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 80);
+  const title = offers[id];
+  return <CandidateForm key={title ? id : "general"} offer={title ? { id, title } : undefined} />;
+}
+
+export function CandidateForm({ offer }: { offer?: { id: string; title: string } }) {
   const t = useTranslations("forms");
   const tc = useTranslations("cta");
   const locale = useLocale() as "en" | "pl";
@@ -36,13 +44,13 @@ export function CandidateForm() {
     mode: "onBlur",
     reValidateMode: "onChange",
     shouldFocusError: false,
-    defaultValues: { fullName: "", email: "", phone: "", location: "", linkedin: "", hasCv: false, technologies: "", rate: "", consentFuture: false },
+    defaultValues: { fullName: "", email: "", phone: "", location: "", linkedin: "", hasCv: false, rate: "", offerId: offer?.id ?? "", consentFuture: false },
   });
   const { submit, honeypotRef, formError } = useFormSubmit("candidate", setError);
   const summary = useErrorSummary(errors);
   const opts = <K extends keyof typeof optionsMap>(k: K) => optionsMap[k].map((v) => ({ value: v, label: t(`options.${k}.${v}` as "options.english.b2") }));
   const labels = Object.fromEntries(
-    ["fullName", "email", "phone", "location", "linkedin", "cv", "mainRole", "technologies", "seniority", "english", "availability", "rate", "contractType"].map((k) => [k, t(`fields.${k}` as "fields.email")]),
+    ["fullName", "email", "phone", "location", "linkedin", "cv", "mainRole", "seniority", "english", "availability", "rate", "contractType"].map((k) => [k, t(`fields.${k}` as "fields.email")]),
   );
   labels.consentRecruitment = t("consents.groupLabel");
   // The file lives outside the schema; its client/server error is stored under "cv".
@@ -65,7 +73,7 @@ export function CandidateForm() {
   const onValid = async (data: Out) => {
     const r = await submit(data, file);
     if (!r.ok) return summary.failed();
-    track("developer_form_submit", { main_role: data.mainRole, seniority: data.seniority, with_cv: !!file });
+    track("developer_form_submit", { main_role: data.mainRole, seniority: data.seniority, with_cv: !!file, offer: data.offerId || undefined });
     setDone(true);
   };
 
@@ -75,6 +83,12 @@ export function CandidateForm() {
     <form noValidate onSubmit={handleSubmit(onValid, summary.failed)} className="relative grid gap-6">
       <ErrorSummary errors={summary.list} labels={labels} summaryRef={summary.summaryRef} />
       <Honeypot ref={honeypotRef} />
+      {offer && (
+        <p className="rounded-2xl border border-green/40 bg-green/5 px-4 py-3 text-sm">
+          {t("fields.offer")}: <strong className="font-medium">{offer.title}</strong>
+          <input type="hidden" {...register("offerId")} />
+        </p>
+      )}
       <div className="grid gap-6 sm:grid-cols-2">
         <TextField id="fullName" label={t("fields.fullName")} required autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
         <TextField id="email" type="email" label={t("fields.email")} required autoComplete="email" inputMode="email" error={errors.email?.message} {...register("email")} />
@@ -106,7 +120,6 @@ export function CandidateForm() {
       <div className="grid gap-6 sm:grid-cols-2">
         <SelectField id="mainRole" label={t("fields.mainRole")} required options={opts("mainRole")} error={errors.mainRole?.message} {...register("mainRole")} />
         <SelectField id="seniority" label={t("fields.seniority")} required options={opts("seniority")} error={errors.seniority?.message} {...register("seniority")} />
-        <TextField id="technologies" label={t("fields.technologies")} hint={t("hints.technologies")} required className="sm:col-span-2" error={errors.technologies?.message} {...register("technologies")} />
         <SelectField id="english" label={t("fields.english")} required options={opts("english")} error={errors.english?.message} {...register("english")} />
         <SelectField id="availability" label={t("fields.availability")} required options={opts("availability")} error={errors.availability?.message} {...register("availability")} />
         <TextField id="rate" label={t("fields.rate")} hint={t("hints.rate")} error={errors.rate?.message} {...register("rate")} />

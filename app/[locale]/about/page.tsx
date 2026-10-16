@@ -8,6 +8,7 @@ import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { NeonHeadline } from "@/components/ui/NeonHeadline";
+import { ContactDetails } from "@/components/layout/ContactDetails";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about">) {
   return pageMetadata(toLocale((await params).locale), "about", routes.about);
@@ -19,7 +20,6 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
   const t = await getTranslations("aboutPage");
   const tc = await getTranslations("cta");
   const paras = t.raw("paragraphs") as string[];
-  const principles = t.raw("principles") as string[];
   const manifesto = t.raw("manifesto") as string[];
 
   return (
@@ -37,16 +37,18 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
               </Reveal>
             ))}
           </div>
-          <aside aria-labelledby="principles-title" className="lg:col-span-4 lg:col-start-9">
-            <h2 id="principles-title" className="eyebrow">{t("principlesTitle")}</h2>
-            <ol className="mt-5 grid gap-3">
-              {principles.map((p, i) => (
-                <li key={p} className="card flex items-baseline gap-4 p-5">
-                  <span className="font-mono text-xs text-orange">0{i + 1}</span>
-                  <span className="font-display text-lg font-medium tracking-tight">{p}</span>
-                </li>
-              ))}
-            </ol>
+          {/* "Our principles" replaced by a contact block (PDF p.10). */}
+          <aside aria-labelledby="about-contact-title" className="lg:col-span-4 lg:col-start-9">
+            <div className="card p-7">
+              <h2 id="about-contact-title" className="eyebrow">{t("contactTitle")}</h2>
+              <p className="mt-5 font-display text-xl font-medium tracking-tight">{t("contactBody")}</p>
+              <ContactDetails />
+              <div className="mt-8">
+                <ButtonLink href={routes.contact} arrow>
+                  {tc("talkHuman")}
+                </ButtonLink>
+              </div>
+            </div>
           </aside>
         </div>
       </Section>

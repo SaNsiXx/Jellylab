@@ -1,6 +1,7 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
-import type { DoiEmail, OutgoingEmail } from "@/lib/adapters/mailing";
+import type { DoiEmail, EmailAttachment, OutgoingEmail } from "@/lib/adapters/mailing";
+import type { SubmissionRecord } from "@/lib/adapters/crm/types";
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 
@@ -28,9 +29,43 @@ export async function buildDoiEmail(to: string, locale: "en" | "pl", confirmUrl:
   return { to, locale, confirmUrl, subject: t("doiSubject"), html, text };
 }
 
-/** Jelly Box invitation: link to the separate delivery-address form (only after DOI + qualification). */
-export async function buildJellyBoxInviteEmail(to: string, locale: "en" | "pl", url: string): Promise<OutgoingEmail> {
-  const t = await getTranslations({ locale, namespace: "emails" });
-  const { html, text } = renderBrandEmail({ locale, heading: t("boxHeading"), body: t("boxBody"), button: t("boxButton"), url, note: t("boxNote"), footer: t("doiFooter") });
-  return { to, subject: t("boxSubject"), html, text, tag: "jelly_box_invite", logUrl: url };
+const FORM_LABEL: Record<SubmissionRecord["formType"], string> = {
+  crew: "Zapytanie o specjalistów",
+  contact: "Pytanie ogólne",
+  "jelly-list": "Zapis na Jelly List",
+  candidate: "Kandydat — Jelly Crew",
+};
+
+const show = (v: unknown) => (Array.isArray(v) ? v.join(", ") : typeof v === "boolean" ? (v ? "tak" : "nie") : String(v ?? ""));
+
+/** Internal notification to the Jelly Labs inbox (plain table, Reply-To = the person who submitted). */
+export function buildSubmissionNotification(to: string, r: SubmissionRecord, attachments?: EmailAttachment[]): OutgoingEmail {
+  const rows: [string, string][] = [
+    ["Imię i nazwisko", r.person.name],
+    ["E-mail", r.person.email],
+    ["Telefon", r.person.phone ?? ""],
+    ["Firma", r.person.company ?? ""],
+    ["Stanowisko", r.person.role ?? ""],
+    ...Object.entries(r.data).map(([k, v]): [string, string] => [k, show(v)]),
+    ...r.consents.map((c): [string, string] => [`zgoda: ${c.key}`, c.granted ? "TAK" : "nie"]),
+    ["CV", attachments?.length ? "w załączniku" : (r.cvRef ?? "")],
+    ["Język strony", r.locale.toUpperCase()],
+    ["Strona", r.pageUrl ?? ""],
+    ...Object.entries(r.attribution).map(([k, v]): [string, string] => [k, show(v)]),
+    ["Darmowa domena e-mail", r.flags.freeEmailDomain ? "tak" : "nie"],
+    ["ID zgłoszenia", r.id],
+    ["Wysłano", r.submittedAt],
+  ].filter(([, v]) => v !== "") as [string, string][];
+
+  const who = r.person.company ? `${r.person.name} (${r.person.company})` : r.person.name;
+  const subject = `[Jelly Labs] ${FORM_LABEL[r.formType]}: ${who}`;
+  const html = `<!doctype html><html lang="pl"><body style="font-family:Arial,Helvetica,sans-serif;color:#111;font-size:14px">
+<h2 style="margin:0 0 16px">${esc(FORM_LABEL[r.formType])}</h2>
+<table cellpadding="8" cellspacing="0" style="border-collapse:collapse;max-width:720px">
+${rows.map(([k, v]) => `<tr><th align="left" valign="top" style="border-bottom:1px solid #ddd;color:#555;font-weight:normal;white-space:nowrap">${esc(k)}</th><td style="border-bottom:1px solid #ddd;white-space:pre-wrap">${esc(v)}</td></tr>`).join("\n")}
+</table>
+<p style="color:#777;font-size:12px;margin-top:16px">Odpowiedz na tę wiadomość, aby napisać bezpośrednio do zgłaszającego.</p>
+</body></html>`;
+  const text = `${FORM_LABEL[r.formType]}\n\n${rows.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
+  return { to, subject, html, text, tag: `submission-${r.formType}`, replyTo: r.person.email, attachments };
 }

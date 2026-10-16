@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { toLocale } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
@@ -6,7 +7,8 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
-import { CandidateForm } from "@/components/forms/CandidateForm";
+import { CandidateForm, CandidateFormWithOffer } from "@/components/forms/CandidateForm";
+import { listJobOffers } from "@/lib/adapters/careers";
 import { FormBoundary } from "@/components/forms/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { NeonHeadline } from "@/components/ui/NeonHeadline";
@@ -22,8 +24,9 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
   const tc = await getTranslations("cta");
   const te = await getTranslations("forms.errors");
   const expect = t.raw("expect") as string[];
-  const process = t.raw("process") as string[];
   const faq = t.raw("faq") as { q: string; a: string }[];
+  // Offer titles for "Applying for: …" when the visitor arrives from /careers (?offer=<id>).
+  const offers = Object.fromEntries((await listJobOffers()).map((o) => [o.id, o.title[locale]]));
 
   return (
     <>
@@ -36,7 +39,7 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
       </PageHero>
 
       <Section className="pt-0 lg:pt-0">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="max-w-3xl">
           <Reveal>
             <h2 className="h3 text-2xl sm:text-3xl">{t("expectTitle")}</h2>
             <ul className="mt-6 grid gap-3">
@@ -48,17 +51,6 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
               ))}
             </ul>
           </Reveal>
-          <Reveal delay={100}>
-            <h2 className="h3 text-2xl sm:text-3xl">{t("processTitle")}</h2>
-            <ol className="mt-6 grid gap-3">
-              {process.map((p, i) => (
-                <li key={p} className="card flex items-center gap-5 p-5">
-                  <span className="font-mono text-sm text-green">0{i + 1}</span>
-                  <span className="font-display text-lg font-medium tracking-tight">{p}</span>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
         </div>
       </Section>
 
@@ -67,7 +59,9 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
           <h2 id="join-title" className="h2"><NeonHeadline text={t("formTitle")} /></h2>
           <div className="mt-10">
             <FormBoundary fallback={<p role="alert">{te("server")}</p>}>
-              <CandidateForm />
+              <Suspense fallback={<CandidateForm />}>
+                <CandidateFormWithOffer offers={offers} />
+              </Suspense>
             </FormBoundary>
           </div>
         </div>

@@ -30,8 +30,8 @@ const go = async (url) => {
 };
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
-// The forged-token step deliberately triggers a 400 from /api/doi/confirm.
-page.on("console", (m) => m.type() === "error" && !/favicon|status of 400/.test(m.text()) && errors.push(m.text()));
+// The forged-token step deliberately triggers a 400 from /api/doi/confirm; removed-page checks return 404.
+page.on("console", (m) => m.type() === "error" && !/favicon|status of 40[04]/.test(m.text()) && errors.push(m.text()));
 
 // ── Consent banner ──
 await go(`${base}/`);
@@ -81,20 +81,13 @@ await page.getByRole("button", { name: "CONFIRM MY EMAIL" }).click();
 await page.waitForTimeout(800);
 ok("forged token → 'expired or not valid' screen", (await page.locator("h1").textContent())?.includes("not valid") ?? false);
 
-// ── Build Your Crew from a talent profile ──
-await go(`${base}/contact?form=crew&profile=JL-SAMPLE-02`);
-ok("profile id carried into crew form", (await page.getByText("JL-SAMPLE-02").count()) > 0);
+// ── Build Your Crew (one free-text "who do you need" field) ──
+await go(`${base}/contact?form=crew`);
+ok("crew form has no legacy role/stack/budget fields", (await page.locator("#roles, #headcount, #stack, #budget, #description").count()) === 0);
 await page.fill("#fullName", "Ada Tester");
 await page.fill("#company", "Example Software House");
 await page.fill("#email", "ada@example-software.io");
-await page.fill("#roles", "1× Lead Frontend");
-await page.fill("#headcount", "1");
-await page.fill("#stack", "React, TypeScript, Next.js");
-await page.selectOption("#seniority", "lead");
-await page.selectOption("#startDate", "asap");
-await page.selectOption("#duration", "6_12");
-await page.locator('input[name="workModel"][value="remote"]').check();
-await page.fill("#description", "Our product team is blocked on a frontend rewrite and needs a lead quickly.");
+await page.fill("#needs", "1× Lead Frontend (React, TypeScript), remote, starting as soon as possible for 6–12 months.");
 await page.locator('input[name="preferredContact"][value="email"]').check();
 ok("marketing consent optional for service request", !(await page.locator("#consentEmail").isChecked()));
 await page.waitForTimeout(2100);
@@ -124,7 +117,6 @@ await page.fill("#phone", "+48 600 000 000");
 await page.fill("#location", "Kraków, Poland");
 await page.selectOption("#mainRole", "backend");
 await page.selectOption("#seniority", "senior");
-await page.fill("#technologies", ".NET, Azure, SQL");
 await page.selectOption("#english", "c1");
 await page.selectOption("#availability", "1_month");
 await page.locator('input[name="contractType"][value="b2b"]').check();
@@ -134,57 +126,25 @@ await page.getByRole("button", { name: "JOIN JELLY CREW" }).last().click();
 await page.getByText("Welcome to the Jelly Crew pipeline.").waitFor({ timeout: 10000 }).catch(() => {});
 ok("candidate with PDF CV → success", await page.getByText("Welcome to the Jelly Crew pipeline.").isVisible());
 
-// ── Jelly Box delivery address (invitation-only) ──
-const boxToken = devToken({ id: "e2e-box", e: "ada@example-software.io", l: "en", p: "jelly_box" });
-await go(`${base}/jelly-box/address?t=${boxToken}`);
-ok("jelly box: valid invitation shows the address form", await page.locator("#postalCode").isVisible());
-await page.fill("#company", "Example Software House");
-await page.fill("#recipientName", "Ada Tester");
-await page.fill("#street", "ul. Przykładowa 1/2");
-await page.fill("#postalCode", "44100");
-await page.fill("#city", "Gliwice");
-await page.fill("#phone", "+48 600 000 000");
-await page.locator("#postalCode").blur();
-await page.waitForTimeout(300);
-ok("jelly box: wrong postal code format rejected", await page.locator("#postalCode-error").isVisible());
-await page.fill("#postalCode", "44-100");
-await page.locator("#confirmCompanyAddress").check();
-await page.waitForTimeout(2100);
-await page.getByRole("button", { name: "SEND MY ADDRESS" }).click();
-await page.getByText("Address received.").waitFor({ timeout: 10000 }).catch(() => {});
-ok("jelly box: address submitted → success", await page.getByText("Address received.").isVisible());
-await go(`${base}/jelly-box/address?t=forged.token`);
-ok("jelly box: forged token → invalid screen", (await page.locator("h1").textContent())?.includes("not valid") ?? false);
-await go(`${base}/jelly-box/address?t=${devToken({ id: "x", e: "a@b.co", l: "en", p: "jelly_list" })}`);
-ok("jelly box: double opt-in token cannot open the address form", (await page.locator("h1").textContent())?.includes("not valid") ?? false);
-const invite = await page.request.post(`${base}/api/jelly-box/invite`, { data: { email: "a@b.co", submissionId: "x" } });
-ok("jelly box: invite endpoint disabled without ADMIN_API_KEY", invite.status() === 404, String(invite.status()));
-
-// ── Talent filters ──
-await go(`${base}/talent`);
-const count = async () => page.locator("main ul li article").count();
-const all = await count();
-await page.selectOption("#f-seniority", "lead");
-await page.waitForTimeout(400);
-ok("seniority filter narrows results + syncs URL", (await count()) < all && page.url().includes("seniority=lead"), `${all} → ${await count()}`);
-await page.selectOption("#f-stack", "Magento");
-await page.waitForTimeout(400);
-ok("impossible combo → empty state", await page.getByText("Nothing matching today? The bench moves.").isVisible());
-await page.getByRole("button", { name: "Reset filters" }).click();
-await page.waitForTimeout(400);
-ok("reset restores all profiles", (await count()) === all);
-
-// ── Insights ──
-await go(`${base}/insights`);
-// Sample articles are visible only in dev / when NEXT_PUBLIC_SHOW_PLACEHOLDERS=true; otherwise the empty state shows.
-const hasSample = (await page.getByText("Sample article — placeholder").count()) > 0;
-if (hasSample) {
-  ok("insights lists sample article (placeholders visible)", true);
-  await page.getByRole("link", { name: /Sample article/ }).first().click();
-  await page.waitForURL("**/insights/sample-article-template");
-  ok("article page renders with one H1 + Article JSON-LD", (await page.locator("h1").count()) === 1 && (await page.locator('script[type="application/ld+json"]').allTextContents()).some((s) => s.includes('"Article"')));
+// ── Careers → apply with the offer pre-selected ──
+await go(`${base}/careers`);
+const offerCards = await page.locator("main article").count();
+if (offerCards > 0) {
+  ok("careers lists offers + JobPosting JSON-LD", (await page.locator('script[type="application/ld+json"]').allTextContents()).some((t) => t.includes('"JobPosting"')), `${offerCards} offer(s)`);
+  await page.getByRole("link", { name: /^APPLY/ }).first().click();
+  await page.waitForURL("**/for-developers?offer=*", { timeout: 10000 }).catch(() => {});
+  await page.getByText("Applying for").waitFor({ timeout: 5000 }).catch(() => {});
+  ok("apply link pre-selects the offer on the candidate form", await page.getByText("Applying for").isVisible(), page.url());
 } else {
-  ok("insights shows empty state when samples are hidden", await page.getByText("The first signal is on its way.").isVisible());
+  ok("careers shows empty state when no offers are published", await page.getByText("No open offers right now.").isVisible());
+}
+await go(`${base}/for-developers?offer=does-not-exist#join`);
+ok("unknown offer id is ignored (general application)", !(await page.getByText("Applying for").isVisible()));
+
+// ── Removed sections are gone ──
+for (const gone of ["/talent", "/how-it-works", "/insights", "/jelly-box-terms"]) {
+  const res = await page.request.get(`${base}${gone}`);
+  ok(`${gone} removed (404)`, res.status() === 404, String(res.status()));
 }
 
 // ── PL parity ──

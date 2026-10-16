@@ -8,33 +8,28 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? (vercelHost ? `https
 export const routes = {
   home: "/",
   solutions: "/solutions",
-  talent: "/talent",
-  howItWorks: "/how-it-works",
   forDevelopers: "/for-developers",
+  careers: "/careers",
   about: "/about",
-  insights: "/insights",
   jellyList: "/jelly-list",
   contact: "/contact",
   privacy: "/privacy",
   cookies: "/cookies",
-  jellyBoxTerms: "/jelly-box-terms",
 } as const;
 
-/** Where "BUILD YOUR CREW" and "REQUEST PROFILE" land (see Phase 1 decision). */
-export const crewHref = (profileId?: string) => ({
-  pathname: routes.contact,
-  query: profileId ? { form: "crew", profile: profileId } : { form: "crew" },
-});
+/** Where "BUILD YOUR CREW" / "ASK ABOUT SPECIALISTS" land: the client request form on the contact page. */
+export const crewHref = () => ({ pathname: routes.contact, query: { form: "crew" } });
 
 export const developerJoinHref = `${routes.forDevelopers}#join`;
 
-export type NavKey = "solutions" | "talent" | "howItWorks" | "forDevelopers" | "about" | "insights";
+/** Apply for a specific job offer: candidate form with the offer id prefilled. */
+export const applyHref = (offerId: string) => ({ pathname: routes.forDevelopers, query: { offer: offerId }, hash: "join" });
+
+export type NavKey = "solutions" | "forDevelopers" | "careers" | "about";
 
 export const mainNav: { key: NavKey; href: string }[] = [
   { key: "solutions", href: routes.solutions },
-  { key: "talent", href: routes.talent },
-  { key: "howItWorks", href: routes.howItWorks },
   { key: "forDevelopers", href: routes.forDevelopers },
+  { key: "careers", href: routes.careers },
   { key: "about", href: routes.about },
-  { key: "insights", href: routes.insights },
 ];

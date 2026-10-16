@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { toLocale } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
-import { LegalDocument, loadLegal } from "@/components/insights/LegalDocument";
+import { LegalDocument, loadLegal } from "@/components/legal/LegalDocument";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/privacy">) {
   const locale = toLocale((await params).locale);
