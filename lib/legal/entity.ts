@@ -4,12 +4,13 @@
 export const PLACEHOLDER = "[DO UZUPEŁNIENIA]";
 
 export const legalEntity = {
-  companyLegalName: PLACEHOLDER, // PLACEHOLDER — full legal name of the data controller
+  companyLegalName: "JellyLabs", // data controller name as provided by Jelly Labs HR
   registeredAddress: PLACEHOLDER, // PLACEHOLDER
   taxId: PLACEHOLDER, // PLACEHOLDER — NIP
   companyRegisterId: PLACEHOLDER, // PLACEHOLDER — KRS
-  contactEmail: PLACEHOLDER, // PLACEHOLDER
-  linkedinUrl: PLACEHOLDER, // PLACEHOLDER
+  contactEmail: "office@jellylabs.tech", // main contact + data protection matters
+  contactEmailSecondary: "malgorzata@jellylabs.tech",
+  linkedinUrl: "https://www.linkedin.com/company/jellylabs-tech/",
 } as const;
 
 export const isPlaceholder = (v: string) => v.includes("DO UZUPEŁNIENIA") || v.includes("[");

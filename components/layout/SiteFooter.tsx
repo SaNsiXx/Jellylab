@@ -22,7 +22,7 @@ export async function SiteFooter() {
     { href: routes.privacy, label: t("footer.legal.privacy") },
     { href: routes.cookies, label: t("footer.legal.cookies") },
   ];
-  const { companyLegalName, registeredAddress, companyRegisterId, taxId, contactEmail, linkedinUrl } = legalEntity;
+  const { companyLegalName, registeredAddress, companyRegisterId, taxId, contactEmail, contactEmailSecondary, linkedinUrl } = legalEntity;
   const companyLine = [companyLegalName, registeredAddress, companyRegisterId, taxId];
 
   return (
@@ -55,6 +55,9 @@ export async function SiteFooter() {
             )}
           </p>
           <p>
+            <a href={`mailto:${contactEmailSecondary}`} className="hover:text-fg">{contactEmailSecondary}</a>
+          </p>
+          <p>
             {isPlaceholder(linkedinUrl) ? (
               <Placeholder>{`LinkedIn: ${linkedinUrl}`}</Placeholder>
             ) : (
@@ -72,7 +75,10 @@ export async function SiteFooter() {
             <span>© {new Date().getFullYear()} Jelly Labs.</span>
             <span className="sr-only">{t("footer.companyLabel")}:</span>
             {companyLine.some(isPlaceholder) ? (
-              <Placeholder>{`${t("footer.companyLabel")}: [PEŁNA NAZWA, ADRES, KRS/NIP — DO UZUPEŁNIENIA]`}</Placeholder>
+              <>
+                {!isPlaceholder(companyLegalName) && <span>{companyLegalName}</span>}
+                <Placeholder>{"[ADRES, KRS/NIP — DO UZUPEŁNIENIA]"}</Placeholder>
+              </>
             ) : (
               <span>{companyLine.join(" · ")}</span>
             )}

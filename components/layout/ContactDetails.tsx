@@ -10,7 +10,7 @@ function Pending({ value }: { value: string }) {
 export async function ContactDetails() {
   const t = await getTranslations("contactPage");
   const tAlly = await getTranslations("a11y");
-  const { contactEmail, linkedinUrl } = legalEntity;
+  const { contactEmail, contactEmailSecondary, linkedinUrl } = legalEntity;
   return (
     <dl className="mt-6 grid gap-5">
       <div>
@@ -23,6 +23,9 @@ export async function ContactDetails() {
               {contactEmail}
             </TrackedLink>
           )}
+          <TrackedLink plain href={`mailto:${contactEmailSecondary}`} event="contact_click" eventProps={{ method: "email" }} className="mt-1 block text-lg hover:text-cyan">
+            {contactEmailSecondary}
+          </TrackedLink>
         </dd>
       </div>
       <div>
