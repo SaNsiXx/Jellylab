@@ -39,12 +39,15 @@ const need = {
   DOI_SECRET: "signing double opt-in links",
 };
 for (const [k, why] of Object.entries(need)) if (!process.env[k]) issues.push(`env ${k} missing (${why})`);
-const notifyLeads = process.env.NOTIFY_EMAIL_LEADS || process.env.NOTIFY_EMAIL;
-const notifyCandidates = process.env.NOTIFY_EMAIL_CANDIDATES || process.env.NOTIFY_EMAIL;
+// Notification inboxes default to legalEntity.contactEmail (office@jellylabs.tech) in lib/server/env.ts.
+const notifyLeads = true;
+const notifyCandidates = true;
 const crmOff = (process.env.CRM_PROVIDER ?? "console") === "console";
 if (crmOff && !notifyLeads) issues.push("CRM_PROVIDER=console and no NOTIFY_EMAIL(_LEADS) — client requests would only be logged");
 if (crmOff && !notifyCandidates) issues.push("CRM_PROVIDER=console and no NOTIFY_EMAIL(_CANDIDATES) — applications would only be logged");
-if ((process.env.MAIL_PROVIDER ?? "console") === "console") issues.push("MAIL_PROVIDER=console — double opt-in and notification emails would not be sent");
+const mail = process.env.MAIL_PROVIDER ?? "console";
+if (mail === "console") issues.push("MAIL_PROVIDER=console — double opt-in and notification emails would not be sent");
+if (mail === "smtp" && (!process.env.SMTP_USER || !process.env.SMTP_PASS)) issues.push("MAIL_PROVIDER=smtp but SMTP_USER / SMTP_PASS missing");
 if ((process.env.RATE_LIMIT_PROVIDER ?? "memory") === "memory") issues.push("RATE_LIMIT_PROVIDER=memory — not effective on serverless");
 if ((process.env.CV_STORAGE_PROVIDER ?? "mock") === "mock" && !notifyCandidates)
   issues.push("CV_STORAGE_PROVIDER=mock and no NOTIFY_EMAIL(_CANDIDATES) — CV uploads are refused on the live site (LinkedIn URL still works)");

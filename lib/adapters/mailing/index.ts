@@ -1,4 +1,5 @@
 import "server-only";
+import nodemailer from "nodemailer";
 import { env } from "@/lib/server/env";
 
 export type DoiPurpose = "jelly_list" | "marketing";
@@ -97,7 +98,40 @@ function brevo(apiKey: string): MailingAdapter {
   };
 }
 
+/** Plain SMTP (Google Workspace by default). Transactional only — list management stays in an ESP (Brevo). */
+function smtp(user: string, pass: string): MailingAdapter {
+  const transport = nodemailer.createTransport({ host: env.smtpHost, port: env.smtpPort, secure: env.smtpPort === 465, auth: { user, pass } });
+  const from = { name: env.mailFromName, address: env.mailFrom };
+  const send = (m: OutgoingEmail) =>
+    transport.sendMail({
+      from,
+      to: m.to,
+      replyTo: m.replyTo,
+      subject: m.subject,
+      html: m.html,
+      text: m.text,
+      attachments: m.attachments?.map((a) => ({ filename: a.name, content: Buffer.from(a.contentBase64, "base64") })),
+    });
+  return {
+    name: "smtp",
+    async sendDoubleOptIn(m) {
+      await send({ to: m.to, subject: m.subject, html: m.html, text: m.text, tag: "doi" });
+    },
+    async sendEmail(m) {
+      await send(m);
+    },
+    async subscribe(i) {
+      // No mailing lists over SMTP: the confirmed sign-up is logged; connect Brevo later for newsletters.
+      console.info("[mail:smtp] confirmed subscription (no list provider configured)", { purpose: i.purpose, locale: i.locale });
+    },
+  };
+}
+
 export function getMailer(): MailingAdapter {
+  if (env.mailProvider === "smtp") {
+    if (!env.smtpUser || !env.smtpPass) throw new Error("MAIL_PROVIDER=smtp but SMTP_USER / SMTP_PASS is missing");
+    return smtp(env.smtpUser, env.smtpPass);
+  }
   if (env.mailProvider === "brevo") {
     if (!env.brevoKey) throw new Error("MAIL_PROVIDER=brevo but BREVO_API_KEY is missing");
     return brevo(env.brevoKey);
