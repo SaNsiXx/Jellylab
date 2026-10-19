@@ -10,7 +10,7 @@ export const legalEntity = {
   companyRegisterId: PLACEHOLDER, // PLACEHOLDER — KRS
   contactEmail: "office@jellylabs.tech", // main contact + data protection matters
   contactEmailSecondary: "malgorzata@jellylabs.tech",
-  linkedinUrl: "https://www.linkedin.com/company/jellylabs-tech/",
+  linkedinUrl: "https://www.linkedin.com/company/jellylabs-tech/posts/",
 } as const;
 
 export const isPlaceholder = (v: string) => v.includes("DO UZUPEŁNIENIA") || v.includes("[");
