@@ -56,7 +56,7 @@ const N = SWARM0 + SWARM.length;
 const TOUCH = 0.35;
 
 /** Shapes the following jelly takes, by the `data-jelly` value of the section on screen. */
-export const FORMS = ["cluster", "chain", "shortlist", "hidden", "split", "ring"] as const;
+export const FORMS = ["cluster", "chain", "shortlist", "hidden", "split", "ring", "merge"] as const;
 export type Form = (typeof FORMS)[number];
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -419,6 +419,26 @@ export class JellyField {
           const a = (i / CLUSTER.length) * Math.PI * 2 + t * 0.22;
           out.push([Math.cos(a) * hw * 0.92, hh * 0.15 + Math.sin(a) * hh * 0.75, b.o[2] * s * 0.5, b.r * s * 0.55 * (1 + Math.sin(t * 1.9 + b.ph) * 0.08)]);
         });
+        noDrops();
+        break;
+      }
+      case "merge": {
+        // the end of the page: every jelly flows back into one big jelly, resting where the footer is empty —
+        // the right half below 1024px (one column of links), past the contact column on wide screens,
+        // bleeding off the right edge on phones
+        const phone = this.cw < 640;
+        const lg = this.cw >= 1024;
+        const mx = phone ? hw * 0.82 : lg ? hw * 0.94 : hw * 0.45;
+        const my = phone ? -hh * 0.2 : 0;
+        const k = phone || lg ? 0.85 : 1.1;
+        CLUSTER.forEach((b) =>
+          out.push([
+            mx + b.o[0] * s * 0.34 * k + Math.sin(t * 0.5 + b.ph) * 0.04,
+            my + b.o[1] * s * 0.34 * k + Math.cos(t * 0.45 + b.ph) * 0.04,
+            b.o[2] * s * 0.3,
+            b.r * s * k * (1 + Math.sin(t * 1.4 + b.ph) * 0.04),
+          ]),
+        );
         noDrops();
         break;
       }

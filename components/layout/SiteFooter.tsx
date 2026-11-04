@@ -25,8 +25,9 @@ export async function SiteFooter() {
   const { companyLegalName, registeredAddress, companyRegisterId, taxId, contactEmail, contactEmailSecondary, linkedinUrl } = legalEntity;
   const companyLine = [companyLegalName, registeredAddress, companyRegisterId, taxId];
 
+  // data-jelly: on the home page the following jelly gathers into one big jelly here (jellyField.ts)
   return (
-    <footer className="relative border-t border-line">
+    <footer data-jelly="merge" className="relative border-t border-line">
       <div className="container-jl grid gap-14 py-16 lg:grid-cols-12 lg:py-24">
         <div className="lg:col-span-5">
           <Wordmark className="h-8 w-auto" />

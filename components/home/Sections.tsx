@@ -147,9 +147,12 @@ export async function JellyDropBlock() {
             </div>
             <p className="mt-5 max-w-lg text-sm text-muted">{t("drop.microcopy")}</p>
           </div>
-          {/* Campaign card (SVG from scripts/build-brand-svgs.mjs); PNG export: public/campaign/01_Get_The_Jelly_Drop_1200.png */}
-          <div className="relative lg:col-span-5">
-            <CampaignArt name="jelly-drop" className="mx-auto max-w-md border border-line" />
+          {/* Campaign art, melted into the card: its black ground is lightened away and the edges fade out */}
+          <div className="relative lg:col-span-5 lg:-my-10 lg:-mr-10">
+            <CampaignArt
+              name="jelly-drop"
+              className="mx-auto max-w-md mix-blend-lighten [mask-image:radial-gradient(closest-side,#000_58%,transparent)] lg:max-w-none"
+            />
           </div>
         </div>
       </div>
