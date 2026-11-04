@@ -4,11 +4,11 @@ import { NeonHeadline } from "@/components/ui/NeonHeadline";
 
 /** Centered confirmation / status screen used across the double opt-in flow. One H1. */
 export function StatusScreen({ title, body, hint, variant = "ok", art, children }: { title: string; body: string; hint?: string; variant?: "ok" | "mail" | "error"; art?: CampaignName; children?: ReactNode }) {
-  const dot = variant === "error" ? "bg-red shadow-[0_0_18px_var(--color-red)]" : variant === "mail" ? "bg-violet-hi shadow-[0_0_18px_var(--color-violet-hi)]" : "bg-lime shadow-[0_0_18px_var(--color-lime)]";
+  const dot = variant === "error" ? "bg-red shadow-[0_0_18px_var(--color-red)]" : variant === "mail" ? "bg-cyan shadow-[0_0_18px_var(--color-cyan)]" : "bg-green shadow-[0_0_18px_var(--color-green)]";
   return (
     <section className="relative isolate container-jl grid min-h-[80svh] items-center gap-12 pt-32 pb-20 lg:grid-cols-12">
       <div className="flex flex-col items-start lg:col-span-7">
-      <div aria-hidden="true" className="absolute top-1/3 right-0 -z-10 h-72 w-[30rem] rotate-12 rounded-[48%_52%_44%_56%/55%_48%_52%_45%] bg-[image:var(--gradient-match-jelly)] opacity-20 blur-3xl" />
+      <div aria-hidden="true" className="absolute top-1/3 right-0 -z-10 h-72 w-[30rem] rotate-12 rounded-[48%_52%_44%_56%/55%_48%_52%_45%] bg-[image:var(--gradient-heat-jelly)] opacity-20 blur-3xl" />
       <span aria-hidden="true" className={`live-dot size-3 rounded-full ${dot}`} />
       <h1 className="h2 mt-8 max-w-3xl"><NeonHeadline text={title} /></h1>
       <p className="lead mt-6">{body}</p>

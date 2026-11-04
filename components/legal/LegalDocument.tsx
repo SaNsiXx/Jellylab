@@ -23,7 +23,7 @@ export async function LegalDocument({ locale, doc, children }: { locale: "en" | 
     <article className="container-jl pt-36 pb-24 lg:pt-44">
       <div className="mx-auto max-w-3xl">
         {d.draft && (
-          <p role="note" className="mb-10 rounded-2xl border border-dashed border-blend/60 bg-blend/5 p-4 font-mono text-sm text-blend">
+          <p role="note" className="mb-10 rounded-2xl border border-dashed border-orange/60 bg-orange/5 p-4 font-mono text-sm text-orange">
             {t("draftBanner")}
           </p>
         )}

@@ -54,7 +54,7 @@ export default async function SolutionsPage({ params }: PageProps<"/[locale]/sol
                     <ul className="grid gap-3">
                       {list.map((li) => (
                         <li key={li} className="flex gap-3 border-b border-line pb-3 text-fg/90">
-                          <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-violet-hi shadow-[0_0_8px_var(--color-violet-hi)]" />
+                          <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-cyan shadow-[0_0_8px_var(--color-cyan)]" />
                           {li}
                         </li>
                       ))}

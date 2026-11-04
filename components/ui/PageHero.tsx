@@ -6,9 +6,9 @@ import { JellyAccent, type JellyEnergy, type JellyShape } from "./BrandArt";
 type Accent = "blue" | "green" | "heat";
 
 const glow: Record<Accent, string> = {
-  blue: "bg-[image:var(--gradient-violet-jelly)]",
-  green: "bg-[image:var(--gradient-lime-jelly)]",
-  heat: "bg-[image:var(--gradient-match-jelly)]",
+  blue: "bg-[image:var(--gradient-blue-jelly)]",
+  green: "bg-[image:var(--gradient-green-jelly)]",
+  heat: "bg-[image:var(--gradient-heat-jelly)]",
 };
 
 const accentJelly: Record<Accent, [JellyEnergy, JellyShape]> = {

@@ -84,7 +84,7 @@ export function CandidateForm({ offer }: { offer?: { id: string; title: string }
       <ErrorSummary errors={summary.list} labels={labels} summaryRef={summary.summaryRef} />
       <Honeypot ref={honeypotRef} />
       {offer && (
-        <p className="rounded-2xl border border-lime/40 bg-lime/5 px-4 py-3 text-sm">
+        <p className="rounded-2xl border border-green/40 bg-green/5 px-4 py-3 text-sm">
           {t("fields.offer")}: <strong className="font-medium">{offer.title}</strong>
           <input type="hidden" {...register("offerId")} />
         </p>

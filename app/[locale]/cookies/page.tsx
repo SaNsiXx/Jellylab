@@ -15,7 +15,7 @@ export default async function Page({ params }: PageProps<"/[locale]/cookies">) {
   setRequestLocale(locale);
   return (
     <LegalDocument locale={locale} doc="cookies">
-      <CookieSettingsButton className="mt-6 inline-flex min-h-11 items-center rounded-full border border-line px-5 text-sm hover:border-violet-hi" />
+      <CookieSettingsButton className="mt-6 inline-flex min-h-11 items-center rounded-full border border-line px-5 text-sm hover:border-cyan" />
     </LegalDocument>
   );
 }

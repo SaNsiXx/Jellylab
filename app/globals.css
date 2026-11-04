@@ -2,14 +2,9 @@
 @import "./tokens.css";
 
 @theme inline {
-  --font-display: var(--font-outfit), "Outfit", ui-sans-serif, sans-serif;
+  --font-display: var(--font-space-grotesk), "Space Grotesk", "Sora", ui-sans-serif, sans-serif;
   --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
-}
-
-:root {
-  /* The Jelly Match pair: lime (action, value) flowing through the pale overlap into violet. */
-  --grad-match: var(--gradient-match-jelly);
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, monospace;
 }
 
 /* z-index scale: base 0 · raised 10 · header 40 · overlay 50 · toast 60 */
@@ -38,12 +33,12 @@
   }
   h1, h2, h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.04em;
-    line-height: 0.98;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
-  ::selection { background: var(--color-lime); color: var(--color-bg); }
+  ::selection { background: color-mix(in oklab, var(--color-cyan) 40%, transparent); color: var(--color-fg); }
 
   /* Visible, high-contrast focus everywhere (WCAG 2.4.7 / 2.4.11). */
   :focus-visible {
@@ -68,7 +63,7 @@
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--color-muted);
   }
@@ -98,9 +93,9 @@
   }
   .hairline { border-color: var(--color-line); }
   /* Single-colour accent text — used once per section at most. */
-  .text-accent-blue { color: var(--color-violet-hi); }
-  .text-accent-green { color: var(--color-lime); }
-  .text-accent-heat { color: var(--color-blend); }
+  .text-accent-blue { color: var(--color-cyan); }
+  .text-accent-green { color: var(--color-green); }
+  .text-accent-heat { color: var(--color-orange); }
   .tabular { font-variant-numeric: tabular-nums; }
 }
 
@@ -117,6 +112,45 @@
   .marquee-track { animation: none; }
 }
 
+/* ---------- Hero fallback jellies (CSS/SVG) ---------- */
+@keyframes jl-enter-right { from { transform: translate3d(60vw, 4vh, 0) scale(0.8); opacity: 0; } }
+@keyframes jl-enter-bottom { from { transform: translate3d(10vw, 60vh, 0) scale(0.8); opacity: 0; } }
+@keyframes jl-enter-top { from { transform: translate3d(20vw, -60vh, 0) scale(0.8); opacity: 0; } }
+
+@keyframes jl-orbit-blue {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50% { transform: translate3d(-5%, 3%, 0) rotate(3deg); }
+}
+@keyframes jl-bounce-green {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1, 1); }
+  40% { transform: translate3d(0, -6%, 0) rotate(5deg) scale(0.97, 1.03); }
+  60% { transform: translate3d(0, -5%, 0) rotate(6deg) scale(1.02, 0.98); }
+}
+@keyframes jl-pulse-heat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-3%, 4%, 0) scale(1.04); }
+}
+
+.jelly-svg { will-change: transform; transform-box: fill-box; transform-origin: center; }
+.jelly-in-blue { animation: jl-enter-right 2.2s var(--ease-jelly) both; }
+.jelly-in-green { animation: jl-enter-top 2.4s var(--ease-jelly) 0.15s both; }
+.jelly-in-heat { animation: jl-enter-bottom 2.6s var(--ease-jelly) 0.3s both; }
+.jelly-float-blue { animation: jl-orbit-blue 11s ease-in-out 2.2s infinite; }
+.jelly-float-green { animation: jl-bounce-green 8s cubic-bezier(0.34, 1.4, 0.64, 1) 2.5s infinite; }
+.jelly-float-heat { animation: jl-pulse-heat 9.5s ease-in-out 2.9s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .jelly-in-blue, .jelly-in-green, .jelly-in-heat,
+  .jelly-float-blue, .jelly-float-green, .jelly-float-heat { animation: none; }
+}
+
+/* Technical line motif (from brand reference) — draws in once. */
+@keyframes jl-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.tech-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: jl-draw 2.4s var(--ease-jelly) 0.6s forwards; }
+@media (prefers-reduced-motion: reduce) {
+  .tech-line { animation: none; stroke-dashoffset: 0; }
+}
+
 /* ---------- Reveal ----------
    Hidden start state only when scripting is enabled AND motion is welcome, so no-JS users,
    reduced-motion users and older browsers (no `scripting` media feature) always see content.
@@ -127,125 +161,119 @@
 }
 
 /* =====================================================================
-   JELLY LAYER — shared with Jelly Match (the parent brand and its products read as one family):
-   lime + violet only, their pale overlap as the third tone. Text stays light-on-dark for contrast.
-   Everything that animates stops under prefers-reduced-motion.
+   NEON LAB LAYER
+   Colour moves; text stays white-on-dark for contrast. Everything that
+   animates stops under prefers-reduced-motion.
    ===================================================================== */
 
-/* registered so they can transition/animate */
-@property --grad-veil { syntax: "<number>"; inherits: false; initial-value: 0; }
-
-@keyframes jl-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
-
-/* ---------- Backdrop (components/layout/Backdrop.tsx) ---------- */
-.backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; contain: strict; }
-.aura-track { position: absolute; inset: 0; will-change: transform, opacity; }
-.aura { position: absolute; border-radius: 50%; will-change: transform; filter: blur(10px); }
-.aura-lime {
-  width: 60vmax; height: 60vmax; top: 30vh; right: -30vmax;
-  background: radial-gradient(circle, rgb(198 255 0 / 0.09), transparent 62%);
-  animation: jl-aura-a 52s ease-in-out infinite alternate;
-}
-.aura-violet {
-  width: 70vmax; height: 70vmax; top: -30vmax; left: -30vmax;
-  background: radial-gradient(circle, rgb(139 92 246 / 0.16), transparent 62%);
-  animation: jl-aura-b 46s ease-in-out infinite alternate;
-}
-.aura-blend {
-  width: 55vmax; height: 55vmax; top: 20vh; left: 10vw;
-  background: radial-gradient(circle, rgb(217 232 160 / 0.07), rgb(139 92 246 / 0.05) 40%, transparent 64%);
-  animation: jl-aura-c 38s ease-in-out infinite alternate;
-}
-@keyframes jl-aura-a { to { transform: translate3d(-30vw, 20vh, 0) scale(1.15); } }
-@keyframes jl-aura-b { to { transform: translate3d(25vw, 35vh, 0) scale(0.9); } }
-@keyframes jl-aura-c { to { transform: translate3d(20vw, -15vh, 0) scale(1.2); } }
-
-/* dot grid: a faint base everywhere + a brighter lime copy revealed around the cursor (--mx/--my from <Backdrop>) */
-.bg-grid {
-  position: absolute; inset: 0;
-  background-image: radial-gradient(rgb(245 245 247 / 0.5) 1px, transparent 1.5px);
-  background-size: 34px 34px;
-  opacity: 0.07;
-  mask-image: linear-gradient(to bottom, #000, rgb(0 0 0 / 0.4));
-}
-.bg-grid-spot {
-  opacity: 0.55;
-  background-image: radial-gradient(rgb(198 255 0 / 0.75) 1px, transparent 1.6px);
-  mask-image: radial-gradient(260px circle at var(--mx, -999px) var(--my, -999px), #000, transparent 75%);
-}
-/* touch screens have no cursor: two soft lit patches stay in the open areas and a spot lights up under each tap */
-@media (hover: none) {
-  .bg-grid-spot {
-    opacity: 0.9;
-    mask-image:
-      radial-gradient(150px circle at 10% 30%, #000, transparent 75%),
-      radial-gradient(170px circle at 92% 70%, #000, transparent 75%),
-      radial-gradient(200px circle at var(--mx, -999px) var(--my, -999px), rgb(0 0 0 / var(--tap, 0)), transparent 75%);
-  }
+@property --neon-a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
-/* glossy jelly droplets (positioned by <Backdrop>; transforms only), lit like the hero jellies */
-.bg-drops { position: absolute; inset: 0; opacity: 0; }
-.bg-drop {
-  position: absolute; left: 0; top: 0; border-radius: 50%; overflow: hidden; will-change: transform;
-  background:
-    radial-gradient(circle at 31% 25%, rgb(255 255 255 / 0.95) 0 3.5%, rgb(255 255 255 / 0) 8%),
-    radial-gradient(ellipse 50% 20% at 45% 17%, rgb(255 255 255 / 0.34), rgb(255 255 255 / 0) 75%),
-    radial-gradient(circle at 75% 80%, rgb(199 158 255 / 0.5) 0 4%, rgb(199 158 255 / 0) 18%),
-    radial-gradient(circle closest-side at 50% 50%, var(--d1) 0%, var(--d2) 48%, var(--d3) 100%);
-  box-shadow:
-    inset 0.12em 0 0.22em -0.04em rgb(214 255 90 / 0.65),
-    inset -0.12em 0 0.22em -0.04em rgb(190 160 255 / 0.65),
-    0 0 36px -4px var(--dg);
-}
-.bg-drop::after {
-  content: ""; position: absolute; inset: -20%; border-radius: 50%; mix-blend-mode: soft-light;
-  background:
-    radial-gradient(circle at 32% 66%, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0) 26%),
-    radial-gradient(circle at 68% 40%, rgb(255 255 255 / 0.4), rgb(255 255 255 / 0) 22%);
-  animation: jl-caustic 9s linear infinite;
-}
-@keyframes jl-caustic { to { transform: rotate(360deg); } }
-.bg-drop-lime { --d1: #dcff45; --d2: #c6ff00; --d3: #6a8a00; --dg: rgb(198 255 0 / 0.45); }
-.bg-drop-violet { --d1: #a983ff; --d2: #8b5cf6; --d3: #45289a; --dg: rgb(139 92 246 / 0.5); }
-.bg-drop-blend { --d1: #eef6d2; --d2: #dbeba8; --d3: #8f7fd6; --dg: rgb(198 255 0 / 0.35); }
-html[data-no-gpu] .bg-drops, html[data-no-gpu] .bg-grid-spot { display: none; }
-
-.grain {
-  position: fixed; inset: -50%; z-index: 60; pointer-events: none;
-  background-image: url("/assets/grain.webp");
-  background-size: 256px 256px;
-  opacity: 0.055;
-  mix-blend-mode: overlay;
-  animation: jl-grain 1s steps(6) infinite;
-}
-@keyframes jl-grain {
-  0% { transform: translate3d(0, 0, 0); }
-  20% { transform: translate3d(-3%, 2%, 0); }
-  40% { transform: translate3d(2%, -4%, 0); }
-  60% { transform: translate3d(-4%, -2%, 0); }
-  80% { transform: translate3d(3%, 4%, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-/* no GPU (set by the hero when WebGL is CPU-emulated): every composited frame is software-blended — keep still */
-html[data-no-gpu] .grain { display: none; }
-html[data-no-gpu] .aura { animation: none; filter: none; will-change: auto; }
-/* phones/tablets: the jelly animates behind everything, so keep the GPU for it */
-@media (max-width: 1023px) {
-  .grain { display: none; }
-  .aura { filter: none; }
-  .bg-drop::after { mix-blend-mode: normal; opacity: 0.45; }
+:root {
+  /* One spectrum, in brand order: Electric → Acid → Heat. */
+  --neon-spectrum: #13c8ff, #306bff, #6b38ff, #8dff45, #00d47e, #ffd25a, #ff9a31, #ff4d5e, #13c8ff;
+  --neon-conic: conic-gradient(from var(--neon-a), var(--neon-spectrum));
+  /* Repeated twice across 200% width → seamless loop when shifted by one period. */
+  --neon-linear: linear-gradient(90deg, #13c8ff, #306bff, #6b38ff, #8dff45, #00d47e, #ffd25a, #ff9a31, #ff4d5e, #13c8ff, #306bff, #6b38ff, #8dff45, #00d47e, #ffd25a, #ff9a31, #ff4d5e, #13c8ff);
 }
 
-/* phones/tablets: the following jelly floats behind the copy — a soft halo in the page colour keeps it readable */
-@media (max-width: 1023px) {
-  main :is(p, li, h1, h2, h3, .eyebrow) {
-    text-shadow: 0 0 2px var(--color-bg), 0 0 10px rgb(11 11 15 / 0.85), 0 0 22px rgb(11 11 15 / 0.6);
-  }
-  main :is(.neon-text, .btn-primary, .btn-secondary, .bg-lime) { text-shadow: none; }
+@keyframes jl-neon-spin { to { --neon-a: 360deg; } }
+@keyframes jl-neon-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+/* ---------- Living backdrop: drifting jelly auras + passing signals ----------
+   Replaces the old graph-paper grid. Only `transform`/`opacity` animate (compositor-only, no repaint).
+   Aura alphas stay low so muted text keeps ≥ 4.5:1 contrast on top. Static under reduced motion. */
+.lab-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.aura {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  will-change: transform;
+}
+.aura-electric {
+  top: -32vmax;
+  left: -26vmax;
+  background: radial-gradient(circle at 50% 50%, rgb(48 107 255 / 0.24), rgb(107 56 255 / 0.1) 38%, transparent 66%);
+  animation: jl-aura-electric 46s ease-in-out infinite alternate;
+}
+.aura-acid {
+  top: 18vh;
+  right: -38vmax;
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle at 50% 50%, rgb(141 255 69 / 0.13), rgb(0 212 126 / 0.06) 40%, transparent 66%);
+  animation: jl-aura-acid 58s ease-in-out infinite alternate;
+}
+.aura-heat {
+  bottom: -36vmax;
+  left: 22vw;
+  background: radial-gradient(circle at 50% 50%, rgb(255 77 94 / 0.17), rgb(255 154 49 / 0.07) 40%, transparent 66%);
+  animation: jl-aura-heat 52s ease-in-out infinite alternate;
+}
+@keyframes jl-aura-electric {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(28vw, 14vh, 0) scale(1.12); }
+  100% { transform: translate3d(12vw, 30vh, 0) scale(0.95); }
+}
+@keyframes jl-aura-acid {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-22vw, 26vh, 0) scale(1.15); }
+  100% { transform: translate3d(-34vw, -6vh, 0) scale(1); }
+}
+@keyframes jl-aura-heat {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-18vw, -22vh, 0) scale(1.08); }
+  100% { transform: translate3d(20vw, -34vh, 0) scale(1.14); }
 }
 
-/* ---------- Animated wordmark: "Jelly" carries the lime → violet flow, "Labs" stays white ---------- */
+/* Signals: a thin pulse of light occasionally crossing the screen (The Jelly Signal / circuit traces). */
+.signal {
+  position: absolute;
+  left: 0;
+  width: 34vw;
+  height: 1px;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: jl-signal 15s linear infinite;
+}
+.signal::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 10px 2px currentColor;
+}
+.signal-cyan { top: 23%; color: var(--color-cyan); background: linear-gradient(90deg, transparent, rgb(19 200 255 / 0.55)); }
+.signal-green { top: 61%; color: var(--color-green); background: linear-gradient(90deg, transparent, rgb(141 255 69 / 0.45)); animation-duration: 19s; animation-delay: 6s; }
+.signal-red { top: 84%; color: var(--color-red); background: linear-gradient(90deg, transparent, rgb(255 77 94 / 0.45)); animation-duration: 23s; animation-delay: 12s; }
+@keyframes jl-signal {
+  0% { transform: translate3d(-40vw, 0, 0); opacity: 0; }
+  4% { opacity: 1; }
+  30% { transform: translate3d(110vw, 0, 0); opacity: 1; }
+  31%, 100% { transform: translate3d(110vw, 0, 0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura { animation: none; }
+  .signal { display: none; }
+}
+
+/* ---------- Animated wordmark ---------- */
 .wordmark {
   position: relative;
   display: inline-block;
@@ -253,16 +281,15 @@ html[data-no-gpu] .aura { animation: none; filter: none; will-change: auto; }
 }
 .wordmark > * { position: absolute; inset: 0; width: 100%; height: 100%; }
 .wordmark-jelly-wrap {
-  filter: drop-shadow(0 0 6px rgb(198 255 0 / 0.35)) drop-shadow(0 0 14px rgb(139 92 246 / 0.35));
+  filter: drop-shadow(0 0 6px rgb(19 200 255 / 0.55)) drop-shadow(0 0 14px rgb(107 56 255 / 0.35));
   transform-origin: 25% 80%;
 }
 .wordmark-jelly {
-  /* two periods across 200% width → seamless loop when shifted by one period */
-  background: linear-gradient(90deg, #c6ff00, #d9e8a0, #8b5cf6, #d9e8a0, #c6ff00, #d9e8a0, #8b5cf6, #d9e8a0, #c6ff00);
+  background: var(--neon-linear);
   background-size: 200% 100%;
   -webkit-mask: url("/brand/jellylabs-wordmark-jelly-mask.png") center / 100% 100% no-repeat;
   mask: url("/brand/jellylabs-wordmark-jelly-mask.png") center / 100% 100% no-repeat;
-  animation: jl-flow 7s linear infinite;
+  animation: jl-neon-flow 7s linear infinite;
 }
 @keyframes jl-jelly-squish {
   0%, 100% { transform: scale(1, 1); }
@@ -271,74 +298,83 @@ html[data-no-gpu] .aura { animation: none; filter: none; will-change: auto; }
   75% { transform: scale(1.02, 0.98); }
 }
 a:hover > .wordmark .wordmark-jelly-wrap,
-a:focus-visible > .wordmark .wordmark-jelly-wrap { animation: jl-jelly-squish 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+a:focus-visible > .wordmark .wordmark-jelly-wrap { animation: jl-jelly-squish 0.7s var(--ease-jelly); }
 a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
 
-/* ---------- Buttons (the Jelly Match system) ---------- */
-.btn-primary,
-.btn-secondary {
+/* ---------- Neon buttons ---------- */
+.btn-neon,
+.btn-neon-ghost {
   isolation: isolate;
-  overflow: hidden;
-  transition: color 0.2s var(--ease-jelly), border-color 0.2s var(--ease-jelly), box-shadow 0.2s var(--ease-jelly);
+  border: 1.5px solid transparent;
+  color: var(--color-fg);
+  text-shadow: 0 0 12px rgb(255 255 255 / 0.25);
+  animation: jl-neon-spin 4.5s linear infinite;
 }
-/* fill wipe from the bottom */
-.btn-primary::before,
-.btn-secondary::before {
+.btn-neon::before,
+.btn-neon-ghost::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -3px;
   z-index: -1;
   border-radius: inherit;
-  transform: translate3d(0, 101%, 0);
-  transition: transform 0.3s var(--ease-jelly);
+  background: var(--neon-conic);
+  filter: blur(14px);
+  animation: jl-neon-spin 4.5s linear infinite;
+  transition: opacity var(--duration-standard) var(--ease-jelly);
   pointer-events: none;
 }
-.btn-primary:hover::before, .btn-primary:focus-visible::before,
-.btn-secondary:hover::before, .btn-secondary:focus-visible::before { transform: translate3d(0, 0, 0); }
-.btn-primary {
-  background: var(--color-lime);
-  color: var(--color-bg);
-  box-shadow: 0 0 0 0 rgb(198 255 0 / 0), 0 10px 40px -12px rgb(198 255 0 / 0.55);
+/* Primary: tinted glass fill + full-spectrum rotating border + glow. */
+.btn-neon {
+  background:
+    linear-gradient(rgb(7 8 13 / 0.84), rgb(7 8 13 / 0.84)) padding-box,
+    var(--neon-conic) padding-box,
+    var(--neon-conic) border-box;
 }
-.btn-primary::before { background: var(--color-fg); }
-.btn-primary:hover { box-shadow: 0 0 0 6px rgb(198 255 0 / 0.14), 0 14px 50px -10px rgb(198 255 0 / 0.65); }
-.btn-secondary {
-  border: 1px solid rgb(245 245 247 / 0.22);
-  color: var(--color-fg);
-  background: rgb(245 245 247 / 0.03);
-  backdrop-filter: blur(10px);
+.btn-neon::before { opacity: 0.55; }
+.btn-neon:hover {
+  background:
+    linear-gradient(rgb(7 8 13 / 0.7), rgb(7 8 13 / 0.7)) padding-box,
+    var(--neon-conic) padding-box,
+    var(--neon-conic) border-box;
+  transform: translateY(-1px);
 }
-.btn-secondary::before { background: var(--color-violet); }
-.btn-secondary:hover, .btn-secondary:focus-visible { border-color: var(--color-violet); box-shadow: 0 10px 40px -12px rgb(139 92 246 / 0.7); }
-.btn-primary .btn-arrow, .btn-secondary .btn-arrow { transition: transform 0.25s var(--ease-jelly); }
+.btn-neon:hover::before { opacity: 0.95; }
+/* Secondary: dim, slow border; lights up on hover/focus. */
+.btn-neon-ghost {
+  animation-duration: 9s;
+  background:
+    linear-gradient(rgb(7 8 13 / 0.92), rgb(7 8 13 / 0.92)) padding-box,
+    conic-gradient(from var(--neon-a), rgb(19 200 255 / 0.55), rgb(107 56 255 / 0.25), rgb(141 255 69 / 0.5), rgb(255 154 49 / 0.25), rgb(19 200 255 / 0.55)) border-box;
+}
+.btn-neon-ghost::before { opacity: 0; }
+.btn-neon-ghost:hover,
+.btn-neon-ghost:focus-visible {
+  animation-duration: 3s;
+  background:
+    linear-gradient(rgb(7 8 13 / 0.86), rgb(7 8 13 / 0.86)) padding-box,
+    var(--neon-conic) border-box;
+}
+.btn-neon-ghost:hover::before,
+.btn-neon-ghost:focus-visible::before { opacity: 0.5; }
+.btn-neon .btn-arrow { filter: drop-shadow(0 0 6px currentColor); }
 
-/* ---------- Gradient text (one fragment per headline, like Jelly Match) ---------- */
+/* ---------- Neon text ---------- */
 .neon-text {
-  /* top layer: a veil in the text colour that fades out, so the gradient fades in as it scrolls into view */
-  background-image: linear-gradient(rgb(245 245 247 / var(--grad-veil)), rgb(245 245 247 / var(--grad-veil))), var(--grad-match);
-  background-size: 100% 100%, 200% 100%;
+  background: var(--neon-linear);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: jl-flow 9s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 22px rgb(48 107 255 / 0.35));
+  animation: jl-neon-flow 12s linear infinite;
   /* keep descenders inside the clip box */
   padding-bottom: 0.08em;
 }
-/* scroll-driven reveal where supported; elsewhere the gradient is simply shown */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .neon-text {
-      animation: jl-flow 9s ease-in-out infinite alternate, jl-unveil linear both;
-      animation-timeline: auto, view();
-      animation-range: normal, entry 40% cover 45%;
-    }
-  }
-}
-@keyframes jl-unveil { from { --grad-veil: 1; } to { --grad-veil: 0; } }
+.neon-glow-text { text-shadow: 0 0 18px rgb(19 200 255 / 0.45); }
 
-/* ---------- Lab cards: corner brackets (the Lab's own detail) + lime edge on hover ---------- */
+/* ---------- Lab cards: corner brackets + neon edge on hover ---------- */
 .card {
-  transition: border-color 0.2s var(--ease-jelly), box-shadow 0.2s var(--ease-jelly);
+  transition: border-color var(--duration-standard) var(--ease-jelly), box-shadow var(--duration-standard) var(--ease-jelly);
 }
 .card::before,
 .card::after {
@@ -347,26 +383,36 @@ a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
   width: 14px;
   height: 14px;
   pointer-events: none;
-  border-color: rgb(245 245 247 / 0.28);
+  border-color: rgb(19 200 255 / 0.55);
   border-style: solid;
   transition: border-color var(--duration-standard), filter var(--duration-standard);
 }
 .card::before { top: 10px; left: 10px; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 6px; }
 .card::after { right: 10px; bottom: 10px; border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 6px; }
 .card:hover {
-  border-color: rgb(198 255 0 / 0.28);
-  box-shadow: 0 30px 80px -40px rgb(139 92 246 / 0.55);
+  border-color: rgb(19 200 255 / 0.35);
+  box-shadow: 0 0 0 1px rgb(19 200 255 / 0.08), 0 0 40px -10px rgb(19 200 255 / 0.45), inset 0 0 40px -24px rgb(107 56 255 / 0.6);
 }
 .card:hover::before,
-.card:hover::after { border-color: var(--color-lime); filter: drop-shadow(0 0 6px rgb(198 255 0 / 0.6)); }
+.card:hover::after { border-color: var(--color-green); filter: drop-shadow(0 0 6px var(--color-green)); }
 
 /* ---------- Lab readouts ---------- */
+.eyebrow { text-shadow: 0 0 14px rgb(19 200 255 / 0.25); }
 @keyframes jl-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 .live-dot { animation: jl-blink 1.6s ease-in-out infinite; }
 .header-neon-line {
-  background: var(--grad-match);
+  background: var(--neon-linear);
   background-size: 200% 100%;
-  animation: jl-flow 9s ease-in-out infinite alternate;
+  animation: jl-neon-flow 10s linear infinite;
+  box-shadow: 0 0 12px rgb(19 200 255 / 0.6);
+}
+.tech-pulse { filter: drop-shadow(0 0 6px currentColor); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark-jelly, .btn-neon, .btn-neon-ghost, .btn-neon::before, .btn-neon-ghost::before,
+  .neon-text, .live-dot, .header-neon-line { animation: none !important; }
+  a:hover > .wordmark .wordmark-jelly-wrap { animation: none; }
+  .tech-pulse { display: none; }
 }
 
 /* Floating jelly accents (public/jelly/*.svg) */
@@ -375,17 +421,17 @@ a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
   50% { transform: translate3d(0, -14px, 0) rotate(4deg); }
 }
 .jelly-accent { animation: jl-accent-float 9s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgb(0 0 0 / 0.45)); }
+@media (prefers-reduced-motion: reduce) { .jelly-accent { animation: none; } }
 
 /* ---------- Micro-interactions (vars set by components/ui/MicroInteractions.tsx) ---------- */
-/* Magnetic buttons: individual `translate` so it never fights hover/active `transform`. */
-.btn-primary,
-.btn-secondary { translate: var(--mx, 0px) var(--my, 0px); }
-/* Card spotlight: a soft lime lamp following the cursor. Off-card by default. */
+/* Magnetic neon buttons: individual `translate` so it never fights hover/active `transform`. */
+.btn-neon,
+.btn-neon-ghost { translate: var(--mx, 0px) var(--my, 0px); }
+/* Card spotlight: a soft lab lamp following the cursor. Off-card by default. */
 .card {
   background:
-    radial-gradient(520px circle at var(--sx, -1000px) var(--sy, -1000px), rgb(198 255 0 / 0.07), transparent 45%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.01)),
-    var(--color-surface);
+    radial-gradient(420px circle at var(--sx, -1000px) var(--sy, -1000px), rgb(19 200 255 / 0.07), transparent 45%),
+    linear-gradient(180deg, color-mix(in oklab, var(--color-surface) 92%, white 2%), var(--color-surface));
 }
 /* Form success: one light pulse sweeps across the panel. */
 .success-sweep { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
@@ -396,15 +442,11 @@ a:hover > .wordmark .wordmark-jelly { animation-duration: 2.4s; }
   bottom: 0;
   left: -45%;
   width: 45%;
-  background: linear-gradient(90deg, transparent, rgb(198 255 0 / 0.16), rgb(139 92 246 / 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgb(141 255 69 / 0.16), rgb(19 200 255 / 0.12), transparent);
   animation: jl-sweep 1.4s var(--ease-jelly) 0.1s 1 forwards;
 }
 @keyframes jl-sweep { to { transform: translate3d(330%, 0, 0); } }
-
 @media (prefers-reduced-motion: reduce) {
-  .aura, .grain, .bg-drop::after, .wordmark-jelly, .neon-text, .live-dot, .header-neon-line, .jelly-accent { animation: none !important; }
-  .bg-grid-spot { display: none; }
-  a:hover > .wordmark .wordmark-jelly-wrap { animation: none; }
-  .btn-primary, .btn-secondary { translate: none; }
+  .btn-neon, .btn-neon-ghost { translate: none; }
   .success-sweep::after { animation: none; display: none; }
 }

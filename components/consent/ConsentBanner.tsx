@@ -60,12 +60,12 @@ export function ConsentBanner() {
       ref={panelRef}
       role="region"
       aria-labelledby="consent-title"
-      className="fixed inset-x-3 bottom-3 z-[45] mx-auto max-w-3xl rounded-[var(--radius-modal)] border border-line bg-surface/95 p-5 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.8),0_0_40px_-20px_rgba(139,92,246,0.5)] backdrop-blur-xl sm:inset-x-6 sm:bottom-6 sm:p-7"
+      className="fixed inset-x-3 bottom-3 z-[45] mx-auto max-w-3xl rounded-[var(--radius-modal)] border border-line bg-surface/95 p-5 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.8),0_0_40px_-20px_rgba(19,200,255,0.5)] backdrop-blur-xl sm:inset-x-6 sm:bottom-6 sm:p-7"
     >
       <h2 id="consent-title" className="font-display text-lg font-semibold tracking-tight">{t("title")}</h2>
       <p className="mt-2 text-sm text-muted">
         {t("body")}{" "}
-        <Link href={routes.cookies} prefetch={false} className="text-fg underline underline-offset-4 hover:text-violet-hi">
+        <Link href={routes.cookies} prefetch={false} className="text-fg underline underline-offset-4 hover:text-cyan">
           {t("policy")}
         </Link>
       </p>
@@ -81,7 +81,7 @@ export function ConsentBanner() {
             <label key={o.key} className={`flex gap-3 rounded-2xl border border-line p-4 ${o.disabled ? "opacity-80" : "cursor-pointer hover:border-white/25"}`}>
               <input
                 type="checkbox"
-                className="mt-0.5 size-5 shrink-0 accent-[var(--color-lime)]"
+                className="mt-0.5 size-5 shrink-0 accent-[var(--color-green)]"
                 checked={o.checked}
                 disabled={o.disabled}
                 onChange={(e) => o.onChange(e.target.checked)}

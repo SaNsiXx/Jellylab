@@ -12,11 +12,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const out = (...p) => path.join(root, "public", ...p);
 
 const ENERGIES = {
-  electric: ["#A78BFA", "#8B5CF6", "#5B34C9"],
-  acid: ["#E6FF80", "#C6FF00", "#8FB800"],
-  heat: ["#EEF6D2", "#D9E8A0", "#8B5CF6"],
+  electric: ["#13C8FF", "#306BFF", "#6B38FF"],
+  acid: ["#D7FF54", "#8DFF45", "#00D47E"],
+  heat: ["#FFD25A", "#FF9A31", "#FF4D5E"],
 };
-const BG = "#0B0B0F";
+const BG = "#07080D";
 
 /* ───────────────────────── Jelly shapes ─────────────────────────
    kind "fill": closed geometry. kind "stroke": tube geometry (stroke width w).
@@ -106,7 +106,7 @@ function backdrop(p, accent) {
   <defs>
     <pattern id="${p}-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern>
     <pattern id="${p}-fine" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M15 0H0V15" fill="none" stroke="#fff" stroke-opacity=".02"/></pattern>
-    <radialGradient id="${p}-g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="700"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".22"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="${p}-g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="700"><stop offset="0" stop-color="#306BFF" stop-opacity=".22"/><stop offset="1" stop-color="#306BFF" stop-opacity="0"/></radialGradient>
     <radialGradient id="${p}-g2" gradientUnits="userSpaceOnUse" cx="1200" cy="1200" r="760"><stop offset="0" stop-color="${accent}" stop-opacity=".2"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></radialGradient>
   </defs>
   <rect width="1200" height="1200" rx="56" fill="${BG}"/>
@@ -135,13 +135,13 @@ function cardDrop() {
   return svg(
     1200,
     1200,
-    `${backdrop("cd", "#8B5CF6")}
+    `${backdrop("cd", "#FF4D5E")}
   <defs>
-    <linearGradient id="cd-ripple" x1="0" x2="1"><stop offset="0" stop-color="#EEF6D2"/><stop offset=".5" stop-color="#D9E8A0"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
-    <radialGradient id="cd-pool" cx="700" cy="890" r="420" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 890) scale(1 .25) translate(-700 -890)"><stop offset="0" stop-color="#D9E8A0" stop-opacity=".55"/><stop offset=".6" stop-color="#8B5CF6" stop-opacity=".12"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="cd-ripple" x1="0" x2="1"><stop offset="0" stop-color="#FFD25A"/><stop offset=".5" stop-color="#FF9A31"/><stop offset="1" stop-color="#FF4D5E"/></linearGradient>
+    <radialGradient id="cd-pool" cx="700" cy="890" r="420" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 890) scale(1 .25) translate(-700 -890)"><stop offset="0" stop-color="#FF9A31" stop-opacity=".55"/><stop offset=".6" stop-color="#FF4D5E" stop-opacity=".12"/><stop offset="1" stop-color="#FF4D5E" stop-opacity="0"/></radialGradient>
   </defs>
-  ${trace("M0 940 H300 C350 940 360 900 410 900 H560", "#A78BFA", [560, 900])}
-  ${trace("M0 1010 H420 C470 1010 490 960 540 950", "#C6FF00", [540, 950])}
+  ${trace("M0 940 H300 C350 940 360 900 410 900 H560", "#13C8FF", [560, 900])}
+  ${trace("M0 1010 H420 C470 1010 490 960 540 950", "#8DFF45", [540, 950])}
   <ellipse cx="700" cy="890" rx="440" ry="110" fill="url(#cd-pool)"/>
   ${ripples}
   ${place(jelly("cdm", "drop", "heat", { glow: 0.7 }), 700, 470, 0.92, 4)}
@@ -155,13 +155,13 @@ function cardInbox() {
   return svg(
     1200,
     1200,
-    `${backdrop("ci", "#5B34C9")}
+    `${backdrop("ci", "#6B38FF")}
   <defs>
-    <linearGradient id="ci-edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A78BFA"/><stop offset=".35" stop-color="#5B34C9"/><stop offset=".65" stop-color="#C6FF00"/><stop offset="1" stop-color="#D9E8A0"/></linearGradient>
+    <linearGradient id="ci-edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13C8FF"/><stop offset=".35" stop-color="#6B38FF"/><stop offset=".65" stop-color="#8DFF45"/><stop offset="1" stop-color="#FF9A31"/></linearGradient>
     <linearGradient id="ci-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
     <filter id="ci-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter>
   </defs>
-  <path d="M60 1060 H360 L390 1030 L420 1090 L450 1000 L480 1110 L510 1060 H1140" fill="none" stroke="#A78BFA" stroke-opacity=".4" stroke-width="3"/>
+  <path d="M60 1060 H360 L390 1030 L420 1090 L450 1000 L480 1110 L510 1060 H1140" fill="none" stroke="#13C8FF" stroke-opacity=".4" stroke-width="3"/>
   ${place(jelly("ci1", "bubble", "electric"), 500, 470, 0.44)}
   ${place(jelly("ci2", "bean", "acid"), 690, 330, 0.5, -12)}
   ${place(jelly("ci3", "capsule", "heat"), 800, 540, 0.34, 8)}
@@ -182,12 +182,12 @@ function cardBox() {
   return svg(
     1200,
     1200,
-    `${backdrop("cb", "#D9E8A0")}
+    `${backdrop("cb", "#FF9A31")}
   <defs>
-    <linearGradient id="cb-edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A78BFA"/><stop offset=".5" stop-color="#C6FF00"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+    <linearGradient id="cb-edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13C8FF"/><stop offset=".5" stop-color="#8DFF45"/><stop offset="1" stop-color="#FF4D5E"/></linearGradient>
     <linearGradient id="cb-left" x1="0" x2="1"><stop offset="0" stop-color="#0c0e15"/><stop offset="1" stop-color="#151926"/></linearGradient>
     <linearGradient id="cb-right" x1="0" x2="1"><stop offset="0" stop-color="#11141e"/><stop offset="1" stop-color="#090b11"/></linearGradient>
-    <radialGradient id="cb-inner" cx="600" cy="640" r="260" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D9E8A0" stop-opacity=".55"/><stop offset=".5" stop-color="#5B34C9" stop-opacity=".25"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cb-inner" cx="600" cy="640" r="260" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF9A31" stop-opacity=".55"/><stop offset=".5" stop-color="#6B38FF" stop-opacity=".25"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
     <clipPath id="cb-open"><path d="M600 520 L860 640 L600 760 L340 640 Z M340 640 V 300 H 860 V 640"/></clipPath>
     <filter id="cb-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12"/></filter>
   </defs>
@@ -201,7 +201,7 @@ function cardBox() {
   <path d="M860 640 L600 760 V1000 L860 880 Z" fill="url(#cb-right)" ${edge}/>
   <path d="M340 640 L600 760 L860 640" fill="none" ${edge} filter="url(#cb-glow)" opacity=".8"/>
   <g transform="translate(0 -150) rotate(-6 600 520)">
-    <path d="M600 400 L880 520 L600 640 L320 520 Z" fill="#101014" ${edge}/>
+    <path d="M600 400 L880 520 L600 640 L320 520 Z" fill="#10131c" ${edge}/>
     <path d="M320 520 V560 L600 680 V640 Z M880 520 V560 L600 680 V640 Z" fill="#0b0d14" ${edge}/>
     <path d="M600 400 L880 520 L600 640 L320 520 Z" fill="none" stroke="url(#cb-edge)" stroke-width="10" filter="url(#cb-glow)" opacity=".5"/>
   </g>
@@ -231,8 +231,8 @@ function icon(name, body) {
     64,
     64,
     `<defs>
-    <linearGradient id="i-g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A78BFA"/><stop offset=".55" stop-color="#8B5CF6"/><stop offset="1" stop-color="#5B34C9"/></linearGradient>
-    <linearGradient id="i-a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E6FF80"/><stop offset="1" stop-color="#8FB800"/></linearGradient>
+    <linearGradient id="i-g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#13C8FF"/><stop offset=".55" stop-color="#306BFF"/><stop offset="1" stop-color="#6B38FF"/></linearGradient>
+    <linearGradient id="i-a" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D7FF54"/><stop offset="1" stop-color="#00D47E"/></linearGradient>
     <filter id="i-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
     <style>.l{fill:none;stroke:url(#i-g);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.l .a{stroke:url(#i-a)}.l .f{fill:url(#i-g);stroke:none}</style>
   </defs>

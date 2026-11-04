@@ -6,36 +6,38 @@
     "campaignLine": "Who the f*ck is Jelly?"
   },
   "colors": {
-    "background": "#0B0B0F",
-    "surface": "#101014",
-    "surfaceElevated": "#17171D",
-    "border": "rgba(245,245,247,0.10)",
-    "textPrimary": "#F5F5F7",
-    "textSecondary": "#A1A1AA",
-    "lime": "#C6FF00",
-    "violet": "#8B5CF6",
-    "violetHi": "#A78BFA",
-    "blend": "#D9E8A0",
+    "background": "#07080D",
+    "surface": "#10131C",
+    "surfaceElevated": "#171B27",
+    "border": "rgba(255,255,255,0.12)",
+    "textPrimary": "#F7F8FC",
+    "textSecondary": "#A9AFBF",
+    "blue": "#306BFF",
+    "cyan": "#13C8FF",
+    "violet": "#6B38FF",
+    "green": "#8DFF45",
+    "emerald": "#00D47E",
+    "orange": "#FF9A31",
     "red": "#FF4D5E",
-    "focus": "#C6FF00"
+    "focus": "#13C8FF"
   },
   "gradients": {
-    "limeJelly": "linear-gradient(135deg, #E6FF80 0%, #C6FF00 48%, #8FB800 100%)",
-    "violetJelly": "linear-gradient(135deg, #C4B5FD 0%, #8B5CF6 48%, #5B34C9 100%)",
-    "matchJelly": "linear-gradient(100deg, #C6FF00 0%, #D9E8A0 45%, #8B5CF6 100%)"
+    "blueJelly": "linear-gradient(135deg, #13C8FF 0%, #306BFF 48%, #6B38FF 100%)",
+    "greenJelly": "linear-gradient(135deg, #D7FF54 0%, #8DFF45 42%, #00D47E 100%)",
+    "heatJelly": "linear-gradient(135deg, #FFD25A 0%, #FF9A31 42%, #FF4D5E 100%)"
   },
   "typography": {
-    "display": "Outfit, sans-serif",
-    "body": "1.125rem",
+    "display": "Space Grotesk, Sora, sans-serif",
+    "body": "Inter, sans-serif",
     "h1Desktop": "clamp(4.5rem, 8vw, 7rem)",
     "h1Mobile": "clamp(2.8rem, 14vw, 3.65rem)",
     "bodyLarge": "1.25rem",
-    "small": "0.875rem",
-    "mono": "JetBrains Mono, monospace"
+    "body": "1.125rem",
+    "small": "0.875rem"
   },
   "radii": {
     "button": "999px",
-    "card": "28px",
+    "card": "24px",
     "modal": "28px"
   },
   "spacing": {
@@ -47,12 +49,7 @@
     "micro": "160ms",
     "standard": "420ms",
     "section": "720ms",
-    "easing": [
-      0.22,
-      1,
-      0.36,
-      1
-    ],
+    "easing": [0.22, 1, 0.36, 1],
     "respectReducedMotion": true
   },
   "breakpoints": {

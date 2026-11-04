@@ -14,7 +14,7 @@ export async function ProblemSection() {
   const t = await getTranslations("problem");
   const points = t.raw("points") as Item[];
   return (
-    <Section labelledBy="problem-title" jelly="chain">
+    <Section labelledBy="problem-title">
       <div className="grid gap-10 lg:grid-cols-12">
         <Reveal className="lg:col-span-8">
           <h2 id="problem-title" className="h2"><NeonHeadline text={t("title")} /></h2>
@@ -27,7 +27,7 @@ export async function ProblemSection() {
         {points.map((p, i) => (
           <li key={p.title} className="bg-bg p-7 sm:p-9">
             <Reveal delay={i * 80}>
-              <p className="font-mono text-xs tracking-[0.2em] text-violet-hi">0{i + 1}</p>
+              <p className="font-mono text-xs tracking-[0.2em] text-cyan">0{i + 1}</p>
               <h3 className="h3 mt-8">{p.title}</h3>
               <p className="mt-3 text-muted">{p.body}</p>
             </Reveal>
@@ -45,7 +45,7 @@ export async function SolutionsPreview() {
   const tech = t.raw("solutions.techLine") as string[];
   const icons: IconName[] = ["staff-augmentation", "dedicated-teams", "specialists"];
   return (
-    <Section labelledBy="solutions-title" jelly="hidden">
+    <Section labelledBy="solutions-title">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <Reveal>
           <Eyebrow accent="blue">{t("solutions.eyebrow")}</Eyebrow>
@@ -88,19 +88,19 @@ export async function ProcessSteps() {
   const t = await getTranslations();
   const steps = t.raw("process.steps") as Item[];
   return (
-    <Section labelledBy="process-title" jelly="shortlist" className="border-t border-line">
+    <Section labelledBy="process-title" className="border-t border-line">
       <Reveal>
         <Eyebrow accent="blue">{t("process.eyebrow")}</Eyebrow>
         <h2 id="process-title" className="h2 mt-5 max-w-3xl"><NeonHeadline text={t("process.title")} /></h2>
       </Reveal>
       <ol className="relative mt-16 grid gap-10 md:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-8">
         {/* connecting technical line */}
-        <span aria-hidden="true" className="absolute top-[0.55rem] right-0 left-0 hidden h-px bg-[linear-gradient(90deg,var(--color-lime),var(--color-blend),var(--color-violet),transparent)] opacity-60 lg:block" />
+        <span aria-hidden="true" className="absolute top-[0.55rem] right-0 left-0 hidden h-px bg-[linear-gradient(90deg,var(--color-cyan),var(--color-blue),var(--color-violet),transparent)] opacity-60 lg:block" />
         {steps.map((s, i) => (
           <li key={s.title} className="relative">
             <Reveal delay={i * 90}>
-              <span aria-hidden="true" className="relative block size-[1.1rem] rounded-full border border-violet-hi bg-bg">
-                <span className="absolute inset-1 rounded-full bg-violet-hi" />
+              <span aria-hidden="true" className="relative block size-[1.1rem] rounded-full border border-cyan bg-bg">
+                <span className="absolute inset-1 rounded-full bg-cyan" />
               </span>
               <p className="mt-8 font-mono text-sm tracking-[0.2em] text-muted">0{i + 1}</p>
               <h3 className="h3 mt-3">{s.title}</h3>
@@ -123,9 +123,9 @@ export async function JellyDropBlock() {
   const t = await getTranslations();
   const list = t.raw("drop.list") as string[];
   return (
-    <Section labelledBy="drop-title" jelly="hidden">
+    <Section labelledBy="drop-title">
       <div className="card overflow-hidden">
-        <div aria-hidden="true" className="pointer-events-none absolute -top-40 -right-32 size-[34rem] rounded-full bg-[image:var(--gradient-match-jelly)] opacity-[0.13] blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -top-40 -right-32 size-[34rem] rounded-full bg-[image:var(--gradient-heat-jelly)] opacity-[0.13] blur-3xl" />
         <div className="relative grid gap-12 p-7 sm:p-12 lg:grid-cols-12 lg:gap-16 lg:p-16">
           <div className="lg:col-span-7">
             <Eyebrow accent="heat">{t("drop.eyebrow")}</Eyebrow>
@@ -135,7 +135,7 @@ export async function JellyDropBlock() {
             <ul className="mt-4 grid gap-3">
               {list.map((li) => (
                 <li key={li} className="flex gap-3 text-fg/90">
-                  <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-blend" />
+                  <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-orange" />
                   {li}
                 </li>
               ))}
@@ -147,13 +147,9 @@ export async function JellyDropBlock() {
             </div>
             <p className="mt-5 max-w-lg text-sm text-muted">{t("drop.microcopy")}</p>
           </div>
-          {/* Campaign art, melted into the card: its black ground is lightened away and the edges fade out.
-              Phones: bleeds to the card edges below the copy. Wide: fills the whole right column, centred on its height. */}
-          <div className="relative -mx-7 -mt-6 -mb-7 sm:-mx-12 sm:-mb-12 lg:col-span-5 lg:m-0 lg:-my-16 lg:-mr-16">
-            <CampaignArt
-              name="jelly-drop"
-              className="mx-auto max-w-xl mix-blend-lighten [mask-image:radial-gradient(closest-side_at_50%_56%,#000_60%,transparent)] lg:absolute lg:top-1/2 lg:left-1/2 lg:w-[125%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2"
-            />
+          {/* Campaign card (SVG from scripts/build-brand-svgs.mjs); PNG export: public/campaign/01_Get_The_Jelly_Drop_1200.png */}
+          <div className="relative lg:col-span-5">
+            <CampaignArt name="jelly-drop" className="mx-auto max-w-md border border-line" />
           </div>
         </div>
       </div>
@@ -165,7 +161,7 @@ export async function JellyDropBlock() {
 export async function JellyCrewBlock() {
   const t = await getTranslations();
   return (
-    <Section labelledBy="crew-title" jelly="split" className="border-t border-line">
+    <Section labelledBy="crew-title" className="border-t border-line">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-6">
           <Eyebrow accent="green">{t("crew.eyebrow")}</Eyebrow>
@@ -173,7 +169,7 @@ export async function JellyCrewBlock() {
         </Reveal>
         <Reveal className="lg:col-span-5 lg:col-start-8 lg:pt-14" delay={120}>
           <p className="lead">{t("crew.body")}</p>
-          <p className="mt-8 border-l-2 border-lime pl-5 font-display text-xl font-medium tracking-tight text-fg sm:text-2xl">{t("crew.kicker")}</p>
+          <p className="mt-8 border-l-2 border-green pl-5 font-display text-xl font-medium tracking-tight text-fg sm:text-2xl">{t("crew.kicker")}</p>
           <div className="mt-10">
             <ButtonLink href={developerJoinHref} variant="secondary" arrow>
               {t("cta.joinCrew")}
@@ -190,7 +186,7 @@ export async function ValuesGrid() {
   const t = await getTranslations("values");
   const items = t.raw("items") as Item[];
   return (
-    <Section labelledBy="values-title" jelly="ring" className="border-t border-line">
+    <Section labelledBy="values-title" className="border-t border-line">
       <Reveal>
         <h2 id="values-title" className="h2 max-w-3xl"><NeonHeadline text={t("title")} /></h2>
       </Reveal>
@@ -215,8 +211,8 @@ export async function ManifestPreview() {
   const t = await getTranslations();
   const paras = t.raw("about.paragraphs") as string[];
   return (
-    <Section labelledBy="about-title" jelly="hidden" className="overflow-hidden">
-      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 -left-40 size-[30rem] -translate-y-1/2 rounded-full bg-[image:var(--gradient-violet-jelly)] opacity-[0.12] blur-3xl" />
+    <Section labelledBy="about-title" className="overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 -left-40 size-[30rem] -translate-y-1/2 rounded-full bg-[image:var(--gradient-blue-jelly)] opacity-[0.12] blur-3xl" />
       <div className="relative grid gap-10 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
           <h2 id="about-title" className="h2"><NeonHeadline text={t("about.title")} /></h2>
@@ -242,7 +238,7 @@ export async function ProofSection() {
   const t = await getTranslations("proof");
   const markets = t.raw("markets") as string[];
   return (
-    <Section labelledBy="proof-title" jelly="chain" className="border-t border-line">
+    <Section labelledBy="proof-title" className="border-t border-line">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <Eyebrow>{t("eyebrow")}</Eyebrow>
@@ -260,14 +256,14 @@ export async function ProofSection() {
         <>
           <ul className="mt-14 grid gap-5 md:grid-cols-3">
             {[1, 2, 3].map((n) => (
-              <li key={n} className="rounded-[var(--radius-card)] border border-dashed border-blend/50 p-7">
-                <p className="font-mono text-xs text-blend">CASE STUDY 0{n}</p>
+              <li key={n} className="rounded-[var(--radius-card)] border border-dashed border-orange/50 p-7">
+                <p className="font-mono text-xs text-orange">CASE STUDY 0{n}</p>
                 <p className="h3 mt-6 text-fg/80">{t("placeholderTitle")}</p>
                 <p className="mt-3 text-sm text-muted">{t("placeholderBody")}</p>
               </li>
             ))}
           </ul>
-          <p className="mt-4 font-mono text-xs text-blend/80">{t("placeholderNote")}</p>
+          <p className="mt-4 font-mono text-xs text-orange/80">{t("placeholderNote")}</p>
         </>
       )}
     </Section>
@@ -284,7 +280,7 @@ export async function FAQSection() {
     mainEntity: items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
   };
   return (
-    <Section labelledBy="faq-title" jelly="split" className="border-t border-line">
+    <Section labelledBy="faq-title" className="border-t border-line">
       <div className="grid gap-10 lg:grid-cols-12">
         <h2 id="faq-title" className="h2 lg:col-span-4"><NeonHeadline text={t("title")} /></h2>
         <div className="divide-y divide-line border-y border-line lg:col-span-8">
@@ -311,10 +307,10 @@ export async function FAQSection() {
 export async function FinalCTA() {
   const t = await getTranslations();
   return (
-    <section data-jelly="ring" aria-labelledby="final-title" className="relative isolate overflow-hidden py-28 lg:py-44">
+    <section aria-labelledby="final-title" className="relative isolate overflow-hidden py-28 lg:py-44">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 h-[26rem] w-[44rem] -translate-x-[70%] -translate-y-1/2 rounded-full bg-[image:var(--gradient-violet-jelly)] opacity-20 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 h-[22rem] w-[36rem] -translate-x-[10%] -translate-y-[40%] rounded-full bg-[image:var(--gradient-match-jelly)] opacity-[0.16] blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 h-[26rem] w-[44rem] -translate-x-[70%] -translate-y-1/2 rounded-full bg-[image:var(--gradient-blue-jelly)] opacity-20 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 h-[22rem] w-[36rem] -translate-x-[10%] -translate-y-[40%] rounded-full bg-[image:var(--gradient-heat-jelly)] opacity-[0.16] blur-3xl" />
       </div>
       <div className="container-jl text-center">
         <Reveal>

@@ -2,14 +2,14 @@
 
 import { useEffect } from "react";
 
-const BUTTONS = ".btn-primary, .btn-secondary";
+const BUTTONS = ".btn-neon, .btn-neon-ghost";
 const MAX_PULL = 6; // px
 
 /**
  * One delegated pointer listener for the whole page (no per-element handlers):
- *  - magnetic buttons: --mx/--my (fine pointers only, not under reduced motion)
+ *  - magnetic neon buttons: --mx/--my (fine pointers only, not under reduced motion)
  *  - card spotlight: --sx/--sy (follows the cursor inside .card)
- * Only CSS variables change; styling lives in globals.css (.btn-primary translate, .card background).
+ * Only CSS variables change; styling lives in globals.css (.btn-neon translate, .card background).
  */
 export function MicroInteractions() {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -9,29 +9,26 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { AnalyticsScripts } from "@/components/consent/AnalyticsScripts";
 import { MicroInteractions } from "@/components/ui/MicroInteractions";
-import { Backdrop } from "@/components/layout/Backdrop";
 import "../globals.css";
 import { toLocale } from "@/i18n/locale";
 
 // next/font self-hosts at build time: no requests to Google from the visitor's browser (GDPR).
-// Same faces as Jelly Match: the parent brand and its products read as one family.
-const display = Outfit({
+const display = Space_Grotesk({
   subsets: ["latin", "latin-ext"],
   weight: ["500", "600", "700"],
-  variable: "--font-outfit",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 const body = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
   display: "swap",
-  // Body text is never the LCP element (the Outfit H1 is), so don't compete for early bandwidth.
+  // Body text is never the LCP element (the Space Grotesk H1 is), so don't compete for early bandwidth.
   preload: false,
 });
-const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: ["400"], variable: "--font-jetbrains", display: "swap", preload: false });
 
 export const viewport: Viewport = {
-  themeColor: "#0B0B0F",
+  themeColor: "#07080D",
   colorScheme: "dark",
 };
 
@@ -58,11 +55,17 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const t = await getTranslations("a11y");
 
   return (
-    <html lang={locale} className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang={locale} className={`${display.variable} ${body.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
-        {/* Living backdrop: drifting auras, cursor-lit dot grid, glossy droplets (see components/layout/Backdrop.tsx). */}
-        <Backdrop />
-        <div className="grain" aria-hidden="true" />
+        {/* Living backdrop: drifting jelly auras + passing signals (see .lab-bg in globals.css). */}
+        <div aria-hidden="true" className="lab-bg">
+          <span className="aura aura-electric" />
+          <span className="aura aura-acid" />
+          <span className="aura aura-heat" />
+          <span className="signal signal-cyan" />
+          <span className="signal signal-green" />
+          <span className="signal signal-red" />
+        </div>
         <NextIntlClientProvider>
           <a
             href="#main"
