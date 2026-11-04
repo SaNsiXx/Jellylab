@@ -147,11 +147,12 @@ export async function JellyDropBlock() {
             </div>
             <p className="mt-5 max-w-lg text-sm text-muted">{t("drop.microcopy")}</p>
           </div>
-          {/* Campaign art, melted into the card: its black ground is lightened away and the edges fade out */}
-          <div className="relative lg:col-span-5 lg:-my-10 lg:-mr-10">
+          {/* Campaign art, melted into the card: its black ground is lightened away and the edges fade out.
+              Phones: bleeds to the card edges below the copy. Wide: fills the whole right column, centred on its height. */}
+          <div className="relative -mx-7 -mt-6 -mb-7 sm:-mx-12 sm:-mb-12 lg:col-span-5 lg:m-0 lg:-my-16 lg:-mr-16">
             <CampaignArt
               name="jelly-drop"
-              className="mx-auto max-w-md mix-blend-lighten [mask-image:radial-gradient(closest-side,#000_58%,transparent)] lg:max-w-none"
+              className="mx-auto max-w-xl mix-blend-lighten [mask-image:radial-gradient(closest-side_at_50%_56%,#000_60%,transparent)] lg:absolute lg:top-1/2 lg:left-1/2 lg:w-[125%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2"
             />
           </div>
         </div>
