@@ -80,7 +80,7 @@ export function MobileMenu({ open, onClose, returnFocusRef, isActive }: Props) {
       }`}
     >
       {/* Soft jelly glow — decorative */}
-      <div aria-hidden="true" className="pointer-events-none absolute -right-24 -bottom-24 size-96 rounded-full bg-[image:var(--gradient-blue-jelly)] opacity-20 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-24 -bottom-24 size-96 rounded-full bg-[image:var(--gradient-violet-jelly)] opacity-20 blur-3xl" />
 
       <div className="container-jl flex h-18 shrink-0 items-center justify-between">
         <Wordmark className="h-6 w-auto" />
@@ -111,7 +111,7 @@ export function MobileMenu({ open, onClose, returnFocusRef, isActive }: Props) {
                   }`}
                 >
                   {t(`nav.${key}`)}
-                  {active && <span aria-hidden="true" className="size-2 rounded-full bg-cyan shadow-[0_0_12px_var(--color-cyan)]" />}
+                  {active && <span aria-hidden="true" className="size-2 rounded-full bg-violet-hi shadow-[0_0_12px_var(--color-violet-hi)]" />}
                 </Link>
               </li>
             );

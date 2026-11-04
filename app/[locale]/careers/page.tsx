@@ -62,11 +62,11 @@ export default async function CareersPage({ params }: PageProps<"/[locale]/caree
                   <article className="card grid gap-6 p-7 sm:p-9 lg:grid-cols-12 lg:items-center">
                     <div className="lg:col-span-8">
                       <div className="flex flex-wrap items-center gap-3">
-                        <span className="rounded-full border border-green/40 px-3 py-1 font-mono text-[0.6875rem] tracking-wider text-green uppercase">
+                        <span className="rounded-full border border-lime/40 px-3 py-1 font-mono text-[0.6875rem] tracking-wider text-lime uppercase">
                           {tf(`seniority.${o.seniority}`)}
                         </span>
                         {o.sample && (
-                          <span className="rounded-full border border-dashed border-orange/60 px-2.5 py-0.5 font-mono text-[0.6875rem] text-orange">{t("sampleBadge")}</span>
+                          <span className="rounded-full border border-dashed border-blend/60 px-2.5 py-0.5 font-mono text-[0.6875rem] text-blend">{t("sampleBadge")}</span>
                         )}
                       </div>
                       <h2 className="h3 mt-5 text-2xl sm:text-3xl">{o.title[locale]}</h2>

@@ -6,7 +6,7 @@ import { Wordmark } from "./Wordmark";
 import { CookieSettingsButton } from "@/components/consent/ConsentBanner";
 
 function Placeholder({ children }: { children: string }) {
-  return <span className="rounded-md border border-dashed border-orange/50 px-1.5 py-0.5 font-mono text-xs text-orange">{children}</span>;
+  return <span className="rounded-md border border-dashed border-blend/50 px-1.5 py-0.5 font-mono text-xs text-blend">{children}</span>;
 }
 
 export async function SiteFooter() {

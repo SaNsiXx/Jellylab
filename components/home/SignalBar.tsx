@@ -14,7 +14,7 @@ export function SignalBar() {
       {items.map((item, i) => (
         <li key={`${item}-${i}`} className="flex items-center whitespace-nowrap">
           <span className="px-6 font-display text-sm font-semibold tracking-[0.22em] text-fg/85 sm:px-8 sm:text-base">{item}</span>
-          <span aria-hidden="true" className={`size-1.5 rounded-full ${["bg-cyan", "bg-green", "bg-orange"][i % 3]}`} />
+          <span aria-hidden="true" className={`size-1.5 rounded-full ${["bg-violet-hi", "bg-lime", "bg-blend"][i % 3]}`} />
         </li>
       ))}
     </ul>

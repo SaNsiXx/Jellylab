@@ -54,7 +54,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       </Section>
 
       <section aria-labelledby="manifesto-title" className="relative isolate overflow-hidden border-y border-line py-24 lg:py-40">
-        <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 h-80 w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--gradient-blue-jelly)] opacity-15 blur-3xl" />
+        <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 h-80 w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--gradient-violet-jelly)] opacity-15 blur-3xl" />
         <div className="container-jl max-w-4xl text-center">
           <h2 id="manifesto-title" className="eyebrow justify-center">{t("manifestoTitle")}</h2>
           <p className="h2 mt-8"><NeonHeadline text={manifesto[0] ?? ""} /></p>
@@ -66,7 +66,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       {showDevPlaceholders && (
         <Section labelledBy="team-title">
           <h2 id="team-title" className="h3 text-2xl">{t("teamTitle")}</h2>
-          <p className="mt-4 rounded-2xl border border-dashed border-orange/50 p-5 font-mono text-sm text-orange">{t("teamPlaceholder")}</p>
+          <p className="mt-4 rounded-2xl border border-dashed border-blend/50 p-5 font-mono text-sm text-blend">{t("teamPlaceholder")}</p>
         </Section>
       )}
 

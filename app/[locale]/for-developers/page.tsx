@@ -45,7 +45,7 @@ export default async function ForDevelopersPage({ params }: PageProps<"/[locale]
             <ul className="mt-6 grid gap-3">
               {expect.map((e) => (
                 <li key={e} className="flex gap-3 border-b border-line pb-3 text-lg text-fg/90">
-                  <span aria-hidden="true" className="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-green shadow-[0_0_8px_var(--color-green)]" />
+                  <span aria-hidden="true" className="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-lime shadow-[0_0_8px_var(--color-lime)]" />
                   {e}
                 </li>
               ))}

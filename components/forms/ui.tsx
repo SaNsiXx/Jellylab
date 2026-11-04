@@ -15,7 +15,7 @@ export function useFieldA11y(id: string, hint?: string, error?: string) {
 function RequiredMark({ required }: { required?: boolean }) {
   const t = useTranslations("forms");
   return required ? (
-    <span className="text-orange" aria-hidden="true">
+    <span className="text-blend" aria-hidden="true">
       {" "}*
     </span>
   ) : (
@@ -59,7 +59,7 @@ function Shell({ id, label, required, hint, error, className = "", children }: S
 const control =
   "block w-full min-h-12 rounded-2xl border bg-white/[0.03] px-4 py-3 text-base text-fg placeholder:text-muted/70 " +
   "transition-[border-color,box-shadow] duration-[var(--duration-micro)] outline-none " +
-  "focus-visible:border-cyan focus-visible:shadow-[0_0_0_3px_rgb(19_200_255/0.25),0_0_24px_-6px_rgb(19_200_255/0.6)] " +
+  "focus-visible:border-violet-hi focus-visible:shadow-[0_0_0_3px_rgb(167_139_250/0.25),0_0_24px_-6px_rgb(167_139_250/0.6)] " +
   "aria-[invalid=true]:border-[#ff6b78]";
 
 type InputProps = Shell & InputHTMLAttributes<HTMLInputElement>;
@@ -132,9 +132,9 @@ export function ChoiceGroup({ id, legend, type, required, error, options, inputP
         {options.map((o) => (
           <label
             key={o.value}
-            className="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-full border border-line bg-white/[0.02] px-4 py-2 text-sm transition-colors hover:border-white/30 has-[:checked]:border-cyan has-[:checked]:bg-cyan/10 has-[:checked]:shadow-[0_0_18px_-6px_var(--color-cyan)] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-focus"
+            className="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-full border border-line bg-white/[0.02] px-4 py-2 text-sm transition-colors hover:border-white/30 has-[:checked]:border-violet-hi has-[:checked]:bg-violet-hi/10 has-[:checked]:shadow-[0_0_18px_-6px_var(--color-violet-hi)] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-focus"
           >
-            <input type={type} value={o.value} className="size-4 accent-[var(--color-cyan)]" aria-invalid={error ? true : undefined} {...inputProps(o.value)} />
+            <input type={type} value={o.value} className="size-4 accent-[var(--color-violet-hi)]" aria-invalid={error ? true : undefined} {...inputProps(o.value)} />
             {o.label}
           </label>
         ))}
@@ -156,7 +156,7 @@ export const ConsentCheckbox = forwardRef<HTMLInputElement, InputHTMLAttributes<
             ref={ref}
             id={id}
             type="checkbox"
-            className="mt-0.5 size-5 shrink-0 accent-[var(--color-green)]"
+            className="mt-0.5 size-5 shrink-0 accent-[var(--color-lime)]"
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `${id}-error` : undefined}
             aria-required={required || undefined}
@@ -165,7 +165,7 @@ export const ConsentCheckbox = forwardRef<HTMLInputElement, InputHTMLAttributes<
           <span>
             {text}
             {required ? (
-              <span className="text-orange">
+              <span className="text-blend">
                 {" "}*<span className="sr-only"> ({t("required")})</span>
               </span>
             ) : (
@@ -205,7 +205,7 @@ export function ErrorSummary({ errors, labels, summaryRef }: { errors: [string, 
       <ul className="mt-3 grid gap-1.5 text-sm">
         {errors.map(([field, key]) => (
           <li key={field}>
-            <a href={`#${field}`} className="underline underline-offset-4 hover:text-cyan" onClick={(e) => { e.preventDefault(); document.getElementById(field)?.focus(); }}>
+            <a href={`#${field}`} className="underline underline-offset-4 hover:text-violet-hi" onClick={(e) => { e.preventDefault(); document.getElementById(field)?.focus(); }}>
               {labels[field] ?? field}: {te.has(key as "required") ? te(key as "required") : key}
             </a>
           </li>
@@ -221,7 +221,7 @@ export function SuccessPanel({ title, body, extra, onReset, resetLabel }: { titl
   return (
     <div role="status" className="card p-8 sm:p-10">
       <span aria-hidden="true" className="success-sweep" />
-      <span aria-hidden="true" className="live-dot inline-block size-3 rounded-full bg-green shadow-[0_0_14px_var(--color-green)]" />
+      <span aria-hidden="true" className="live-dot inline-block size-3 rounded-full bg-lime shadow-[0_0_14px_var(--color-lime)]" />
       <h3 className="h3 mt-6 text-2xl sm:text-3xl" tabIndex={-1} ref={(el) => el?.focus()}>
         {title}
       </h3>
