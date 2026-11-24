@@ -8,11 +8,11 @@ export type ConsentKey = "marketingEmail" | "phone" | "recruitment" | "futureOff
 type Locale = "en" | "pl";
 
 export const CONSENT_VERSIONS: Record<ConsentKey | "privacyNotice", string> = {
-  marketingEmail: "2026-10-DRAFT-1",
-  phone: "2026-10-DRAFT-1",
-  recruitment: "2026-10-DRAFT-1",
-  futureOffers: "2026-10-DRAFT-1",
-  privacyNotice: "2026-10-DRAFT-1",
+  marketingEmail: "2026-11-24",
+  phone: "2026-11-24",
+  recruitment: "2026-11-24",
+  futureOffers: "2026-11-24",
+  privacyNotice: "2026-11-24",
 };
 
 export function controllerName(locale: Locale) {

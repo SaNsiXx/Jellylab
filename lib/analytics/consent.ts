@@ -6,7 +6,7 @@ import { useSyncExternalStore } from "react";
 export type Consent = { analytics: boolean; marketing: boolean; version: string; updatedAt: string };
 
 /** Bump when the cookie policy / vendor list changes → visitors are asked again. */
-export const CONSENT_POLICY_VERSION = "2026-10-DRAFT-1";
+export const CONSENT_POLICY_VERSION = "2026-11-24";
 const KEY = "jl-consent";
 const OPEN_EVENT = "jl:consent-open";
 
