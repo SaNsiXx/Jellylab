@@ -63,6 +63,19 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           areaServed: ["PL", "DE", "AT", "CH", "GB", "EU"],
           ...(isPlaceholder(legalEntity.linkedinUrl) ? {} : { sameAs: [legalEntity.linkedinUrl] }),
           ...(isPlaceholder(legalEntity.companyLegalName) ? {} : { legalName: legalEntity.companyLegalName }),
+          ...(isPlaceholder(legalEntity.taxId) ? {} : { taxID: legalEntity.taxId.replace(/\D/g, "") }),
+          ...(isPlaceholder(legalEntity.registeredAddress)
+            ? {}
+            : {
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "ul. Zygmunta Augusta 29/2",
+                  postalCode: "34-600",
+                  addressLocality: "Limanowa",
+                  addressCountry: "PL",
+                },
+              }),
+          ...(isPlaceholder(legalEntity.contactEmail) ? {} : { email: legalEntity.contactEmail }),
         }}
       />
     </>
